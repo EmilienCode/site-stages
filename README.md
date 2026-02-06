@@ -115,10 +115,10 @@ Accédez à `http://projet-stage.local` dans votre navigateur.
 
 ## 👥 L'équipe Web4All
 
-* **[Nom Étudiant 1]** - *Scrum Master / Backend Lead* - [Lien LinkedIn/GitHub]
-* **[Nom Étudiant 2]** - *Product Owner / Frontend Lead* - [Lien LinkedIn/GitHub]
-* **[Nom Étudiant 3]** - *Développeur Fullstack* - [Lien LinkedIn/GitHub]
-* **[Nom Étudiant 4]** - *Développeur Fullstack / DB Architect* - [Lien LinkedIn/GitHub]
+* **Tom Romanin** - *Scrum Master / Backend Lead*
+* **Mathéo Goaoc** - *Product Owner / Frontend Lead*
+* **Émilien Rousseau** - *Développeur Fullstack* 
+* **Charles Devines** - *Développeur Fullstack / DB Architect*
 
 ## 📝 Licence & Droits
 
