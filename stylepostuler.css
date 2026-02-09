@@ -61,7 +61,10 @@ body {
     background: linear-gradient(180deg, #f5f9ff 0%, #eef4ff 100%);
     color: var(--color-dark-gray);
 }
-
+.logoAcc{
+    text-decoration: none;
+    color: var(--color-dark-gray);
+}
 a {
     text-decoration: none;
     color: inherit;

@@ -87,10 +87,15 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 .NomNav{
+    text-decoration: none;
     color: var(--color-dark-gray);
     font-weight: var(--font-weight-nom);
     font-size: var(--size-text-nom);
     font-family: var(--font-sans);
+}
+.logoAcc{
+    text-decoration: none;
+    color: var(--color-dark-gray);
 }
 .LogoNav{
     padding: calc(var(--spacing) * 2);

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Postuler | cesitonstage</title>
+    <title>CESITonStage - Postuler</title>
     <meta name="description" content="Postulez à une offre de stage sur cesitonstage.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,19 +15,19 @@
             <div class="navInside">
                 <div class="NomLogoNav">
                     <div class="LogoNav">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="LOGO" aria-hidden="true">
+                        <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg"  alt="Logo plateforme" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="LOGO" aria-hidden="true"> 
                             <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                             <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                        </svg>
+                        </svg></a> 
                     </div>
                     <div class="NomNav">
-                        CESITonStage
+                        <a class = "logoAcc" href= index.html> CESITonStage </a> 
                     </div>
                 </div>
             <div class="BtnNavOutside">
                     <a href="index.html" class="BtnNavInside">Accueil</a>
-                    <a href="offres.html" class="BtnNavInside">Offre</a>
-                    <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
+                    <a href="offres.html" class="BtnNavInside">Offres</a>
+                    <a href="#" class="BtnNavInside">Entreprise</a>
             </div>
             <div class="logoDroitNav">
                     <button class="NotifBtn">
@@ -77,7 +77,7 @@
     <section class="card form-card">
         <h3>Votre candidature</h3>
 
-        <form class="form" method="post" action="merci-candidature.html" enctype="multipart/form-data">
+        <form class="form" action="merci-candidature.html">
 
             <div class="form-row">
                 <div class="form-group">
@@ -108,7 +108,7 @@
 
             <div class="form-group file-group">
                 <label for="cv">CV (PDF)</label>
-    
+                <input type="file" id="cv" required>
                 <span class="file-hint">Format PDF – 2 Mo max</span>
             </div>
 
