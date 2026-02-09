@@ -17,16 +17,14 @@
     --radius: 0.625rem;
 
     /* Couleurs */
-    --background: rgb(255, 255, 255);
-    --color-white: #ffffff;
+    --background:#ffffff;
+    --color-gray:#e2e8f0;
+    --color-dark-gray:#0f172a;
+    --color-light-gray:#4e3030;
 
-    --color-gray:rgb(214, 217, 224);
-    --color-light-gray: rgb(74, 85, 101);
-    --color-dark-gray: rgb(16, 24, 40);
-
-    --color-blue: rgb(21, 93, 251);
-    --color-dark-blue: rgb(14, 62, 165);
-    --color-blue-light: rgb(96, 165, 250);
+    --primary-color:#fa8072;
+    --secondary-color:#914941;
+    --tertiary-color: #fac4a7; 
 
     /* UI */
     --color-border-light: rgb(229, 231, 235);
@@ -35,8 +33,8 @@
     --color-muted-bg-hover: rgb(209, 213, 219);
 
     /* Effets */
-    --shadow-blue: 0 12px 32px rgba(37, 99, 235, 0.08);
-    --focus-ring-blue: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    --shadow-blue: 0 12px 32px rgba(235, 116, 37, 0.08);
+    --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
 }
 
 * {
@@ -93,12 +91,12 @@ svg {
 
 .LogoNav {
     padding: calc(var(--spacing) * 2);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: var(--radius);
 }
 
 .LOGO {
-    color: var(--color-white);
+    color: var(--);
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
 }
@@ -125,14 +123,14 @@ svg {
     bottom: -2px;
     width: 100%;
     height: 2px;
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
 }
 
 .BtnNavInside:hover {
-    color: var(--color-blue);
+    color: var(--primary-color);
 }
 
 .BtnNavInside:hover::after {
@@ -156,7 +154,7 @@ svg {
 }
 .NotifBtn:hover {
     background-color: var(--color-gray);
-    color: var(--color-blue);
+    color: var(--primary-color);
 }
 .svgNotif{
     width: calc(var(--spacing) * 5);
@@ -189,7 +187,7 @@ svg {
 .top-links {
     margin-bottom: 20px;
     font-size: 0.9rem;
-    color: var(--color-blue);
+    color: var(--primary-color);
 }
 
 .card {
@@ -213,10 +211,10 @@ svg {
 .badge {
     background: linear-gradient(
         90deg,
-        var(--color-blue),
-        var(--color-blue-light)
+        var(--primary-color),
+        var(--tertiary-color)
     );
-    color: var(--color-white);
+    color: var(--);
     padding: 4px 10px;
     border-radius: 999px;
     font-size: 0.75rem;
@@ -225,7 +223,7 @@ svg {
 
 .offer-card h2 {
     margin-top: 6px;
-    color: var(--color-blue);
+    color: var(--primary-color);
     font-size: 1rem;
 }
 
@@ -252,8 +250,8 @@ svg {
     border-radius: 2px;
     background: linear-gradient(
         90deg,
-        var(--color-blue),
-        var(--color-blue-light)
+        var(--primary-color),
+        var(--tertiary-color)
     );
 }
 
@@ -292,7 +290,7 @@ textarea {
 input:focus,
 textarea:focus {
     outline: none;
-    border-color: var(--color-blue);
+    border-color: var(--primary-color);
     box-shadow: var(--focus-ring-blue);
 }
 
@@ -317,12 +315,12 @@ textarea {
 .btn-primary {
     background: linear-gradient(
         90deg,
-        var(--color-blue),
-        var(--color-blue-light)
+        var(--primary-color),
+        var(--tertiary-color)
     );
-    color: var(--color-white);
+    color: var(--);
     border-radius: calc(var(--radius) + 8px); /* arrondi plus prononcé */
-    border: 2px solid var(--color-blue-light); /* contour plus visible */
+    border: 2px solid var(--tertiary-color); /* contour plus visible */
     padding: 0.6em 1em; /* bouton plus large et confortable */
     box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* léger relief */
     transition: all 0.3s ease; /* transitions plus douces */
@@ -354,7 +352,7 @@ footer{
     padding-block: calc(var(--spacing) * 12);
     padding-inline: calc(var(--spacing) * 6);
     margin-top: calc(var(--spacing) * 12);
-    background-color: var(--color-white);
+    background-color: var(--);
     border-color: var(--color-gray);
     border-top-style: solid;
     border-top-width: 1px;
@@ -376,11 +374,11 @@ footer{
 }
 .logofooter{
     padding: calc(var(--spacing) * 1.5);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: calc(var(--radius)  - 2px);
 }
 .svglogofooter{
-    color: var(--color-white);
+    color: var(--);
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
     border-color: #0000;
