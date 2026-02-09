@@ -16,6 +16,7 @@
     --color-dark-blue:rgb(14, 62, 165);
     --radius:0.625rem;
 }
+
 body{
     background-color: var(--background);
 }
