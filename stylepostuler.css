@@ -319,11 +319,11 @@ textarea {
         var(--tertiary-color)
     );
     color: var(--);
-    border-radius: calc(var(--radius) + 8px); /* arrondi plus prononcé */
-    border: 2px solid var(--tertiary-color); /* contour plus visible */
-    padding: 0.6em 1em; /* bouton plus large et confortable */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* léger relief */
-    transition: all 0.3s ease; /* transitions plus douces */
+    border-radius: calc(var(--radius) + 8px); 
+    border: 2px solid var(--tertiary-color); 
+    padding: 0.6em 1em; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
+    transition: all 0.3s ease; 
 }
 
 .btn-primary:hover {
@@ -345,6 +345,50 @@ textarea {
 .btn-secondary:hover {
     background: var(--color-muted-bg-hover);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.thank-card {
+    text-align: center;
+    padding: 56px 32px;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.thank-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--tertiary-color)
+    );
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-blue);
+}
+
+.thank-card h1 {
+    font-size: 1.7rem;
+    margin-bottom: 16px;
+}
+
+.thank-card p {
+    font-size: 1rem;
+    color: var(--color-light-gray);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.thank-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 
