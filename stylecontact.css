@@ -18,7 +18,7 @@
 
     /* Couleurs */
     --background:#ffffff;
-    --color-gray:#e2e8f0;
+    --color-gray:#ffd5d0;
     --color-dark-gray:#0f172a;
     --color-light-gray:#4e3030;
 
@@ -59,7 +59,7 @@ button, input, select, optgroup, textarea {
 }
 
 body {
-    background: linear-gradient(180deg, #f5f9ff 0%, #eef4ff 100%);
+    background: var(--background);
     color: var(--color-dark-gray);
 }
 
@@ -211,7 +211,8 @@ svg {
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
-    box-shadow: var(--shadow-blue);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    border: 1px solid var(--color-gray);
 }
 
 .offer-header {

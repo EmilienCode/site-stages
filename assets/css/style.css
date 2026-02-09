@@ -9,6 +9,7 @@
             --font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             --background:#ffffff;
             --color-gray:#ffd5d0;
+
             --color-dark-gray:#0f172a;
             --color-light-gray:#83545b;
             --color-white:#fff;
@@ -190,7 +191,7 @@
             padding-bottom: calc(var(--spacing) * 24);
             padding-top: calc(var(--spacing) * 16);
             padding-inline: calc(var(--spacing) * 6);
-            background-color: var(--color-white);
+            background-color: var(--background);
             overflow: hidden;
             position: relative;
             font-family: var(--font-sans);
