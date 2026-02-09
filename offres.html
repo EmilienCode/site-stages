@@ -1,14 +1,14 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" href="styleoffres.css"/>
     <meta charset="utf-8" />
-    <title>CESITonStage - Accueil</title>
+    <title>CESITonStage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
     href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
     rel="stylesheet"
     type="text/css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Les trois lignes ci‑dessous sont un correctif pour que la sémantique
         HTML5 fonctionne correctement avec les anciennes versions de
         Internet Explorer-->
@@ -32,9 +32,9 @@
                     </div>
                 </div>
             <div class="BtnNavOutside">
-                    <a href="index.html" class="BtnNavInside">Accueil</a>
-                    <a href="offres.html" class="BtnNavInside">Offre</a>
-                    <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
+                <a href="index.html" class="BtnNavInside">Accueil</a>
+                <a href="offres.html" class="BtnNavInside">Offre</a>
+                <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
             </div>
             <div class="logoDroitNav">
                 <button class="NotifBtn">
@@ -59,13 +59,17 @@
         </nav>
     </header>
     <!-- Ici nous mettons le contenu de la page -->
-    <main>
-    <!-- Il contient un article -->
+<main>
+    <div class="progress">
+        <div class="progress-bar"></div>
+    </div>
+    
+    <div class="outils">
         <section class="Section">
             <div class="InsideSection">
-                <div style="opacity: 1;transform: none;">
-                    <h1 class="TxtBlack animated-title-glitch">Trouvez votre <span class="TxtBlue">stage idéal</span> ou le candidat parfait.</h1>
-                    <p class="ParaLight">La plateforme dédiée aux étudiants et aux entreprises pour faciliter la recherche de stages et d'alternances. Publiez votre profil ou parcourez les offres.</p>
+                
+                <div class="GroupeRecherche">
+                    
                     <div class="BoxRechercher">
                         <div class="input1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
@@ -87,36 +91,96 @@
                             </button>
                         </div>
                     </div>
-                    <div class="barrePopulaire">
-                        <span class="populaire">Populaire :</span>
-                        <span class="populaireTXT">Développement Web</span>
-                        <span class="populaireTXT">Marketing</span>
-                        <span class="populaireTXT">Design UX</span>
+
+                    <div class="divTrie">
+                        <button class="btnTrie">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
+                                <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path>
+                            </svg>
+                            Filtres
+                        </button>
+                        <button class="btnTrie">
+                            Trier par : Récents
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
                     </div>
+
                 </div>
-                <div class="planete">
-                </div>
+                <div class="planete"></div>
             </div>
         </section>
-        <section class="SectionOffre">
-            <div class="SectionTrie">
-                <div class="divTrie">
-                    <button class="btnTrie">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
-                            <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path>
-                        </svg>
-                        Filtres
-                    </button>
-                    <button class="btnTrie">
-                        Trier par : Récents
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
-                            <path d="m6 9 6 6 6-6"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </section>
-    </main>
+    </div>
+
+    <section class="offres">
+        <article class="offre">
+            <h3>Stage Développeur Web</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 6 mois</p>
+            <p>Lieu : Orléans</p>
+            <a href="postuler.html">En savoir plus</a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Technicien Réseau</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 4 mois</p>
+            <p>Lieu : Tours</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Data Analyst</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 5 mois</p>
+            <p>Lieu : Télétravail</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage IA </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 3 mois</p>
+            <p>Lieu : Paris</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Cisco Packet Tracer </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 1 mois</p>
+            <p>Lieu : Blois</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Génie logiciel </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 6 mois</p>
+            <p>Lieu : Paris</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage cookie clicker </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : rush de 2 semaines</p>
+            <p>Lieu : Orléans</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage technicien maintenance</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 4 mois</p>
+            <p>Lieu : Tours</p>
+            <a href="postuler.html">En savoir plus </a>
+        </article>
+    </section>
+    
+    
+</main>
     <footer>
         <div class="footerIn">
             <div class="footerlogonom">

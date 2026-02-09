@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Postuler | cesitonstage</title>
-    <meta name="description" content="Postulez à une offre de stage sur cesitonstage.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="stylepostuler.css">
+    <link rel="stylesheet" href="stylecontact.css">
+    <meta charset="utf-8" />
+    <title>CESITonStage</title>
+    <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
+    rel="stylesheet"
+    type="text/css" />
+    <!-- Les trois lignes ci‑dessous sont un correctif pour que la sémantique
+        HTML5 fonctionne correctement avec les anciennes versions de
+        Internet Explorer-->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
 </head>
-
 <body>
-
-<header>
+    <header>
         <nav class="nav">
             <div class="navInside">
                 <div class="NomLogoNav">
@@ -51,79 +56,10 @@
             </div>
             </div>
         </nav>
-</header>
+    </header>
+        <h2 class="contact">CONTACT</h2>
 
-<main class="page">
-
-    <section class="top-links">
-        <a href="#">← Retour</a>
-    </section>
-
-    <section class="card offer-card">
-        <div class="offer-header">
-            <h1>Stage Exemple</h1>
-            <span class="badge">Nouveau</span>
-        </div>
-
-        <h2>Entreprise Exemple </h2>
-
-        <div class="offer-meta">
-            <span>📍 Lieu</span>
-            <span>⏳ Durée</span>
-            <span>💻 Domaine</span>
-            <span>💰 Salaire</span>
-        </div>
-    </section>
-
-    <section class="card form-card">
-        <h3>Votre candidature</h3>
-
-        <form class="form" action="merci-candidature.html">
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" placeholder="Dupont" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" placeholder="Jean" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Adresse email</label>
-                <input type="email" id="email" placeholder="jean.dupont@gmail.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="tel">Numéro de téléphone</label>
-                <input type="tel" id="tel" placeholder="ex : 0606060606" required>
-            </div>
-
-            <div class="form-group">
-                <label for="lm">Lettre de motivation (recommandée)</label>
-                <textarea id="lm" placeholder="Expliquez pourquoi ce stage vous intéresse..."></textarea>
-            </div>
-
-            <div class="form-group file-group">
-                <label for="cv">CV (PDF)</label>
-    
-                <span class="file-hint">Format PDF – 2 Mo max</span>
-            </div>
-
-            <div class="form-actions">
-                <a href="#" class="btn btn-secondary">Annuler</a>
-                <button type="submit"  class="btn btn-primary">Envoyer ma candidature</button>
-            </div>
-
-        </form>
-    </section>
-
-</main>
-
-    <footer>
+        <footer>
         <div class="footerIn">
             <div class="footerlogonom">
                 <div class="logofooter">
@@ -142,6 +78,5 @@
             <p style="color: var(--color-light-gray); font-size: 0.875rem;">© 2026 CESITonStage from Crazy Industries. Tous droits réservés.</p>
         </div>
     </footer>
-
 </body>
 </html>
