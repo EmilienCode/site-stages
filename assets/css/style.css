@@ -76,12 +76,17 @@
             max-width: 80rem;
             margin-inline: auto;
         }
+        .logoAcc{
+            text-decoration: none;
+            color: var(--color-dark-gray);
+        }
         .NomLogoNav{
             display: flex;
             gap: calc(var(--spacing) * 2);
             align-items: center;
         }
         .NomNav{
+            text-decoration: none;
             color: var(--color-dark-gray);
             font-weight: var(--font-weight-nom);
             font-size: var(--size-text-nom);

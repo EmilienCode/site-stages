@@ -16,7 +16,10 @@
     --color-dark-blue:#914941;
     --radius:0.625rem;
 }
-
+.logoAcc{
+    text-decoration: none;
+    color: var(--color-dark-gray);
+}
 body{
     background-color: var(--background);
 }
