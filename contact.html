@@ -36,11 +36,11 @@
                     <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
             </div>
             <div class="logoDroitNav">
-                <button class="NotifBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                </button>
+                    <button class="NotifBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
                     <button class="NotifBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
                             <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
@@ -57,9 +57,49 @@
             </div>
         </nav>
     </header>
-        <h2 class="contact">CONTACT</h2>
+    
+    <main class="page">
+        
+        <section class="card form-card">
+            <h3>CONTACT</h3>
+            <form class="form" action="envoi-contact.html">
 
-        <footer>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" placeholder="Dupont" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" placeholder="Jean" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input type="email" id="email" placeholder="jean.dupont@gmail.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tel">Numéro de téléphone</label>
+                    <input type="tel" id="tel" placeholder="ex : 0606060606" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lm">Message</label>
+                    <textarea id="lm" placeholder="Expliquez votre problème"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a href="#" class="btn btn-secondary">Annuler</a>
+                    <button type="submit"  class="btn btn-primary">Envoyer</button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+    <footer>
         <div class="footerIn">
             <div class="footerlogonom">
                 <div class="logofooter">
