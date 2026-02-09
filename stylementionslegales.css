@@ -7,13 +7,13 @@
     --size-text-NavBarre:0.875rem;
     --spacing:0.25rem;
     --font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --background:rgb(255,255,255);
-    --color-gray:rgb(214, 217, 224);
-    --color-dark-gray:rgb(16, 24, 40);
-    --color-light-gray:rgb(74, 85, 101);
+    --background:#ffffff;
+    --color-gray:#ffd5d0;
+    --color-dark-gray:#0f172a;
+    --color-light-gray:#83545b;
     --color-white:#fff;
-    --color-blue:rgb(21, 93, 251);
-    --color-dark-blue:rgb(14, 62, 165);
+    --color-blue:#fa8072;
+    --color-dark-blue:#914941;
     --radius:0.625rem;
 }
 
