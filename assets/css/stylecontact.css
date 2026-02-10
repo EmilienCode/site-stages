@@ -275,7 +275,7 @@ svg {
 
 .form-card h3::after {
     content: "";
-    width: 195px;
+    width: 210px;
     height: 3.5px;
     margin-top: 6px;
     display: block;
@@ -368,7 +368,6 @@ textarea {
     background: var(--color-muted-bg);
     color: var(--color-dark-gray);
     border-radius: calc(var(--radius) + 8px); 
-    border: 2px solid var(--color-dark-gray);
     padding: 0.5em 1em;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
@@ -378,49 +377,31 @@ textarea {
     background: var(--color-muted-bg-hover);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
-.thank-card {
-    text-align: center;
-    padding: 56px 32px;
-    max-width: 700px;
-    margin: 40px auto;
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.thank-icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: linear-gradient(
-        90deg,
-        var(--primary-color),
-        var(--tertiary-color)
-    );
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
+.radio-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-blue);
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-light);
+    background: var(--color-input-bg);
+    cursor: pointer;
+    transition: background 0.2s ease, border 0.2s ease;
 }
 
-.thank-card h1 {
-    font-size: 1.7rem;
-    margin-bottom: 16px;
+.radio-item:hover {
+    border-color: var(--primary-color);
 }
 
-.thank-card p {
-    font-size: 1rem;
-    color: var(--color-light-gray);
-    line-height: 1.6;
-    margin-bottom: 32px;
-}
-
-.thank-actions {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
+.radio-item input[type="radio"] {
+    accent-color: var(--primary-color);
+    cursor: pointer;
 }
 
 
