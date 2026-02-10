@@ -18,7 +18,7 @@
 
     /* Couleurs */
     --background:#ffffff;
-    --color-gray:#e2e8f0;
+    --color-gray:#ffd5d0;
     --color-dark-gray:#0f172a;
     --color-light-gray:#4e3030;
 
@@ -59,7 +59,7 @@ button, input, select, optgroup, textarea {
 }
 
 body {
-    background: linear-gradient(180deg, #f5f9ff 0%, #eef4ff 100%);
+    background: var(--background);
     color: var(--color-dark-gray);
 }
 
@@ -215,7 +215,8 @@ svg {
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
-    box-shadow: var(--shadow-blue);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    border: 1px solid var(--color-gray);
 }
 
 .offer-header {
@@ -457,23 +458,37 @@ footer{
     gap: calc(var(--spacing) * 8);
     display: flex;
 }
-@media (min-width: 768px) {
-    .page {
-        max-width: 900px;
-        margin: auto;
+
+@media (max-width: 768px) {
+
+    .navInside {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .BtnNavOutside {
+        gap: 1.5rem; 
+        flex-wrap: wrap; 
+        justify-content: center;
     }
 
-    .form-row {
-        flex-direction: row;
-    }
-}
-
-@media (min-width: 1024px) {
-    .page {
-        max-width: 1100px;
+    .RechercherBTN {
+        width: 100%; 
     }
 
-    .card {
-        padding: 32px;
+    .barrePopulaire {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .footerIn {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .navfooter {
+        flex-direction: column;
+        gap: 1rem;
     }
 }
