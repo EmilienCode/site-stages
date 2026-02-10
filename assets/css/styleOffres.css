@@ -198,9 +198,10 @@ svg{
 .CompteBtn{
     display: flex;
     background-color: var(--background);
-    border-color: var(--color-dark-gray);
+    color: var(--color-light-gray);
+    border-color: transparent;
     border-style: solid;
-    border-width: 1px;
+    border-width: 0px;
     border-radius: 3.40282e38px;
     overflow: hidden;
     justify-content: center;
@@ -211,11 +212,10 @@ svg{
 }
 .CompteBtn:hover {
     background-color: var(--color-gray);
-    color: var(--color-gray);
+    color: var(--primary-color);
     border-color: var(--primary-color);
 }
 .svgCompte{
-    color: oklch(.551 .027 264.364);
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
     border-color: var(--border);

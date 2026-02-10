@@ -1,32 +1,53 @@
 :root{
-    --font-weight-titre:800;
-    --font-weight-nom:700;
-    --font-weight-moyen:500;
-    --size-text-titre:3rem;
-    --size-text-nom:1.25rem;
-    --size-text-NavBarre:0.875rem;
-    --spacing:0.25rem;
-    --font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* Typographie */
+    --font-weight-titre: 800;
+    --font-weight-nom: 700;
+    --font-weight-moyen: 500;
+
+    --size-text-titre: 3rem;
+    --size-text-nom: 1.25rem;
+    --size-text-NavBarre: 0.875rem;
+
+    --font-sans: ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
+
+    /* Espacements & formes */
+    --spacing: 0.25rem;
+    --radius: 0.625rem;
+
+    /* Couleurs */
     --background:#ffffff;
     --color-gray:#ffd5d0;
-    --color-box-shadow-blue:rgba(21, 93, 251, 0.2);
-    --color-box-shadow-black:#0000001a;
     --color-dark-gray:#0f172a;
     --color-light-gray:#4e3030;
-    --color-white:#fff;
-    --color-blue:#fa8072;
-    --color-dark-blue:#914941;
-    --color-bg-populaire-txt:oklch(.97 .014 254.604);
-    --color-bg-populaire-border: rgb(243, 244, 246);
-    --color-back-icone:oklch(.551 .027 264.364);
-    --radius:0.625rem;
+
+    --primary-color:#fa8072;
+    --secondary-color:#914941;
+    --tertiary-color: #fac4a7; 
+
+    /* UI */
+    --color-border-light: rgb(229, 231, 235);
+    --color-input-bg: rgb(249, 251, 255);
+    --color-muted-bg: rgb(229, 231, 235);
+    --color-muted-bg-hover: rgb(209, 213, 219);
+
+    /* Effets */
+    --shadow-blue: 0 12px 32px rgba(235, 116, 37, 0.08);
+    --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
+
+    --color-box-shadow-blue:rgba(21, 93, 251, 0.2);
+    --color-box-shadow-black:#0000001a;
+    --color-bg-populaire-txt:#eff6ff;
+    --color-bg-populaire-border: #f3f4f6;
+    --color-back-icone:#6a7282;
 }
 body.dark-mode {
     /* 1. FOND PRINCIPAL : On passe du blanc à un bleu nuit très profond (élégant) */
     --background: #111d37; 
 
     /* 2. ÉLÉMENTS "BLANCS" (Box, Nav) : Ils deviennent gris foncé pour se détacher du fond */
-    --color-white: #111d37; 
+    --background: #111d37; 
 
     /* 3. BORDURES : On remplace le rose pâle par un gris bleuté discret */
     --color-gray: #334155; 
@@ -38,10 +59,10 @@ body.dark-mode {
     --color-light-gray: #cbd5e1; 
 
     /* 6. ACCENT (Boutons/Liens) : On garde votre saumon, il vibre bien sur le noir */
-    --color-blue: #fa8072; 
+    --primary-color: #fa8072; 
 
     /* 7. ACCENT HOVER : On l'éclaircit légèrement ou on le garde saturé */
-    --color-dark-blue: #e86a5c; 
+    --secondary-color: #e86a5c; 
 
     /* 8. OMBRES : On les rend plus sombres pour qu'elles se voient sur le fond foncé */
     --color-box-shadow-blue: rgba(21, 93, 251, 0.1); /* Plus subtil */
@@ -86,7 +107,7 @@ button, input, select, optgroup, textarea {
 }
 .TxtBlue{
     font-weight: var(--font-weight-titre);
-    color: var(--color-blue);
+    color: var(--primary-color);
     font-size: var(--size-text-titre);
     font-family: var(--font-sans);
 }
@@ -97,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav{
     padding-block: calc(var(--spacing) * 4); 
     padding-inline: calc(var(--spacing) * 6);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -131,11 +152,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .LogoNav{
     padding: calc(var(--spacing) * 2);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: var(--radius);
 }
 .LOGO{
-    color: var(--color-white);
+    color: var(--background);
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
 }
@@ -172,13 +193,13 @@ svg{
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     transform: scaleX(0); 
     transform-origin: bottom right;
     transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 .BtnNavInside:hover{
-    color: var(--color-blue);
+    color: var(--primary-color);
     text-decoration: none;
 }
 .BtnNavInside:hover::after {
@@ -200,7 +221,7 @@ svg{
 }
 .NotifBtn:hover {
     background-color: var(--color-gray);
-    color: var(--color-blue);
+    color: var(--primary-color);
 }
 .svgNotif{
     width: calc(var(--spacing) * 5);
@@ -208,10 +229,11 @@ svg{
 }
 .CompteBtn{
     display: flex;
-    background-color: var(--color-bg-populaire-txt);
-    border-color: var(--color-bg-populaire-border);
+    background-color: var(--background);
+    color: var(--color-light-gray);
+    border-color: transparent;
     border-style: solid;
-    border-width: 1px;
+    border-width: 0px;
     border-radius: 3.40282e38px;
     overflow: hidden;
     justify-content: center;
@@ -220,8 +242,12 @@ svg{
     width: calc(var(--spacing) * 8);
     height: calc(var(--spacing) * 8);
 }
+.CompteBtn:hover {
+    background-color: var(--color-gray);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
 .svgCompte{
-    color: var(--color-fond-);
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
     border-color: var(--border);
@@ -251,7 +277,7 @@ svg{
     flex-direction: row;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px var(--color-box-shadow-black), 0 8px 10px -6px var(--color-box-shadow-black);
     padding: calc(var(--spacing) * 2);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-style: solid;
     border-width: 1px;
@@ -286,7 +312,7 @@ svg{
     flex: 1;
 }
 .svgLoop{
-    color: var(--color-blue);
+    color: var(--primary-color);
     flex-shrink: 0;
     height: calc(var(--spacing) * 5);
 }
@@ -300,18 +326,18 @@ svg{
     transition-property: all;
     transition: cubic-bezier(.4, 0, .2, 1);
     transition-duration: 0.15s;
-    color: var(--color-white);
+    color: var(--background);
     white-space: nowrap;
     font-weight: var(--font-weight-nom);
     padding-block: calc(var(--spacing) * 3);
     padding-inline: calc(var(--spacing) * 8);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: calc(var(--radius)  + 4px);
     border-color: #0000;
     cursor: pointer;
 }
 .RechercherBTN:hover{
-    background-color: var(--color-dark-blue);
+    background-color: var(--secondary-color);
 }
 .planete{
     display: block;
@@ -337,20 +363,20 @@ svg{
     border-style: solid;
     border-width: 1px;
     border-radius: 3.40282e38px;
-    color: var(--color-blue);
+    color: var(--primary-color);
     display: inline-block;
     transition: transform 0.2s cubic-bezier(.175, .885, .32, 1.275);
 }
 .populaireTXT:hover {
     transform: translateY(-5px);
-    border-color: var(--color-blue);
+    border-color: var(--primary-color);
     cursor: default;
 }
 footer{
     padding-block: calc(var(--spacing) * 12);
     padding-inline: calc(var(--spacing) * 6);
     margin-top: calc(var(--spacing) * 12);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-top-style: solid;
     border-top-width: 1px;
@@ -372,11 +398,11 @@ footer{
 }
 .logofooter{
     padding: calc(var(--spacing) * 1.5);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: calc(var(--radius)  - 2px);
 }
 .svglogofooter{
-    color: var(--color-white);
+    color: var(--background);
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
     border-color: #0000;
@@ -423,7 +449,7 @@ footer{
     font-size: 0.875rem;
     padding-block: calc(var(--spacing) * 2.5);
     padding-inline: calc(var(--spacing) * 4);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-style: solid;
     border-width: 1px;
@@ -432,7 +458,7 @@ footer{
     align-items: center;
 }
 .btnTrie:hover{
-    border-color: var(--color-blue);
+    border-color: var(--primary-color);
     cursor:pointer;
 }
 .logoTrie{
