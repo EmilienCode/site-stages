@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styleconfidentialite.css"/>
     <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
+    <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
+    <link rel="stylesheet" href="assets/css/styleDarkMode.css">
     <meta charset="utf-8" />
     <title>CESITonStage - Confidentialité</title>
     <link
@@ -57,6 +59,13 @@
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                     </div>
+                    <!-- From Uiverse.io by Madflows --> 
+                    <div class="toggle-switch">
+                        <label class="switch-label">
+                            <input type="checkbox" id="btn-theme-toogle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>  
                 </div>
             </div>
         </nav>
@@ -271,5 +280,6 @@
             <p style="color: var(--color-light-gray); font-size: 0.875rem;">© 2026 CESITonStage from Crazy Industries. Tous droits réservés.</p>
         </div>
     </footer>
+    <script src="assets/js/darkToogle.js"></script>
 </body>
 </html>

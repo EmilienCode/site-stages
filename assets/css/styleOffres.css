@@ -23,6 +23,7 @@
 
     /* Couleurs */
     --background:#ffffff;
+    --color-background-offre:#faf3f1;
     --color-gray:#ffd5d0;
     --color-dark-gray:#0f172a;
     --color-light-gray:#4e3030;
@@ -322,8 +323,8 @@ svg{
 .inputTXT{
     color: var(--color-light-gray); 
     width: 100%;
-    outline-color: color-mix(in oklab, oklch(.708 0 0) 50%, transparent);
-    border-color: #0000;
+    outline: none;
+    border: none;
 }
 .RechercherBTN{
     transition-property: all;
@@ -448,7 +449,7 @@ footer{
     transition-property: all;
     transition: cubic-bezier(.4, 0, .2, 1);
     transition-duration: 0.15s;
-    color: oklch(.373 .034 259.733);
+    color: var(--color-dark-gray);
     font-weight: 600;
     font-size: 0.875rem;
     padding-block: calc(var(--spacing) * 2.5);
@@ -470,7 +471,7 @@ footer{
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
     display: block;
-    color: oklch(.373 .034 259.733);
+    color: var(--color-dark-gray);
     font-weight: 600;
     font-size: 0.875rem;
 }
@@ -596,7 +597,7 @@ footer{
 .offre:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
-    background-color: #faf3f1;
+    background-color: var(--color-background-offre);
     border-color: transparent; 
 }
 
@@ -606,7 +607,7 @@ footer{
 }
 
 .offre:hover::after{
-    background-color: #faf3f1;
+    background-color: var(--color-background-offre);
 }
 
 @keyframes tourneMonPote {
