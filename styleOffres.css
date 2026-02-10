@@ -239,7 +239,6 @@ svg{
     border-radius: 1rem;
     gap: calc(var(--spacing) * 4);
     transition: all 0.3s cubic-bezier(.4, 0, .2, 1);
-    
     /* IMPORTANT : Plus de position absolute ici ! */
     position: static; 
     transform: none;
@@ -248,6 +247,7 @@ svg{
 
 .BoxRechercher:hover{
     box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
+    transform: scale(1.01);
 }
 
 /* --- LES BOUTONS DE TRI (Nettoyés) --- */
@@ -471,10 +471,9 @@ footer{
     display: flex;
     flex-direction: column;
     gap: calc(var(--spacing) * 2);
-    
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
     z-index: 0; 
     transition: transform 0.3s ease, border-color 0.3s ease;
-    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
 }
 
 
@@ -565,7 +564,7 @@ footer{
 
 .offre:hover {
     transform: translateY(-5px);
-    
+    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
     background-color: #faf3f1;
     border-color: transparent; 
 }

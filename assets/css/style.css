@@ -219,7 +219,7 @@
             transition: all 0.3s cubic-bezier(.4, 0, .2, 1);
         }
         .BoxRechercher:hover{
-            transform: translateY(-3px); /* Monte légèrement */
+            transform: scale(1.01); /* Monte légèrement */
             box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2); /* Ajoute une ombre douce */
         }
         .input1{
@@ -301,7 +301,7 @@
             transition: transform 0.2s cubic-bezier(.175, .885, .32, 1.275);
         }
         .populaireTXT:hover {
-            transform: scale(1.08);
+            transform: translateY(-5px);
             border-color: var(--color-blue);
             cursor: default;
         }
