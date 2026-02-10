@@ -1,20 +1,40 @@
-:root{
-    --font-weight-titre:800;
-    --font-weight-nom:700;
-    --font-weight-moyen:500;
-    --size-text-titre:3rem;
-    --size-text-nom:1.25rem;
-    --size-text-NavBarre:0.875rem;
-    --spacing:0.25rem;
-    --font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+:root {
+    /* Typographie */
+    --font-weight-titre: 800;
+    --font-weight-nom: 700;
+    --font-weight-moyen: 500;
+
+    --size-text-titre: 3rem;
+    --size-text-nom: 1.25rem;
+    --size-text-NavBarre: 0.875rem;
+
+    --font-sans: ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
+
+    /* Espacements & formes */
+    --spacing: 0.25rem;
+    --radius: 0.625rem;
+
+    /* Couleurs */
     --background:#ffffff;
     --color-gray:#ffd5d0;
     --color-dark-gray:#0f172a;
-    --color-light-gray:#83545b;
-    --color-white:#fff;
-    --color-blue:#fa8072;
-    --color-dark-blue:#914941;
-    --radius:0.625rem;
+    --color-light-gray:#4e3030;
+
+    --primary-color:#fa8072;
+    --secondary-color:#914941;
+    --tertiary-color: #fac4a7; 
+
+    /* UI */
+    --color-border-light: rgb(229, 231, 235);
+    --color-input-bg: rgb(249, 251, 255);
+    --color-muted-bg: rgb(229, 231, 235);
+    --color-muted-bg-hover: rgb(209, 213, 219);
+
+    /* Effets */
+    --shadow-blue: 0 12px 32px rgba(235, 116, 37, 0.08);
+    --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
 }
 .logoAcc{
     text-decoration: none;
@@ -43,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav{
     padding-block: calc(var(--spacing) * 4); 
     padding-inline: calc(var(--spacing) * 6);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -73,11 +93,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .LogoNav{
     padding: calc(var(--spacing) * 2);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: var(--radius);
 }
 .LOGO{
-    color: var(--color-white);
+    color: var(--background);
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
 }
@@ -114,13 +134,13 @@ svg{
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     transform: scaleX(0); 
     transform-origin: bottom right;
     transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 .BtnNavInside:hover{
-    color: var(--color-blue);
+    color: var(--primary-color);
     text-decoration: none;
 }
 .BtnNavInside:hover::after {
@@ -142,7 +162,7 @@ svg{
 }
 .NotifBtn:hover {
     background-color: var(--color-gray);
-    color: var(--color-blue);
+    color: var(--primary-color);
 }
 .svgNotif{
     width: calc(var(--spacing) * 5);
@@ -172,7 +192,7 @@ footer{
     padding-block: calc(var(--spacing) * 12);
     padding-inline: calc(var(--spacing) * 6);
     margin-top: calc(var(--spacing) * 12);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-top-style: solid;
     border-top-width: 1px;
@@ -194,11 +214,11 @@ footer{
 }
 .logofooter{
     padding: calc(var(--spacing) * 1.5);
-    background-color: var(--color-blue);
+    background-color: var(--primary-color);
     border-radius: calc(var(--radius)  - 2px);
 }
 .svglogofooter{
-    color: var(--color-white);
+    color: var(--background);
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
     border-color: #0000;
@@ -245,7 +265,7 @@ footer{
     font-size: 0.875rem;
     padding-block: calc(var(--spacing) * 2.5);
     padding-inline: calc(var(--spacing) * 4);
-    background-color: var(--color-white);
+    background-color: var(--background);
     border-color: var(--color-gray);
     border-style: solid;
     border-width: 1px;
@@ -254,7 +274,7 @@ footer{
     align-items: center;
 }
 .btnTrie:hover{
-    border-color: var(--color-blue);
+    border-color: var(--primary-color);
     cursor:pointer;
 }
 .logoTrie{
