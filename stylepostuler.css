@@ -471,8 +471,22 @@ footer{
     .form-row {
         flex-direction: row;
     }
+}
 
-        .navInside {
+@media (min-width: 1024px) {
+    .page {
+        max-width: 1100px;
+    }
+
+    .card {
+        padding: 32px;
+    }
+}
+
+/* --- RESPONSIVE MOBILE (Écrans < 768px) --- */
+@media (max-width: 768px) {
+
+    .navInside {
         flex-direction: column;
         gap: 1.5rem;
     }
@@ -494,15 +508,5 @@ footer{
     .navfooter {
         flex-direction: column;
         gap: 1rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .page {
-        max-width: 1100px;
-    }
-
-    .card {
-        padding: 32px;
     }
 }
