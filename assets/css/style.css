@@ -9,13 +9,48 @@
     --font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --background:#ffffff;
     --color-gray:#ffd5d0;
-
+    --color-box-shadow-blue:rgba(21, 93, 251, 0.2);
+    --color-box-shadow-black:#0000001a;
     --color-dark-gray:#0f172a;
-    --color-light-gray:#83545b;
+    --color-light-gray:#4e3030;
     --color-white:#fff;
     --color-blue:#fa8072;
     --color-dark-blue:#914941;
+    --color-bg-populaire-txt:oklch(.97 .014 254.604);
+    --color-bg-populaire-border: rgb(243, 244, 246);
+    --color-back-icone:oklch(.551 .027 264.364);
     --radius:0.625rem;
+}
+body.dark-mode {
+    /* 1. FOND PRINCIPAL : On passe du blanc à un bleu nuit très profond (élégant) */
+    --background: #111d37; 
+
+    /* 2. ÉLÉMENTS "BLANCS" (Box, Nav) : Ils deviennent gris foncé pour se détacher du fond */
+    --color-white: #111d37; 
+
+    /* 3. BORDURES : On remplace le rose pâle par un gris bleuté discret */
+    --color-gray: #334155; 
+
+    /* 4. TEXTE PRINCIPAL (Titres) : Passe du noir au blanc cassé (plus doux que le blanc pur) */
+    --color-dark-gray: #f1f5f9; 
+
+    /* 5. TEXTE SECONDAIRE (Paragraphes) : Passe du marron/gris à un gris clair lisible */
+    --color-light-gray: #cbd5e1; 
+
+    /* 6. ACCENT (Boutons/Liens) : On garde votre saumon, il vibre bien sur le noir */
+    --color-blue: #fa8072; 
+
+    /* 7. ACCENT HOVER : On l'éclaircit légèrement ou on le garde saturé */
+    --color-dark-blue: #e86a5c; 
+
+    /* 8. OMBRES : On les rend plus sombres pour qu'elles se voient sur le fond foncé */
+    --color-box-shadow-blue: rgba(21, 93, 251, 0.1); /* Plus subtil */
+    --color-box-shadow-black: rgba(0, 0, 0, 0.6);    /* Plus fort */
+
+    /* 9. ÉLÉMENTS SPÉCIFIQUES (Tags populaires, icônes) */
+    --color-bg-populaire-txt: #334155;      /* Fond des tags */
+    --color-bg-populaire-border: #475569;   /* Bordure des tags */
+    --color-back-icone: #94a3b8;            /* Couleur des petites icônes */
 }
 body{
     background-color: var(--background);
@@ -173,8 +208,8 @@ svg{
 }
 .CompteBtn{
     display: flex;
-    background-color: rgb(229, 231, 235);
-    border-color: rgb(243, 244, 246);
+    background-color: var(--color-bg-populaire-txt);
+    border-color: var(--color-bg-populaire-border);
     border-style: solid;
     border-width: 1px;
     border-radius: 3.40282e38px;
@@ -186,7 +221,7 @@ svg{
     height: calc(var(--spacing) * 8);
 }
 .svgCompte{
-    color: oklch(.551 .027 264.364);
+    color: var(--color-fond-);
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
     border-color: var(--border);
@@ -214,7 +249,7 @@ svg{
 .BoxRechercher{
     display: flex;
     flex-direction: row;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px var(--color-box-shadow-black), 0 8px 10px -6px var(--color-box-shadow-black);
     padding: calc(var(--spacing) * 2);
     background-color: var(--color-white);
     border-color: var(--color-gray);
@@ -226,7 +261,7 @@ svg{
 }
 .BoxRechercher:hover{
     transform: scale(1.01); /* Monte légèrement */
-    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2); /* Ajoute une ombre douce */
+    box-shadow: 0 4px 12px var(--color-box-shadow-blue); /* Ajoute une ombre douce */
 }
 .input1{
     display: flex;
@@ -258,7 +293,7 @@ svg{
 .inputTXT{
     color: var(--color-light-gray); 
     width: 100%;
-    outline-color: color-mix(in oklab, oklch(.708 0 0) 50%, transparent);
+    outline-color: #0000;
     border-color: #0000;
 }
 .RechercherBTN{
@@ -291,14 +326,14 @@ svg{
     margin-top: calc(var(--spacing) * 8);
 }
 .populaire{
-    color: oklch(.21 .034 264.665);
+    color: var(--color-dark-gray);
     font-weight: 600;
 }
 .populaireTXT{
     padding-block: calc(var(--spacing) * 1);
     padding-inline: calc(var(--spacing) * 3);
-    background-color: oklch(.97 .014 254.604);
-    border-color: oklch(.932 .032 255.585);
+    background-color: var(--color-bg-populaire-txt);
+    border-color: var(--color-bg-populaire-border);
     border-style: solid;
     border-width: 1px;
     border-radius: 3.40282e38px;
@@ -383,7 +418,7 @@ footer{
     transition-property: all;
     transition: cubic-bezier(.4, 0, .2, 1);
     transition-duration: 0.15s;
-    color: oklch(.373 .034 259.733);
+    color: var(--color-back-icone);
     font-weight: 600;
     font-size: 0.875rem;
     padding-block: calc(var(--spacing) * 2.5);
@@ -404,7 +439,7 @@ footer{
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
     display: block;
-    color: oklch(.373 .034 259.733);
+    color: var(--color-back-icone);
     font-weight: 600;
     font-size: 0.875rem;
 }
