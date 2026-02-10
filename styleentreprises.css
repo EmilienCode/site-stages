@@ -261,6 +261,19 @@ footer{
     font-size: 0.875rem;
 }
 
+.entreprisestitre{
+    color: rgb(16, 24, 40);
+    font-weight: var(--font-weight-titre);
+    line-height: 1.25;
+    font-size: var(--size-text-titre);
+    margin-bottom: calc(var(--spacing) * 6);
+    font-family: var(--font-sans);
+    cursor: default;
+    max-width: 70rem;
+    margin-inline: auto;
+    margin-top: 7rem;
+}
+
 @media (max-width: 768px) {
 
     .navInside {
