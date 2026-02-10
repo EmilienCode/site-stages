@@ -184,8 +184,8 @@ svg {
 }
 .CompteBtn{
     display: flex;
-    background-color: rgb(229, 231, 235);
-    border-color: rgb(243, 244, 246);
+    background-color: var(--background);
+    border-color: var(--color-dark-gray);
     border-style: solid;
     border-width: 1px;
     border-radius: 3.40282e38px;
@@ -195,6 +195,11 @@ svg {
     cursor: pointer;
     width: calc(var(--spacing) * 8);
     height: calc(var(--spacing) * 8);
+}
+.CompteBtn:hover {
+    background-color: var(--color-gray);
+    color: var(--color-gray);
+    border-color: var(--primary-color);
 }
 .svgCompte{
     color: oklch(.551 .027 264.364);
