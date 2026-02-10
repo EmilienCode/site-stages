@@ -95,6 +95,10 @@ svg {
     gap: calc(var(--spacing) * 2);
     align-items: center;
 }
+.logoAcc{
+    text-decoration: none;
+    color: var(--color-dark-gray);
+}
 
 .NomNav {
     color: var(--color-dark-gray);
