@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="styleoffres.css"/>
+    <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
     <meta charset="utf-8" />
     <title>CESITonStage - Offres</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,17 +37,19 @@
                 <a href="offres.html" class="BtnNavInside">Offres</a>
                 <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
             </div>
-            <div class="logoDroitNav">
-                <button class="NotifBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                </button>
-                    <button class="NotifBtn">
+                <div class="logoDroitNav">
+                    <button class="NotifBtn WishlistBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="wishlist-text">Wishliste</span>
+                    </button>
+                    <button class="NotifBtn NotificationBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
                             <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
                             <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path>
                         </svg>
+                        <span class="notif-text">Notifications</span>
                     </button>
                     <div class="CompteBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgCompte" aria-hidden="true">
@@ -54,7 +57,7 @@
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                     </div>
-            </div>
+                </div>
             </div>
         </nav>
     </header>
