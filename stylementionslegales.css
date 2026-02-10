@@ -49,7 +49,9 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom-width: 1px;
     z-index: 50;
     top: calc(var(--spacing) * 0);
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 .navInside{
     display: flex;
@@ -276,6 +278,7 @@ footer{
     cursor: default;
     max-width: 70rem;
     margin-inline: auto;
+    margin-top: 7rem;
 }
 
 @media (max-width: 768px) {
