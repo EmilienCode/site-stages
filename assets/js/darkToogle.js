@@ -1,5 +1,5 @@
 // On récupère le bouton et le body
-const bouton = document.getElementById('leBouton');
+const bouton = document.getElementById('btn-theme-toogle');
 const body = document.body;
 
 // On écoute le clic sur le bouton

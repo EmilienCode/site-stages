@@ -1,0 +1,62 @@
+/* --- Bouton Toggle Dark Mode (Version Compacte) --- */
+
+.toggle-switch {
+  position: relative;
+  width: 50px;       /* Largeur réduite (était 100px) */
+  height: 26px;      /* Hauteur réduite (était 50px) */
+  margin-left: calc(var(--spacing) * 2); /* Petit espacement à gauche */
+}
+
+/* Le label englobe tout et sert de zone de clic */
+.switch-label {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* On cache la case à cocher (checkbox) brute */
+#btn-theme-toogle {
+  position: absolute;
+  display: none;
+}
+
+/* --- Le fond du bouton (La piste) --- */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-gray); /* Gris/Rose par défaut */
+  transition: .4s;
+  border-radius: 34px;
+}
+
+/* --- Le rond qui bouge (Le bouton) --- */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;     /* Taille du rond */
+  width: 20px;
+  left: 3px;        /* Position initiale à gauche */
+  bottom: 3px;      /* Centrage vertical (26px hauteur - 20px rond / 2) */
+  background-color: var(--color-white);
+  transition: .4s cubic-bezier(0.4, 0, 0.2, 1); /* Animation fluide */
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Légère ombre pour le relief */
+}
+
+/* --- État Activé (Quand on clique) --- */
+
+/* 1. Le fond devient bleu */
+#btn-theme-toogle:checked + .slider {
+  background-color: var(--color-blue);
+}
+
+/* 2. Le rond se déplace vers la droite */
+#btn-theme-toogle:checked + .slider::before {
+  transform: translateX(24px); /* 50px largeur - 20px rond - 6px marges */
+}
