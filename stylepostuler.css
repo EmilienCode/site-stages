@@ -90,6 +90,7 @@ svg {
     align-items: center;
     max-width: 80rem;
     margin-inline: auto;
+    position: relative;
 }
 
 .NomLogoNav {
@@ -125,6 +126,11 @@ svg {
     font-weight: var(--font-weight-moyen);
     color: var(--color-light-gray);
     font-family: var(--font-sans);
+
+    position: absolute;  
+    left: 50%;                
+    transform: translateX(-50%); 
+    width: max-content;
 }
 
 .BtnNavInside {
@@ -464,6 +470,30 @@ footer{
 
     .form-row {
         flex-direction: row;
+    }
+
+        .navInside {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .BtnNavOutside {
+        position: static; 
+        transform: none;  
+        gap: 1.5rem; 
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
+
+    .footerIn {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .navfooter {
+        flex-direction: column;
+        gap: 1rem;
     }
 }
 

@@ -80,6 +80,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     max-width: 80rem;
     margin-inline: auto;
+    position: relative;
 }
 .NomLogoNav{
     display: flex;
@@ -119,6 +120,11 @@ svg{
     gap: calc(var(--spacing) * 8);
     align-items: center;
     font-family: var(--font-sans);
+
+    position: absolute;  
+    left: 50%;                
+    transform: translateX(-50%); 
+    width: max-content;
 }
 .BtnNavInside{
     position: relative;
@@ -597,6 +603,8 @@ footer{
             }
 
             .BtnNavOutside {
+                position: static; /* On remet le positionnement normal */
+                transform: none;
                 gap: 1.5rem; 
                 flex-wrap: wrap; 
                 justify-content: center;
