@@ -76,6 +76,7 @@
             align-items: center;
             max-width: 80rem;
             margin-inline: auto;
+            position: relative;
         }
         .logoAcc{
             text-decoration: none;
@@ -115,6 +116,11 @@
             gap: calc(var(--spacing) * 8);
             align-items: center;
             font-family: var(--font-sans);
+
+            position: absolute;  
+            left: 50%;                
+            transform: translateX(-50%); 
+            width: max-content;
         }
         .BtnNavInside{
             position: relative;
@@ -412,6 +418,8 @@
             }
             
             .BtnNavOutside {
+                position: static; 
+                transform: none;  
                 gap: 1.5rem; 
                 flex-wrap: wrap; 
                 justify-content: center;

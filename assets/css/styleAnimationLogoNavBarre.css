@@ -1,0 +1,97 @@
+/* --- Animation Wishlist --- */
+
+/* On configure le conteneur du bouton pour qu'il soit flexible */
+.WishlistBtn {
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Important pour cacher le texte au départ */
+    transition: all 0.4s cubic-bezier(.4, 0, .2, 1); /* Animation fluide */
+    width: auto;
+}
+
+/* Configuration du texte (caché par défaut) */
+.wishlist-text {
+    max-width: 0;       /* Largeur nulle au départ */
+    opacity: 0;         /* Invisible */
+    white-space: nowrap;/* Empêche le texte de sauter à la ligne */
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0;
+    transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+    color: inherit;     /* Prend la couleur définie au survol */
+}
+
+/* --- État au survol (Hover) --- */
+
+/* 1. Le bouton s'élargit */
+.WishlistBtn:hover {
+    padding-right: calc(var(--spacing) * 4); /* Ajoute de l'espace à droite */
+}
+
+/* 2. L'icône roule vers la gauche */
+.WishlistBtn:hover .svgNotif {
+    transform: rotate(-360deg); /* Rotation complète vers la gauche */
+    transition: transform 0.6s ease-out; /* Durée de la rotation */
+}
+
+/* 3. Le texte apparaît */
+.WishlistBtn:hover .wishlist-text {
+    max-width: 80px;    /* On donne assez de place pour le mot */
+    opacity: 1;         /* Devient visible */
+    margin-left: calc(var(--spacing) * 2); /* Espace entre l'icône et le texte */
+}
+
+/* --- Animation Notification (Cloche) --- */
+
+/* 1. Définition de l'animation de sonnerie */
+@keyframes sonner {
+    0% { transform: rotate(0); }
+    20% { transform: rotate(15deg); } /* Penche à droite */
+    40% { transform: rotate(-15deg); } /* Penche à gauche */
+    60% { transform: rotate(10deg); }
+    80% { transform: rotate(-10deg); }
+    100% { transform: rotate(0); }
+}
+
+/* 2. Configuration du bouton (conteneur) */
+.NotificationBtn {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+    width: auto;
+}
+
+/* 3. Configuration du texte (caché par défaut) */
+.notif-text {
+    max-width: 0;
+    opacity: 0;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0;
+    transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+    color: inherit;
+}
+
+/* --- État au survol (Hover) --- */
+
+/* Le bouton s'élargit */
+.NotificationBtn:hover {
+    padding-right: calc(var(--spacing) * 4);
+}
+
+/* L'icône se met à sonner */
+.NotificationBtn:hover .svgNotif {
+    /* On lance l'animation définie plus haut */
+    animation: sonner 0.5s ease-in-out both; 
+    /* Important : le point de pivot est en haut au centre pour un effet réaliste */
+    transform-origin: top center; 
+}
+
+/* Le texte apparaît */
+.NotificationBtn:hover .notif-text {
+    max-width: 100px; /* Un peu plus large que wishlist car le mot est long */
+    opacity: 1;
+    margin-left: calc(var(--spacing) * 2);
+}
