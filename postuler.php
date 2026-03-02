@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>CESITonStage - Postuler</title>
+    <meta name="description" content="Postulez à une offre de stage sur cesitonstage.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/stylepostuler.css"/>
+    <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
+    <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
+    <link rel="stylesheet" href="assets/css/styleDarkMode.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <div class="navInside">
+                <div class="NomLogoNav">
+                    <div class="LogoNav">
+                        <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg"  alt="Logo plateforme" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="LOGO" aria-hidden="true"> 
+                            <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                        </svg></a> 
+                    </div>
+                    <div class="NomNav">
+                        <a class = "logoAcc" href= index.html> CESITonStage </a> 
+                    </div>
+                </div>
+            <div class="BtnNavOutside">
+                    <a href="index.html" class="BtnNavInside">Accueil</a>
+                    <a href="offres.html" class="BtnNavInside">Offres</a>
+                    <a href="#" class="BtnNavInside">Entreprise</a>
+            </div>
+                <div class="logoDroitNav">
+                    <button class="NotifBtn WishlistBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="wishlist-text">Wishliste</span>
+                    </button>
+                    <button class="NotifBtn NotificationBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
+                            <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+                            <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path>
+                        </svg>
+                        <span class="notif-text">Notifications</span>
+                    </button>
+                    <div class="CompteBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgCompte" aria-hidden="true">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <!-- From Uiverse.io by Madflows --> 
+                    <div class="toggle-switch">
+                        <label class="switch-label">
+                            <input type="checkbox" id="btn-theme-toogle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>  
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<main class="page">
+
+    <section class="top-links">
+        <a href="offres.html">← Retour</a>
+    </section>
+
+    <section class="card offer-card">
+        <div class="offer-header">
+            <h1>Stage Exemple</h1>
+            <span class="badge">Nouveau</span>
+        </div>
+
+        <h2>Entreprise Exemple </h2>
+
+        <div class="offer-meta">
+            <span>📍 Lieu</span>
+            <span>⏳ Durée</span>
+            <span>💻 Domaine</span>
+            <span>🧑‍🎓 Formation requise</span>
+        </div>
+    </section>
+
+    <section class="card form-card">
+        <h3>Votre candidature</h3>
+
+        <form class="form" action="traitement.php" method="POST" enctype="multipart/form-data">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="Nom" placeholder="Dupont" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="Prénom" placeholder="Jean" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" name="Email" placeholder="jean.dupont@gmail.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="tel">Numéro de téléphone</label>
+                <input type="tel" id="tel" name="Tel" placeholder="ex : 0606060606" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lm">Lettre de motivation (recommandée)</label>
+                <textarea id="lm" name="LM" placeholder="Expliquez pourquoi ce stage vous intéresse..."></textarea>
+            </div>
+
+            <div class="form-group file-group">
+                <label for="cv">CV (PDF)</label>
+                <input type="file" id="cv" name="CV" accept="application/pdf" required>
+                <span class="file-hint">Format PDF – 2 Mo max</span>
+            </div>
+
+            <div class="form-actions">
+                <a href="offres.html" class="btn btn-secondary">Annuler</a>
+                <button type="submit"  class="btn btn-primary">Envoyer ma candidature</button>
+            </div>
+
+        </form>
+        <script>
+            document.getElementById("cv").addEventListener("change", function() {
+                const file = this.files[0];
+                if (file) {
+                    const maxSize = 2 * 1024 * 1024; // 2 Mo
+
+                    // Vérification du type
+                    if (file.type !== "application/pdf") {
+                        alert("Le fichier doit être au format PDF.");
+                        this.value = "";
+                        return;
+                    }
+
+                    // Vérification de la taille
+                    if (file.size > maxSize) {
+                        alert("Le fichier dépasse la taille maximale de 2 Mo.");
+                        this.value = "";
+                    }
+                }
+            });
+        </script>
+    </section>
+
+</main>
+
+    <footer>
+        <div class="footerIn">
+            <div class="footerlogonom">
+                <div class="logofooter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svglogofooter" aria-hidden="true">
+                        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                    </svg>
+                </div>
+                <span class="nomfooter">CESITONSTAGE</span>
+            </div>
+            <div class="navfooter">
+                <a href="mentions-legales.html" class="BtnNavInside">Mentions légales</a>
+                <a href="confidentialite.html" class="BtnNavInside">Confidentialité</a>
+                <a href="contact.html" class="BtnNavInside">Contact</a>
+            </div>
+            <p style="color: var(--color-light-gray); font-size: 0.875rem;">© 2026 CESITonStage from Crazy Industries. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <script src="assets/js/darkToogle.js"></script>
+</body>
+</html>

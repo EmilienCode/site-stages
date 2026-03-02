@@ -1,18 +1,36 @@
+<?php
+require 'config.php';
+
+if (!isset($_GET['id'])) {
+    die("Aucune candidature trouvée.");
+}
+
+$id = $_GET['id'];
+
+$stmt = $pdo->prepare("SELECT * FROM candidatures WHERE id = ?");
+$stmt->execute([$id]);
+$candidature = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$candidature) {
+    die("Candidature introuvable.");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>CESITonStage - Postuler</title>
-    <meta name="description" content="Postulez à une offre de stage sur cesitonstage.">
+    <title>Candidature envoyée | CESITonStage</title>
+    <meta name="description" content="Votre candidature a bien été prise en compte.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="assets/css/stylepostuler.css"/>
+    <link rel="stylesheet" href="assets/css/stylepostuler.css">
     <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
     <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">
 </head>
 
 <body>
+
     <header>
         <nav class="nav">
             <div class="navInside">
@@ -29,8 +47,8 @@
                 </div>
             <div class="BtnNavOutside">
                     <a href="index.html" class="BtnNavInside">Accueil</a>
-                    <a href="offres.html" class="BtnNavInside">Offres</a>
-                    <a href="#" class="BtnNavInside">Entreprise</a>
+                    <a href="offres.html" class="BtnNavInside">Offre</a>
+                    <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
             </div>
                 <div class="logoDroitNav">
                     <button class="NotifBtn WishlistBtn">
@@ -66,93 +84,56 @@
 
 <main class="page">
 
-    <section class="top-links">
-        <a href="offres.html">← Retour</a>
-    </section>
+    <section class="card thank-card">
+        <div class="thank-icon">✔</div>
 
-    <section class="card offer-card">
-        <div class="offer-header">
-            <h1>Stage Exemple</h1>
-            <span class="badge">Nouveau</span>
+        <h1>Merci pour votre candidature !</h1>
+
+        <p>
+            Votre candidature a bien été prise en compte.<br>
+            L’entreprise analysera votre profil et vous contactera si votre
+            candidature correspond au poste.
+        </p>
+        <div class="card" style="margin-top:20px; text-align:left;">
+            <h3>Résumé de votre candidature :</h3>
+            <p><strong>Nom :</strong> <?= $candidature['Nom'] ?></p>
+            <p><strong>Prénom :</strong> <?= $candidature['Prénom'] ?></p>
+            <p><strong>Email :</strong> <?= $candidature['Email'] ?></p>
+            <p><strong>Téléphone :</strong> <?= $candidature['Tel'] ?></p>
+            <p><strong>Lettre :</strong><br><?= nl2br($candidature['LM']) ?></p>
         </div>
 
-        <h2>Entreprise Exemple </h2>
-
-        <div class="offer-meta">
-            <span>📍 Lieu</span>
-            <span>⏳ Durée</span>
-            <span>💻 Domaine</span>
-            <span>🧑‍🎓 Formation requise</span>
+        <div class="thank-actions">
+            <a href="index.html" class="btn btn-secondary">Retour à l’accueil</a>
+            <a href="offres.html" class="btn btn-primary">Voir d’autres offres</a>
         </div>
-    </section>
-
-    <section class="card form-card">
-        <h3>Votre candidature</h3>
-
-        <form class="form" action="merci-candidature.html">
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" placeholder="Dupont" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" placeholder="Jean" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Adresse email</label>
-                <input type="email" id="email" placeholder="jean.dupont@gmail.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="tel">Numéro de téléphone</label>
-                <input type="tel" id="tel" placeholder="ex : 0606060606" required>
-            </div>
-
-            <div class="form-group">
-                <label for="lm">Lettre de motivation (recommandée)</label>
-                <textarea id="lm" placeholder="Expliquez pourquoi ce stage vous intéresse..."></textarea>
-            </div>
-
-            <div class="form-group file-group">
-                <label for="cv">CV (PDF)</label>
-                <input type="file" id="cv" required>
-                <span class="file-hint">Format PDF – 2 Mo max</span>
-            </div>
-
-            <div class="form-actions">
-                <a href="offres.html" class="btn btn-secondary">Annuler</a>
-                <button type="submit"  class="btn btn-primary">Envoyer ma candidature</button>
-            </div>
-
-        </form>
     </section>
 
 </main>
 
-    <footer>
-        <div class="footerIn">
-            <div class="footerlogonom">
-                <div class="logofooter">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svglogofooter" aria-hidden="true">
-                        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                        <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                    </svg>
-                </div>
-                <span class="nomfooter">CESITONSTAGE</span>
+<footer>
+    <div class="footerIn">
+        <div class="footerlogonom">
+            <div class="logofooter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="svglogofooter" aria-hidden="true">
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                </svg>
             </div>
-            <div class="navfooter">
-                <a href="mentions-legales.html" class="BtnNavInside">Mentions légales</a>
-                <a href="confidentialite.html" class="BtnNavInside">Confidentialité</a>
-                <a href="contact.html" class="BtnNavInside">Contact</a>
-            </div>
-            <p style="color: var(--color-light-gray); font-size: 0.875rem;">© 2026 CESITonStage from Crazy Industries. Tous droits réservés.</p>
+            <span class="nomfooter">CESITONSTAGE</span>
         </div>
-    </footer>
-    <script src="assets/js/darkToogle.js"></script>
+
+        <div class="navfooter">
+            <a href="mentions-legales.html" class="BtnNavInside">Mentions légales</a>
+            <a href="confidentialite.html" class="BtnNavInside">Confidentialité</a>
+            <a href="contact.html" class="BtnNavInside">Contact</a>
+        </div>
+        <p>© 2026 CESITonStage from Crazy Industries. Tous droits réservés.</p>
+    </div>
+</footer>
+<script src="assets/js/darkToogle.js"></script>
 </body>
 </html>
