@@ -36,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
 
     } else {
-        echo "Erreur lors de l'upload du fichier.";
+        echo "Erreur upload : ";
+        print_r(error_get_last());
     }
 }
 ?>
