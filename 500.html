@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oups ! Page introuvable - 404</title>
+    <style>
+        :root {
+            --primary-color: #fa8072;
+            --secondary-color: #914941;
+            --dark-gray: #0f172a;
+            --background: #ffffff;
+            --font-stack: "Inter", "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--background);
+            color: var(--dark-gray);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 8rem;
+            margin: 0;
+            color: var(--primary-color);
+            line-height: 1;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 14px rgba(250, 128, 114, 0.4);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Animation flottante pour le 404 */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translatey(0px); }
+            50% { transform: translatey(-20px); }
+            100% { transform: translatey(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating">
+        <h1>500</h1>
+    </div>
+    
+    <h2>Il n'y a rien ici...</h2>
+    
+    <p>
+        Désolé, il semblerait que le serveur ait eu quelques lacunes.
+    </p>
+
+    <a href="/" class="btn">Retourner à l'accueil</a>
+
+</body>
+</html>

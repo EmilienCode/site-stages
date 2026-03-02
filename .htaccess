@@ -3,6 +3,7 @@ Options -Indexes
 
 # 2. Définir les pages d'erreur
 ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
 
 # 3. Moteur de réécriture
 RewriteEngine On
