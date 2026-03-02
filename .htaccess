@@ -1,0 +1,27 @@
+# 1. Empêcher le listage
+Options -Indexes
+
+# 2. Définir les pages d'erreur
+ErrorDocument 404 /404.html
+
+# 3. Moteur de réécriture
+RewriteEngine On
+
+# Si le HTTPS est désactivé (off)
+RewriteCond %{HTTPS} off
+# Alors on redirige (301) vers la même adresse mais en https://
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 5. Supprimer l'extension .html des URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# 6. Protection des fichiers sensibles
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# 7. Compression GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript
+</IfModule>
