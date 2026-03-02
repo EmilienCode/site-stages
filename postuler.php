@@ -99,7 +99,7 @@
 
                 <div class="form-group">
                     <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="Prénom" placeholder="Jean" required>
+                    <input type="text" id="prenom" name="Prenom" placeholder="Jean" required>
                 </div>
             </div>
 

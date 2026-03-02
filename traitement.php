@@ -4,12 +4,12 @@ require 'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $Nom = htmlspecialchars($_POST['Nom']);
-    $Prénom = htmlspecialchars($_POST['Prénom']);
+    $Prenom = htmlspecialchars($_POST['Prenom']);
     $Email = htmlspecialchars($_POST['Email']);
     $Tel = htmlspecialchars($_POST['Tel']);
     $LM = htmlspecialchars($_POST['LM']);
 
-    // Gestion upload PDF
+    // Upload CV
     $CV = $_FILES['CV'];
     $CVName = time() . "_" . basename($CV["name"]);
     $targetDir = "uploads/";
@@ -23,18 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Fichier trop volumineux.");
     }
 
-    move_uploaded_file($CV["tmp_name"], $targetFile);
+    if (move_uploaded_file($CV["tmp_name"], $targetFile)) {
 
-    // Insertion en BDD
-    $sql = "INSERT INTO candidatures (Nom, Prénom, Email, Tel, LM, CV)
-            VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO candidatures (Nom, Prenom, Email, Tel, LM, CV)
+                VALUES (?, ?, ?, ?, ?, ?)";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$Nom, $Prénom, $Email, $Tel, $LM, $CVName]);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$Nom, $Prenom, $Email, $Tel, $LM, $CVName]);
 
-    // Redirection avec ID
-    $id = $pdo->lastInsertId();
-    header("Location: merci-candidature.php?id=" . $id);
-    exit();
+        $id = $pdo->lastInsertId();
+        header("Location: merci-candidature.php?id=" . $id);
+        exit();
+
+    } else {
+        echo "Erreur lors de l'upload du fichier.";
+    }
 }
 ?>
