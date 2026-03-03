@@ -7,7 +7,7 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-$stmt = $pdo->prepare("SELECT * FROM candidatures WHERE id = ?");
+$stmt = $pdo->prepare("SELECT * FROM Formulaire WHERE id = ?");
 $stmt->execute([$id]);
 $candidature = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -69,8 +69,7 @@ if (!$candidature) {
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                    </div>
-                    <!-- From Uiverse.io by Madflows --> 
+                    </div> 
                     <div class="toggle-switch">
                         <label class="switch-label">
                             <input type="checkbox" id="btn-theme-toogle">
@@ -97,7 +96,7 @@ if (!$candidature) {
         <div class="card" style="margin-top:20px; text-align:left;">
             <h3>Résumé de votre candidature :</h3>
             <p><strong>Nom :</strong> <?= $candidature['Nom'] ?></p>
-            <p><strong>Prénom :</strong> <?= $candidature['Prénom'] ?></p>
+            <p><strong>Prénom :</strong> <?= $candidature['Prenom'] ?></p>
             <p><strong>Email :</strong> <?= $candidature['Email'] ?></p>
             <p><strong>Téléphone :</strong> <?= $candidature['Tel'] ?></p>
             <p><strong>Lettre :</strong><br><?= nl2br($candidature['LM']) ?></p>

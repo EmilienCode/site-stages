@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (move_uploaded_file($CV["tmp_name"], $targetFile)) {
 
-        $sql = "INSERT INTO candidatures (Nom, Prenom, Email, Tel, LM, CV)
+        $sql = "INSERT INTO Formulaire (Nom, Prenom, Email, Tel, LM, CV)
                 VALUES (?, ?, ?, ?, ?, ?)";
 
         $stmt = $pdo->prepare($sql);
