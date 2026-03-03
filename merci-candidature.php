@@ -94,12 +94,15 @@ if (!$candidature) {
             candidature correspond au poste.
         </p>
         <div class="card" style="margin-top:20px; text-align:left;">
-            <h3>Résumé de votre candidature :</h3>
-            <p><strong>Nom :</strong> <?= $candidature['Nom'] ?></p>
-            <p><strong>Prénom :</strong> <?= $candidature['Prenom'] ?></p>
-            <p><strong>Email :</strong> <?= $candidature['Email'] ?></p>
-            <p><strong>Téléphone :</strong> <?= $candidature['Tel'] ?></p>
-            <p><strong>Lettre :</strong><br><?= nl2br($candidature['LM']) ?></p>
+            <h3><strong>Résumé de votre candidature :</strong></h3>
+            <div style="padding-left:20px">
+                <ul><li><strong>Nom :</strong> <?= $candidature['Nom'] ?></li>
+                <li><strong>Prénom :</strong> <?= $candidature['Prenom'] ?></li>
+                <li><strong>Email :</strong> <?= $candidature['Email'] ?></li>
+                <li><strong>Téléphone :</strong> <?= $candidature['Tel'] ?></li>
+                <li><strong>Lettre :</strong><br><?= nl2br($candidature['LM']) ?></li>
+                </ul>
+            </div>
         </div>
 
         <div class="thank-actions">

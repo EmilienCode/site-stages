@@ -25,11 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (move_uploaded_file($CV["tmp_name"], $targetFile)) {
 
-        $sql = "INSERT INTO Formulaire (Nom, Prenom, Email, Tel, LM, CV)
+        $sql = "INSERT INTO Formulaire (Nom, Prenom, Email, Tel, LM, DestinationCV)
                 VALUES (?, ?, ?, ?, ?, ?)";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$Nom, $Prenom, $Email, $Tel, $LM, $CVName]);
+        $stmt->execute([$Nom, $Prenom, $Email, $Tel, $LM, $targetFile]);
 
         $id = $pdo->lastInsertId();
         header("Location: merci-candidature.php?id=" . $id);
