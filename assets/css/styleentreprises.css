@@ -193,6 +193,124 @@ svg{
     height: calc(var(--spacing) * 5);
     border-color: var(--border);
 }
+
+/* Conteneur principal */
+.entreprises-container {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 6);
+    margin-top: calc(var(--spacing) * 8);
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: calc(var(--spacing) * 6);
+    padding-bottom: calc(var(--spacing) * 12);
+}
+
+/* Carte entreprise */
+.entreprise-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background);
+    border: 1px solid var(--color-gray);
+    border-radius: 1rem;
+    padding: calc(var(--spacing) * 6);
+    font-family: var(--font-sans);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
+                0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Nom et détails */
+.entreprise-card h3,
+.entreprise-card p {
+    position: relative;
+    z-index: 10;
+    margin: 0;
+}
+
+.entreprise-card h3 {
+    color: var(--color-dark-gray);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.entreprise-card p {
+    color: var(--color-light-gray);
+    font-size: 0.95rem;
+}
+
+/* Hover animation */
+.entreprise-card::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 125%; 
+    height: 60%;
+    
+    background: linear-gradient(180deg, #fa8072,#914941, #6b2c48,#914941, #fa8072);
+    animation: tourneMonPote 3s linear infinite;
+    
+    z-index: 1; 
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+}
+
+.entreprise-card::after {
+    content: '';
+    position: absolute;
+    inset: 2px; 
+    background: var(--background);
+    border-radius: 12px; 
+    z-index: 2; 
+    opacity: 1; 
+}
+
+.entreprise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
+    background-color: var(--color-background-offre);
+    border-color: transparent; 
+}
+
+.entreprise-card:hover::before {
+    opacity: 1;
+}
+
+.entreprise-card:hover::after {
+    background-color: var(--color-background-offre);
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.pagination-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-nom);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--background);
+}
+
+@keyframes tourneMonPote {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
 footer{
     padding-block: calc(var(--spacing) * 12);
     padding-inline: calc(var(--spacing) * 6);
@@ -238,71 +356,6 @@ footer{
     gap: calc(var(--spacing) * 8);
     display: flex;
 }
-.SectionOffre{
-    padding-bottom: calc(var(--spacing) * 24);
-    padding-inline: calc(var(--spacing) * 6);
-    max-width: 80rem;
-    margin-inline: auto;
-}
-.SectionTrie{
-    align-items: center;
-    flex-direction: row;
-    gap: calc(var(--spacing) * 6);
-    margin-bottom: calc(var(--spacing) * 12);
-    justify-content: space-between;
-    display: flex;
-    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
-    border-color: #0000;
-    font-family: var(--font-sans);
-}
-.divTrie{
-    gap: calc(var(--spacing) * 3);
-    align-items: center;
-    display: flex;
-}
-.btnTrie{
-    display: flex;
-    transition-property: all;
-    transition: cubic-bezier(.4, 0, .2, 1);
-    transition-duration: 0.15s;
-    color: oklch(.373 .034 259.733);
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding-block: calc(var(--spacing) * 2.5);
-    padding-inline: calc(var(--spacing) * 4);
-    background-color: var(--background);
-    border-color: var(--color-gray);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: calc(var(--radius)  + 4px);
-    gap: calc(var(--spacing) * 2);
-    align-items: center;
-}
-.btnTrie:hover{
-    border-color: var(--primary-color);
-    cursor:pointer;
-}
-.logoTrie{
-    width: calc(var(--spacing) * 4);
-    height: calc(var(--spacing) * 4);
-    display: block;
-    color: oklch(.373 .034 259.733);
-    font-weight: 600;
-    font-size: 0.875rem;
-}
-
-.entreprisestitre{
-    color: rgb(16, 24, 40);
-    font-weight: var(--font-weight-titre);
-    line-height: 1.25;
-    font-size: var(--size-text-titre);
-    margin-bottom: calc(var(--spacing) * 6);
-    font-family: var(--font-sans);
-    cursor: default;
-    max-width: 70rem;
-    margin-inline: auto;
-    margin-top: 7rem;
-}
 
 @media (max-width: 768px) {
 
@@ -312,6 +365,8 @@ footer{
     }
     
     .BtnNavOutside {
+        position: static; /* On remet le positionnement normal */
+        transform: none;
         gap: 1.5rem; 
         flex-wrap: wrap; 
         justify-content: center;
@@ -337,3 +392,4 @@ footer{
         gap: 1rem;
     }
 }
+

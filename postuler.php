@@ -30,7 +30,7 @@
             <div class="BtnNavOutside">
                     <a href="index.html" class="BtnNavInside">Accueil</a>
                     <a href="offres.html" class="BtnNavInside">Offres</a>
-                    <a href="#" class="BtnNavInside">Entreprise</a>
+                    <a href="entreprises.php" class="BtnNavInside">Entreprise</a>
             </div>
                 <div class="logoDroitNav">
                     <button class="NotifBtn WishlistBtn">

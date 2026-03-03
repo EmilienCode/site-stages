@@ -48,7 +48,7 @@ if (!$candidature) {
             <div class="BtnNavOutside">
                     <a href="index.html" class="BtnNavInside">Accueil</a>
                     <a href="offres.html" class="BtnNavInside">Offre</a>
-                    <a href="entreprises.html" class="BtnNavInside">Entreprise</a>
+                    <a href="entreprises.php" class="BtnNavInside">Entreprise</a>
             </div>
                 <div class="logoDroitNav">
                     <button class="NotifBtn WishlistBtn">
