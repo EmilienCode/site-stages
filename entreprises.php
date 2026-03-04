@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styleentreprises.css"/>
     <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
     <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">
     <meta charset="utf-8" />
     <title>CESITonStage - Entreprises</title>
-    <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
-    rel="stylesheet"
-    type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css"/>
     <!-- Les trois lignes ci‑dessous sont un correctif pour que la sémantique
         HTML5 fonctionne correctement avec les anciennes versions de
         Internet Explorer-->
@@ -136,12 +133,17 @@
     $entreprisesPage = array_slice($entreprises, $start, $parPage);
     ?>
     <div class="entreprises-container">
+    <?php $delay = 0; ?>
     <?php foreach($entreprisesPage as $e): ?>
         <div class="entreprise-card">
             <h3 class="entreprise-nom"><?= htmlspecialchars($e['nom']) ?></h3>
             <p><strong>Secteur :</strong> <?= htmlspecialchars($e['secteur']) ?></p>
             <p><strong>Ville :</strong> <?= htmlspecialchars($e['ville']) ?></p>
         </div>
+        <?php 
+        $delay += 100; // Ajoute 100ms de délai entre chaque carte
+        if($delay > 500) $delay = 0; // Réinitialise pour ne pas avoir un délai trop long sur les dernières cartes
+        ?>
     <?php endforeach; ?>
     </div>
 
@@ -174,5 +176,6 @@
         </div>
     </footer>
     <script src="assets/js/darkToogle.js"></script>
+    <script src="assets/js/scroll-animation.js"></script>
 </body>
 </html>

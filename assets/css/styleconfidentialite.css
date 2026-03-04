@@ -69,9 +69,7 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom-width: 1px;
     z-index: 50;
     top: calc(var(--spacing) * 0);
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+    position: sticky;
 }
 .navInside{
     display: flex;

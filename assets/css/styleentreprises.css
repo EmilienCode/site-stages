@@ -18,6 +18,7 @@
 
     /* Couleurs */
     --background:#ffffff;
+    --color-background-offre:#faf3f1;
     --color-gray:#ffd5d0;
     --color-dark-gray:#0f172a;
     --color-light-gray:#4e3030;
@@ -60,6 +61,18 @@ h1, h2, h3, h4, h5, h6 {
     font-size: inherit;
     font-weight: inherit;
 }
+.entreprisestitre{
+    color: rgb(16, 24, 40);
+    font-weight: var(--font-weight-titre);
+    line-height: 1.25;
+    font-size: var(--size-text-titre);
+    margin-bottom: calc(var(--spacing) * 6);
+    font-family: var(--font-sans);
+    cursor: default;
+    max-width: 70rem;
+    margin-inline: auto;
+    margin-top: 7rem;
+}
 .nav{
     padding-block: calc(var(--spacing) * 4); 
     padding-inline: calc(var(--spacing) * 6);
@@ -69,9 +82,7 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom-width: 1px;
     z-index: 50;
     top: calc(var(--spacing) * 0);
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+    position: sticky;
 }
 .navInside{
     display: flex;
@@ -208,6 +219,9 @@ svg{
 
 /* Carte entreprise */
 .entreprise-card {
+    opacity: 0;
+    will-change: transform, opacity; 
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
     background-color: var(--background);
@@ -221,6 +235,31 @@ svg{
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
                 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
     transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Les impaires viennent de la gauche */
+.entreprise-card:nth-child(odd) {
+    transform: translateX(-50px) scale(0.95);
+}
+
+/* Les paires viennent de la droite */
+.entreprise-card:nth-child(even) {
+    transform: translateX(50px) scale(0.95);
+}
+
+/* L'état final (visible au centre) */
+.entreprise-card.is-visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+/* Le comportement au survol (Uniquement quand la carte est déjà visible !) */
+.entreprise-card.is-visible:hover {
+    /* On combine : on reste au centre (X=0), on monte un peu (Y=-5px) et on zoome un poil plus */
+    transform: translate(0, -5px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
+    background-color: var(--color-background-offre);
+    border-color: transparent;  
 }
 
 /* Nom et détails */
@@ -264,10 +303,11 @@ svg{
     content: '';
     position: absolute;
     inset: 2px; 
-    background: var(--background);
-    border-radius: 12px; 
+    background-color: var(--background);
+    /* On calcule le radius pour qu'il épouse parfaitement la bordure extérieure de 1rem */
+    border-radius: calc(1rem - 2px); 
     z-index: 2; 
-    opacity: 1; 
+    transition: background-color 0.3s ease;
 }
 
 .entreprise-card:hover {
