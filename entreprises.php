@@ -1,4 +1,5 @@
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="assets/css/styleentreprises.css"/>
     <h2 class="entreprisestitre">ENTREPRISES</h2>
     <?php
     $entreprises = [
@@ -87,5 +88,5 @@
         <a href="?page=<?= $page + 1 ?>" class="pagination-btn">Suivant</a>
     <?php endif; ?>
     </div>
-
+<script src="assets/js/scroll-animation.js"></script>
 <?php include "includes/footer.php"; ?>
