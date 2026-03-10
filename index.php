@@ -1,4 +1,5 @@
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="assets/css/style.css"/>
     <main>
         <section class="Section">
             <div class="InsideSection">

@@ -7,7 +7,6 @@
     href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
     rel="stylesheet"
     type="text/css" />
-    <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
     <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">

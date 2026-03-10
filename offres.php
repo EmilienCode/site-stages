@@ -1,4 +1,5 @@
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="assets/css/styleoffres.css"/>
 <main>
     <div class="progress">
         <div class="progress-bar"></div>

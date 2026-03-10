@@ -1,4 +1,5 @@
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="assets/css/stylementionslegales.css"/>
         <h2 class="infoediteur">INFORMATIONS EDITEUR</h2>
         <br>
     <p class = "mentionslegales">OZI, société par action simplifiée à capital variable et plancher de 3300 €, dont le siège social est situé 27 bd Saint Martin 75003 PARIS – France, immatriculée au registre du commerce et des sociétés de Paris sous le numéro 922 563 796.

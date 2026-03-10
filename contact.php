@@ -1,5 +1,5 @@
 <?php include "includes/header.php"; ?>
-    
+<link rel="stylesheet" href="assets/css/stylecontact.css"/>
     <main class="page">
         
         <section class="card form-card">

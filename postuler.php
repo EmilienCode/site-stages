@@ -1,5 +1,5 @@
 <?php include "includes/header.php"; ?>
-
+<link rel="stylesheet" href="assets/css/stylepostuler.css"/>
 <main class="page">
 
     <section class="top-links">

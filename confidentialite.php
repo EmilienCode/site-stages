@@ -1,4 +1,5 @@
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="assets/css/styleconfidentialite.css"/>
         <h2 class="conditiongene">CONDITION GENERALES D'UTILISATION</h2>
         <br>
     <p class = "confidentialite">Les présentes conditions générales d'utilisation (ci-après "CGU") ont pour objet de fixer les conditions d’utilisation des services (ci-après désignées "les Services") proposés sur le site web accessibles à l’adresse URL https://www.gentlemates.com (ci-après "le Site") et les applications mobile et tablette (ci-après "les Applications").

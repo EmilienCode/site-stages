@@ -17,7 +17,7 @@ if (!$candidature) {
 ?>
 
 <?php include "includes/header.php"; ?>
-
+<link rel="stylesheet" href="assets/css/stylepostuler.css"/>
 <main class="page">
 
     <section class="card thank-card">
