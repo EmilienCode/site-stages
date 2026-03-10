@@ -1,0 +1,124 @@
+<?php include "includes/header.php"; ?>
+<main>
+    <div class="progress">
+        <div class="progress-bar"></div>
+    </div>
+    
+    <div class="outils">
+        <section class="Section">
+            <div class="InsideSection">
+                
+                <div class="GroupeRecherche">
+                    
+                    <div class="BoxRechercher">
+                        <div class="input1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                                <path d="m21 21-4.34-4.34"></path>
+                                <circle cx="11" cy="11" r="8"></circle>
+                            </svg>
+                            <input type="text" placeholder="Métier, compétence..." class="inputTXT">
+                        </div>
+                        <div class="input2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <input type="text" placeholder="Ville ou région" class="inputTXT">
+                        </div>
+                        <div>
+                            <button class="RechercherBTN">
+                                Rechercher
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="divTrie">
+                        <button class="btnTrie">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
+                                <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path>
+                            </svg>
+                            Filtres
+                        </button>
+                        <button class="btnTrie">
+                            Trier par : Récents
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="planete"></div>
+            </div>
+        </section>
+    </div>
+
+    <section class="offres">
+        <article class="offre">
+            <h3>Stage Développeur Web</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 6 mois</p>
+            <p>Lieu : Orléans</p>
+            <a href="postuler.php">En savoir plus</a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Technicien Réseau</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 4 mois</p>
+            <p>Lieu : Tours</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Data Analyst</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 5 mois</p>
+            <p>Lieu : Télétravail</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage IA </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 3 mois</p>
+            <p>Lieu : Paris</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Cisco Packet Tracer </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 1 mois</p>
+            <p>Lieu : Blois</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage Génie logiciel </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 6 mois</p>
+            <p>Lieu : Paris</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage cookie clicker </h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : rush de 2 semaines</p>
+            <p>Lieu : Orléans</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+
+        <article class="offre">
+            <h3>Stage technicien maintenance</h3>
+            <h4>Entreprise : MBDA</h4>
+            <p>Durée : 4 mois</p>
+            <p>Lieu : Tours</p>
+            <a href="postuler.php">En savoir plus </a>
+        </article>
+    </section>
+    
+    
+</main>
+<?php include "includes/footer.php"; ?>

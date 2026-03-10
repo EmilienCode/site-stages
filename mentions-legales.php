@@ -1,0 +1,37 @@
+<?php include "includes/header.php"; ?>
+        <h2 class="infoediteur">INFORMATIONS EDITEUR</h2>
+        <br>
+    <p class = "mentionslegales">OZI, société par action simplifiée à capital variable et plancher de 3300 €, dont le siège social est situé 27 bd Saint Martin 75003 PARIS – France, immatriculée au registre du commerce et des sociétés de Paris sous le numéro 922 563 796.
+        <br>
+        <br>
+        <br>
+        Adresse de contact : contact@web4all.com
+        <br>
+        <br>
+        <br>
+        Le site exploite par ailleurs la marque déposée Web4All.
+        <br>
+        <br>
+        <br>
+        Hébergeur du site : Netlify, Inc.,44 Montgomery Street, Suite 300, San Francisco, California 94104
+        <br>
+        <br>
+        <br>
+        Directeur de la publication : Emilien ROUSSEAU
+        <br>
+        <br>
+        <br>
+        Droit de reproduction
+        <br>
+        <br>
+        <br>
+        Tous droits de reproduction et de représentation réservés. © OZI © Web4All Toutes les informations reproduites dans ce site (sons, photos, logos Web4All) sont protégées par des droits de propriété intellectuelle détenus par OZI.
+        <br>
+        <br>
+        <br>
+        Par conséquent, aucune de ces informations ne peut être reproduite, modifiée, rediffusée, traduite, exploitée commercialement ou réutilisée de quelque manière que ce soit sans l'accord préalable écrit de OZI.
+        <br>
+        <br>
+        <br>
+        Marque déposée : Numéro 018845577 Web4All</p>
+<?php include "includes/footer.php"; ?>
