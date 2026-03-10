@@ -219,7 +219,7 @@ svg{
 
 /* Carte entreprise */
 .entreprise-card {
-    opacity: 1;
+    opacity: 0;
     will-change: transform, opacity; 
     transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
     position: relative;
@@ -337,6 +337,7 @@ svg{
     border: 1px solid var(--primary-color);
     border-radius: var(--radius);
     color: var(--primary-color);
+    font-family: var(--font-sans);
     text-decoration: none;
     font-weight: var(--font-weight-nom);
     transition: background-color 0.3s, color 0.3s;
@@ -432,4 +433,3 @@ footer{
         gap: 1rem;
     }
 }
-
