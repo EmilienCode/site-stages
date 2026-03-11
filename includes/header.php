@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="includes/image/logo.png">
     <!-- Les trois lignes ci‑dessous sont un correctif pour que la sémantique
         HTML5 fonctionne correctement avec les anciennes versions de
         Internet Explorer-->
