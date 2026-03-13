@@ -1,0 +1,19 @@
+{
+    "name": "crazyindustries/cesitonstage",
+    "description": "site offres de stages",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Crazyindustries\\Cesitonstage\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MatheoGoaoc",
+            "email": "matheo.goaoc@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.23"
+    }
+}

@@ -35,6 +35,15 @@
                     </div>
                 </div>
                 <div class="planete">
+                    <script type="importmap">
+                        {
+                            "imports": {
+                                "three": "https://cdn.jsdelivr.net/npm/three@0.161/build/three.module.js",
+                                "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/"
+                            }
+                        }
+                    </script>
+                    <script type="module" src="index.js"></script>
                 </div>
             </div>
         </section>
