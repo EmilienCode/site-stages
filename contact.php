@@ -4,23 +4,24 @@
         
         <section class="card form-card">
             <h3>NOUS CONTACTER</h3>
-            <form class="form" action="envoi-contact.html">
+            <input type="hidden" name="type_formulaire" value="contact">
+            <form class="form" action="traitement.php" method="POST" enctype="multipart/form-data">
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" id="nom" placeholder="Zidane" required>
+                        <input type="text" id="nom" name="Nom" placeholder="Zidane" required>
                     </div>
 
                     <div class="form-group">
                         <label for="prenom">Prénom</label>
-                        <input type="text" id="prenom" placeholder="Zinédine" required>
+                        <input type="text" id="prenom" name="Prenom" placeholder="Zinédine" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Adresse email</label>
-                    <input type="email" id="email" placeholder="zizouzidane@gmail.com" required>
+                    <input type="email" id="email" name="Email" placeholder="zizouzidane@gmail.com" required>
                 </div>
                 
                 <div class="form-group">
@@ -63,13 +64,13 @@
                         <input
                             type="text"
                             id="autre-detail"
-                            name="autre_detail"
+                            name="raison"
                             placeholder="Précisez la raison de votre demande"
                             required>
                 </div>
                 <div class="form-group">
                     <label for="lm">Détails</label>
-                    <textarea id="lm" placeholder="Expliquez plus en détails la raison de votre demande..." required></textarea>
+                    <textarea id="lm" name="Details" placeholder="Expliquez plus en détails la raison de votre demande..." required></textarea>
                 </div>
 
                 <div class="form-actions">

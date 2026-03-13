@@ -24,7 +24,7 @@
 
     <section class="card form-card">
         <h3>Votre candidature</h3>
-
+        <input type="hidden" name="type_formulaire" value="candidature">
         <form class="form" action="traitement.php" method="POST" enctype="multipart/form-data">
 
             <div class="form-row">

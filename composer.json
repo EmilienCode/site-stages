@@ -1,0 +1,11 @@
+{
+    "name": "tom/ces-itonstage.fr",
+    "require": {
+        "twig/twig": "^3.23"
+    },
+      "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}

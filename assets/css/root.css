@@ -1,0 +1,71 @@
+:root {
+    /* Typographie */
+    --font-weight-titre: 800;
+    --font-weight-nom: 700;
+    --font-weight-moyen: 500;
+
+    --size-text-titre: 3rem;
+    --size-text-nom: 1.25rem;
+    --size-text-NavBarre: 0.875rem;
+
+    --font-sans: ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
+
+    /* Espacements & formes */
+    --spacing: 0.25rem;
+    --radius: 0.625rem;
+
+    /* Couleurs communes */
+    --background: #ffffff;
+    --color-gray: #ffd5d0;
+    --color-dark-gray: #0f172a;
+    --color-light-gray: #4e3030;
+
+    --primary-color: #fa8072;
+    --secondary-color: #914941;
+    --tertiary-color: #fac4a7; 
+
+    /* UI communes */
+    --color-border-light: rgb(229, 231, 235);
+    --color-input-bg: rgb(249, 251, 255);
+    --color-muted-bg: rgb(229, 231, 235);
+    --color-muted-bg-hover: rgb(209, 213, 219);
+
+    /* Effets communs */
+    --shadow-blue: 0 12px 32px rgba(235, 116, 37, 0.08);
+    --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
+
+
+
+    /*===Variables spécifiques à certaines pages===*/
+    
+    /* Accueil (style.css) */
+    --color-box-shadow-blue: rgba(21, 93, 251, 0.2);
+    --color-box-shadow-black: #0000001a;
+    --color-bg-populaire-txt: #eff6ff;
+    --color-bg-populaire-border: #f3f4f6;
+    --color-back-icone: #6a7282;
+
+    /* Entreprises & Offres */
+    --color-background-offre: #faf3f1;
+}
+
+/*Resets globaux (présents dans tous nos fichiers)*/
+body {
+    background-color: var(--background);
+}
+
+button, input, select, optgroup, textarea {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    opacity: 1;
+    --lightningcss-light: initial;
+    --lightningcss-dark: ;
+    color-scheme: light;
+    background-color: #0000;
+    border-radius: 0;
+}
