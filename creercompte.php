@@ -1,3 +1,4 @@
+
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="assets/css/stylelogin.css"/>
     <main class="connexion-container">
@@ -7,16 +8,17 @@
             <p>Créer un compte étudiant pour plus de fonctionnalitées</p>
         </header>
 
-        <form class="connexion-form" action="connexion.html" onsubmit="return checkPassword()">
+        <form class="connexion-form" method="POST" action="register.php" onsubmit="return checkPassword()">
+            <input type="hidden" name="type" value="COMPTE">
             <div class="form-row">
                 <div class="form-line">
                     <label for="nom">Nom</label>
-                    <input type="text" id="nom" placeholder="Zidane">
+                    <input type="text" name="nom" id="nom" placeholder="Zidane" required>
                 </div>
 
                 <div class="form-line">
                     <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" placeholder="Zinédine">
+                    <input type="text" name="prenom" id="prenom" placeholder="Zinédine" required>
                 </div>
             </div>
 
@@ -24,6 +26,7 @@
                 <label for="username">Email</label>
                 <input
                     type="email"
+                    name="email"
                     id="username"
                     placeholder="zizouzidane@gmail.com"
                     required
@@ -34,6 +37,7 @@
                 <label for="password">Définissez un mot de passe   </label>
                 <input
                     type="password"
+                    name="password"
                     id="password"
                     minlength="8" 
                     pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" 
@@ -62,9 +66,60 @@
                 <span id="error" style="color:#914941;"></span><br><br>
             </div>
 
+                    <!-- BLOC COORDONNÉES -->
+            <h3>Coordonnées</h3>
+
+            <div class="form-line">
+                <label>Sexe</label>
+                <div class="form-row">
+                    <label>
+                        <input type="radio" name="sexe" value="0" required> M.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="sexe" value="1"> Mme.
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-line">
+                <label for="naissance">Date de naissance</label>
+                <input
+                    type="text"
+                    name="date_naissance"
+                    id="naissance"
+                    placeholder="jj/mm/aaaa"
+                    pattern="\d{2}/\d{2}/\d{4}"
+                    required
+                />
+            </div>
+
+            <div class="form-line">
+                <label for="telephone">Téléphone</label>
+                <input
+                    type="tel"
+                    name="telephone"
+                    id="telephone"
+                    placeholder="0606060606"
+                    required
+                />
+            </div>
+
+            <div class="form-line">
+                <label for="ville">Ville</label>
+                <input
+                    type="text"
+                    name="ville"
+                    id="ville"
+                    placeholder="Orléans"
+                    required
+                />
+            </div>
+
             <button type="submit" class="btn-primary btn-full">
                 Créer un compte
             </button>
+
         </form>
         <script>
             function checkPassword() {
