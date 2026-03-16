@@ -37,12 +37,55 @@
     --shadow-blue: 0 12px 32px rgba(235, 116, 37, 0.08);
     --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
 }
+/* La boîte qui contient les infos cachées */
+.details-cache {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* Ce qui se passe au survol de la carte */
+.entreprise-card:hover .details-cache {
+    max-height: 800px; /* Hauteur max du menu ouvert */
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+/* Ta grille d'infos pour qu'elle soit bien visible */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes */
+    gap: 10px;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(250, 128, 114, 0.05); /* Rappel de ta couleur primary très léger */
+    border-radius: 8px;
+}
+.links-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.info-item {
+    font-size: 0.85rem;
+    color: var(--color-light-gray);
+}
 .logoAcc{
     text-decoration: none;
     color: var(--color-dark-gray);
 }
 body{
     background-color: var(--background);
+}
+.pagination-btn {
+    position: relative;
+    z-index: 20;
+}
+.card-body-content {
+    position: relative;
+    z-index: 10; 
+    width: 100%;
 }
 button, input, select, optgroup, textarea {
     font: inherit;
@@ -61,6 +104,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: inherit;
     font-weight: inherit;
 }
+
 .entreprisestitre{
     color: rgb(0,0,0);
     font-weight: var(--font-weight-titre);
@@ -240,6 +284,9 @@ svg{
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
                 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
     transition: transform 0.3s ease, border-color 0.3s ease;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+    will-change: transform, opacity, max-height;
 }
 
 /* Les impaires viennent de la gauche */

@@ -1,6 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/config.php'; 
+require_once __DIR__.'/config.php';
 require_once __DIR__.'/src/Models/UtilisateurModel.php';
 require_once __DIR__.'/src/Controlers/AdminControleur.php';
 
@@ -8,11 +11,10 @@ require_once __DIR__.'/src/Controlers/AdminControleur.php';
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
 $twig = new \Twig\Environment($loader);
 
-// 1. On crée le Modèle
+// Initialisation (Comme d'habitude)
 $userModel = new UtilisateurModel($pdo);
-
-// 2. On injecte le Modèle et Twig dans le Contrôleur
 $controleur = new AdminControleur($userModel, $twig);
 
-// 3. On lance l'action
-$controleur->afficherUtilisateurs();
+// Lancement de l'action de suppression
+$controleur->supprimerUtilisateur();
+?>
