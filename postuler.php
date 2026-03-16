@@ -27,37 +27,15 @@
         <input type="hidden" name="type_formulaire" value="candidature">
         <form class="form" action="traitement.php" method="POST" enctype="multipart/form-data">
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="Nom" placeholder="Zidane" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="Prenom" placeholder="Zinédine" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Adresse email</label>
-                <input type="email" id="email" name="Email" placeholder="zizou.zinedine@gmail.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="tel">Numéro de téléphone</label>
-                <input type="tel" id="tel" name="Tel" placeholder="ex : 0606060606" required>
+            <div class="form-group file-group">
+                <label for="cv">CV (PDF)</label>
+                <input type="file" id="cv" name="CV" accept="application/pdf" required>
+                <span class="file-hint">Format PDF – 2 Mo max</span>
             </div>
 
             <div class="form-group">
                 <label for="lm">Lettre de motivation (recommandée)</label>
                 <textarea id="lm" name="LM" placeholder="Expliquez pourquoi ce stage vous intéresse..."></textarea>
-            </div>
-
-            <div class="form-group file-group">
-                <label for="cv">CV (PDF)</label>
-                <input type="file" id="cv" name="CV" accept="application/pdf" required>
-                <span class="file-hint">Format PDF – 2 Mo max</span>
             </div>
 
             <div class="form-actions">
