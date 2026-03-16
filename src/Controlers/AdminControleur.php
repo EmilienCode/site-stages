@@ -1,27 +1,34 @@
 <?php
 class AdminControleur {
-    private $pdo;
+    private $userModel;
     private $twig;
 
-    public function __construct($pdo, $twig) {
-        $this->pdo = $pdo;
+    public function __construct($userModel, $twig) {
+        $this->userModel = $userModel;
         $this->twig = $twig;
     }
 
     public function afficherUtilisateurs() {
-        // La logique de récupération des données (Modèle)
-        $query = "
-            SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
-            FROM UTILISATEUR u 
-            LEFT JOIN ROLES r ON u.id_role = r.id_role
-            ORDER BY u.id_utilisateur DESC
-        ";
-        $stmt = $this->pdo->query($query);
-        $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Le contrôleur demande au modèle les données
+        $utilisateurs = $this->userModel->getAll();
 
-        // Appel de la vue avec les données
+        // Le contrôleur demande à Twig d'afficher la vue avec ces données
         echo $this->twig->render('admin_utilisateur.twig', [
             'users' => $utilisateurs
         ]);
     }
-}?>
+
+    public function supprimerUtilisateur() {
+        // 1. On récupère l'ID passé en paramètre dans l'URL (ex: ?id=5)
+        $id = $_GET['id'] ?? null;
+
+        if ($id) {
+            // 2. On demande au modèle de supprimer
+            $this->userModel->deleteUser($id);
+        }
+
+        // 3. On redirige vers la page de gestion pour voir le changement
+        header('Location: admin_utilisateur.php');
+        exit();
+    }
+}
