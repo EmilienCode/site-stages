@@ -28,4 +28,12 @@ switch ($page) {
         echo $twig->render('offres.twig');
         break;
     
+    case 'confidentialite':
+        echo $twig->render('confidentialite.twig');
+        break;
+    
+    case 'mentions-legales':
+        echo $twig->render('mentions-legales.twig');
+        break;
+    
 }
