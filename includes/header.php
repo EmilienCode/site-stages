@@ -25,33 +25,43 @@
             <div class="navInside">
                 <div class="NomLogoNav">
                     <div class="LogoNav">
-                        <a href="index.php"><svg xmlns="http://www.w3.org/2000/svg"  alt="Logo plateforme" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="LOGO" aria-hidden="true"> 
-                            <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                            <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                        </svg></a> 
+                        <a href="index.php">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="LOGO" aria-hidden="true"> 
+                                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                            </svg>
+                        </a> 
                     </div>
                     <div class="NomNav">
-                        <a class = "logoAcc" href= index.php> CESITonStage </a> 
+                        <a class="logoAcc" href="index.php">CESITonStage</a> 
                     </div>
                 </div>
-            <div class="BtnNavOutside">
+
+                <div class="BtnNavOutside">
                     <a href="index.php" class="BtnNavInside">Accueil</a>
                     <a href="offres.php" class="BtnNavInside">Offres</a>
                     <a href="entreprises.php" class="BtnNavInside">Entreprise</a>
-            </div>
+                    
+                    <div class="dropdown">
+                        <button class="dropbtn">Admin ▾</button>
+                        <div class="dropdown-content">
+                            <a href="#gestion-utilisateurs">Gestion utilisateurs</a>
+                            <a href="#gestion-entreprises">Gestion entreprises</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="logoDroitNav">
                     <button class="NotifBtn WishlistBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                        <span class="wishlist-text">Wishliste</span>
                     </button>
                     <button class="NotifBtn NotificationBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
                             <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
                             <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path>
                         </svg>
-                        <span class="notif-text">Notifications</span>
                     </button>
                     <div class="CompteBtn">
                         <a href="connexion.php">
@@ -61,10 +71,9 @@
                             </svg>
                         </a>
                     </div>
-                   
                     <div class="toggle-switch">
                         <label class="switch-label">
-                            <input type="checkbox" id="btn-theme-toogle">
+                            <input type="checkbox" class="checkbox" id="btn-theme-toogle">
                             <span class="slider"></span>
                         </label>
                     </div>  
