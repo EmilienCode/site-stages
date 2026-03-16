@@ -62,7 +62,7 @@
                    
                     <div class="toggle-switch">
                         <label class="switch-label">
-                            <input type="checkbox" id="btn-theme-toogle">
+                            <input type="checkbox" class="checkbox" id="btn-theme-toogle">
                             <span class="slider"></span>
                         </label>
                     </div>  
