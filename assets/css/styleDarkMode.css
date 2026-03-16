@@ -1,7 +1,7 @@
 body.dark-mode {
     /* 1. FOND PRINCIPAL : On passe du blanc à un bleu nuit très profond (élégant) */
     --background: #111d37; 
-    --color-background-offre: #130400;
+    --color-background-offre: #0f0656;
 
     /* 2. ÉLÉMENTS "BLANCS" (Box, Nav) : Ils deviennent gris foncé pour se détacher du fond */
     --background: #111d37; 
@@ -29,4 +29,7 @@ body.dark-mode {
     --color-bg-populaire-txt: #334155;      /* Fond des tags */
     --color-bg-populaire-border: #475569;   /* Bordure des tags */
     --color-back-icone: #94a3b8;            /* Couleur des petites icônes */
+
+    /* 10. COULEUR DES TITRES*/
+    --color-light-white: #f1f5f9;
 }

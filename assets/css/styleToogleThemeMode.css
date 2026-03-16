@@ -46,7 +46,7 @@
   background-color: var(--background);
   transition: .4s cubic-bezier(0.4, 0, 0.2, 1); /* Animation fluide */
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Légère ombre pour le relief */
+  box-shadow: 0 2px 4px rgba(5, 229, 84, 0.2); /* Légère ombre pour le relief */
 }
 
 /* --- État Activé (Quand on clique) --- */
