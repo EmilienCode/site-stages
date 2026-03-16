@@ -15,4 +15,19 @@ $twig = new \Twig\Environment($loader);
 
     #générer le HTML final
 
-echo $twig->render('index.twig'); #affiche la page index.twig
+
+$page = $_GET['page'] ?? 'accueil';
+
+switch ($page) {
+
+    case 'accueil':
+        echo $twig->render('index.twig');
+        break;
+
+    case 'offres':
+        echo $twig->render('offres.twig');
+        break;
+    case "register":
+        require 'register.php';
+        break;
+}
