@@ -35,7 +35,7 @@
 
         <div class="connexion-links">
             <a href="#">Mot de passe oublié ?</a>
-            <a href="creercompte.html">Créer un compte étudiant</a>
+            <a href="creercompte.php">Créer un compte étudiant</a>
         </div>
     </section>
     </main>
