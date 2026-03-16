@@ -74,19 +74,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 7rem;
 }
 
-.entreprisestitre{
-    color: var(--color-light-white);
-    font-weight: var(--font-weight-titre);
-    line-height: 1.25;
-    font-size: var(--size-text-titre);
-    margin-bottom: calc(var(--spacing) * 6);
-    font-family: var(--font-sans);
-    cursor: default;
-    max-width: 70rem;
-    margin-inline: auto;
-    margin-top: 7rem;
-}
-
 .nav{
     padding-block: calc(var(--spacing) * 4); 
     padding-inline: calc(var(--spacing) * 6);
