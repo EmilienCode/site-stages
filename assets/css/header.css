@@ -135,6 +135,58 @@
     height: calc(var(--spacing) * 5);
     border-color: var(--border);
 }
+
+/* Style du conteneur du menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style du bouton principal */
+.dropbtn {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Conteneur des options (caché par défaut) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+/* Style des liens/boutons à l'intérieur du menu */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Changement de couleur au survol des options */
+.dropdown-content a:hover {
+    background-color: #ecf0f1;
+}
+
+/* Affichage du menu au survol du bouton "Admin" */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Changement de couleur du bouton principal au survol */
+.dropdown:hover .dropbtn {
+    background-color: #34495e;
+}
+
 svg {
     display: block;
 }
