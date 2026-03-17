@@ -24,3 +24,4 @@ class UtilisateurModel {
         return $stmt->execute(['id' => $id]);
     }
 }
+?>

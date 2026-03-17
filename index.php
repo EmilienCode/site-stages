@@ -36,4 +36,7 @@ switch ($page) {
         echo $twig->render('mentions-legales.twig');
         break;
     
+    case 'entreprises':
+        echo $twig->render('entreprises.twig');
+        break;
 }
