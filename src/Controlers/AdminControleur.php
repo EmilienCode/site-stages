@@ -8,7 +8,19 @@ class AdminControleur {
         $this->twig = $twig;
     }
 
+    private function checkAdmin() {
+        // On vérifie si la session existe ET si le rôle est bien 3
+        if (!isset($_SESSION['user_id']) || $_SESSION['id_role'] != 3) {
+            // Si pas admin, on redirige vers l'accueil ou login
+            header('Location: index.php?page=login&error=access_denied');
+            exit();
+        }
+    }
+
     public function afficherUtilisateurs() {
+        //check admin
+        $this->checkAdmin();
+
         // Le contrôleur demande au modèle les données
         $utilisateurs = $this->userModel->getAll();
 
@@ -19,6 +31,9 @@ class AdminControleur {
     }
 
     public function supprimerUtilisateur() {
+        //check admin
+        $this->checkAdmin();
+
         // 1. On récupère l'ID passé en paramètre dans l'URL (ex: ?id=5)
         $id = $_GET['id'] ?? null;
 
