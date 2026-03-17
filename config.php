@@ -1,5 +1,5 @@
 <?php
-$host = "10.145.128.81";
+$host = "127.0.0.1";
 $dbname = "CESITonStage.fr";
 $user = "tom";
 $pass = "MeilleurGroupe26!";

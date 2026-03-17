@@ -15,10 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
     $telephone = $_POST["telephone"];
     $sexe = $_POST["sexe"];
     $date = DateTime::createFromFormat('d/m/Y', $_POST['date_naissance']);
+    if (!$date) {
+        die("Format de date incorrect !");
+    }
     $date = $date->format('Y-m-d');
 
     try {
-
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->beginTransaction();
 
         // insertion utilisateur
@@ -40,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
         $stmt2->execute([$ville, $telephone, $sexe, $date, $id_utilisateur]);
 
         $pdo->commit();
-        echo "Compte créé avec succès";
         header("Location: connexion.php");
         exit;
     } 

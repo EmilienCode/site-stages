@@ -27,7 +27,13 @@ switch ($page) {
     case 'offres':
         echo $twig->render('offres.twig');
         break;
-    case "register":
-        require 'register.php';
+    
+    case 'confidentialite':
+        echo $twig->render('confidentialite.twig');
         break;
+    
+    case 'mentions-legales':
+        echo $twig->render('mentions-legales.twig');
+        break;
+    
 }
