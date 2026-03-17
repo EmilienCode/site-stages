@@ -28,7 +28,7 @@ class AdminControleur {
         }
 
         // 3. On redirige vers la page de gestion pour voir le changement
-        header('Location: admin_utilisateur.php');
+        header('Location: index.php?page=admin_utilisateur');
         exit();
     }
 }
