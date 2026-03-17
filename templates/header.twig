@@ -21,7 +21,7 @@
                 <a href="index.php?page=entreprises" class="BtnNavInside">Entreprises</a>
                 
                 {# On remet la condition pour cacher Admin si déconnecté #}
-                {% if session.user_id is defined and session.user_id is not null and session.id_role == 1 %}
+                {% if session.user_id is defined and session.user_id is not null and session.id_role == 3 %}
                     <div class="dropdown">
                         <button class="dropbtn">Admin ▾</button>
                         <div class="dropdown-content">
