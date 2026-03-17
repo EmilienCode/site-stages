@@ -46,4 +46,56 @@ class AdminControleur {
         header('Location: index.php?page=admin_utilisateur');
         exit();
     }
+
+    public function modifierUtilisateur() {
+        $this->checkAdmin(); // Sécurité
+
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            header('Location: index.php?page=admin_utilisateur');
+            exit();
+        }
+
+        // Si le formulaire a été soumis (méthode POST)
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // On récupère les données du formulaire
+            $data = [
+                'nom' => $_POST['nom'] ?? '',
+                'prenom' => $_POST['prenom'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'id_role' => $_POST['id_role'] ?? 1,
+                'ville' => $_POST['ville'] ?? '',
+                'telephone' => $_POST['telephone'] ?? '',
+                'sexe' => $_POST['sexe'] ?? 0, // 0: Non précisé, 1: Homme, 2: Femme par exemple
+                'date_naissance' => $_POST['date_naissance'] ?? ''
+            ];
+
+            // On met à jour
+            if ($this->userModel->updateUser($id, $data)) {
+                // Succès : on redirige vers la liste
+                header('Location: index.php?page=admin_utilisateur&success=update');
+                exit();
+            } else {
+                $erreur = "Une erreur est survenue lors de la modification.";
+            }
+        }
+
+        // On charge les données pour pré-remplir le formulaire
+        $userToEdit = $this->userModel->getUserById($id);
+        $roles = $this->userModel->getRoles();
+
+        if (!$userToEdit) {
+            header('Location: index.php?page=admin_utilisateur');
+            exit();
+        }
+
+        // On affiche la vue Twig
+        echo $this->twig->render('modifier_utilisateur.twig', [
+            'user' => $userToEdit,
+            'roles' => $roles,
+            'erreur' => $erreur ?? null,
+            'session' => $_SESSION
+        ]);
+    }
 }

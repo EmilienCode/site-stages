@@ -70,5 +70,26 @@ switch ($page) {
 
         // 3. On lance l'action
         $controleur->afficherUtilisateurs();
-        break;        
+        break;  
+    
+    case 'modifier_utilisateur':
+        // 1. On crée le Modèle
+        $userModel = new UtilisateurModel($pdo);
+
+        // 2. On injecte le Modèle et Twig dans le Contrôleur
+        $controleur = new AdminControleur($userModel, $twig);
+
+        // 3. On lance l'action
+        $controleur->modifierUtilisateur();
+        break;   
+    
+    case 'supprimer_utilisateur':
+        // 1. On crée le Modèle
+        $userModel = new UtilisateurModel($pdo);
+
+        // 2. On injecte le Modèle et Twig dans le Contrôleur
+        $controleur = new AdminControleur($userModel, $twig);
+        
+        $controleur->supprimerUtilisateur();
+        break;
 }
