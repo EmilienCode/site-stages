@@ -138,7 +138,7 @@
         </script>
 
         <div class="connexion-links">
-            <a href="connexion.html">← Retour</a>
+            <a href="connexion.php">← Retour</a>
         </div>
     </section>
     </main>

@@ -18,19 +18,17 @@
             <div class="BtnNavOutside">
                 <a href="index.php" class="BtnNavInside">Accueil</a>
                 <a href="index.php?page=offres" class="BtnNavInside">Offres</a>
-                <a href="entreprises.php?page=entreprises" class="BtnNavInside">Entreprises</a>
+                <a href="index.php?page=entreprises" class="BtnNavInside">Entreprises</a>
                 
-                {# Le bloc Admin doit être à l'intérieur de BtnNavOutside #}
-                {% if session.user_id is defined and session.user_id is not null and session.id_role == 1 %}
-                    <div class="dropdown">
-                        <button class="dropbtn">Admin ▾</button>
-                        <div class="dropdown-content">
-                            <a href="admin_utilisateur.php">Gestion utilisateurs</a>
-                            <a href="#gestion-entreprises">Gestion entreprises</a>
-                        </div> 
-                    </div>
-                {% endif %}
-            </div> <div class="logoDroitNav">
+                <div class="dropdown">
+                    <button class="dropbtn">Admin ▾</button>
+                    <div class="dropdown-content">
+                        <a href="index.php?page=admin_utilisateur">Gestion utilisateurs</a>
+                        <a href="index.php?page=admin_entreprise">Gestion entreprises</a>
+                    </div> 
+                </div>
+            </div>
+            <div class="logoDroitNav">
                 <button class="NotifBtn WishlistBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
