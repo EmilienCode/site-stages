@@ -1,0 +1,63 @@
+{% extends "base.twig" %}
+
+{% block title %}Entreprises{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/styleentreprises.css"/>
+
+<h2 class="entreprisestitre">ENTREPRISES</h2>
+
+<div class="entreprises-container">
+    {% for e in entreprises %}
+        {# On applique le filtre lower sur les clés si vraiment nécessaire, sinon on utilise e.NOM_ENTREPRISE #}
+        <div class="entreprise-card">
+            <div class="card-body-content">
+                
+                <div class="card-header-simple">
+                    <h3 class="entreprise-nom">{{ e.nom_entreprise|default('Nom inconnu') }}</h3>
+                    <p class="ville-label">📍 {{ e.ville_entreprise|default('N/A') }}</p>
+                </div>
+
+                <div class="details-cache">
+                    <div class="details-content">
+                        <p class="description">
+                            <strong>À propos :</strong><br>
+                            {{ e.description_entreprise|default('Aucune description.')|nl2br }}
+                        </p>
+
+                        <div class="info-grid">
+                            <div class="info-item"><strong>🆔 SIRET :</strong> {{ e.siret_entreprise|default('/') }}</div>
+                            <div class="info-item"><strong>📞 Tel :</strong> {{ e.telephone_entreprise|default('/') }}</div>
+                            <div class="info-item"><strong>📧 Mail :</strong> {{ e.email_entreprise|default('/') }}</div>
+                            <div class="info-item"><strong>📏 Taille :</strong> {{ e.taille_entreprise|default('/') }}</div>
+                            <div class="info-item"><strong>💼 Secteur :</strong> {{ e.secteur_entreprise|default('/') }}</div>
+                            <div class="info-item"><strong>🌍 Site Web :</strong> {{ e.site_web_entreprise|default('/') }}</div>
+                        </div>
+
+                        <div class="links-footer">
+                            {% if e.site_web_entreprise is not empty %}
+                                <a href="{{ e.site_web_entreprise }}" target="_blank" class="pagination-btn">Site Web</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <p>Aucune entreprise trouvée.</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if page > 1 %}
+        <a href="?p={{ page - 1 }}" class="pagination-btn">Précédent</a>
+    {% endif %}
+    
+    {% if entreprises|length >= parPage %}
+        <a href="?p={{ page + 1 }}" class="pagination-btn">Suivant</a>
+    {% endif %}
+</div>
+
+<script src="assets/js/scroll-animation.js"></script>
+{% endblock %}
