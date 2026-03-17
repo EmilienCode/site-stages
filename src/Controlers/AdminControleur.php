@@ -12,7 +12,7 @@ class AdminControleur {
         // On vérifie si la session existe ET si le rôle est bien 3
         if (!isset($_SESSION['user_id']) || $_SESSION['id_role'] != 3) {
             // Si pas admin, on redirige vers l'accueil ou login
-            header('Location: index.php?page=login&error=access_denied');
+            header('Location: acceserror.html');
             exit();
         }
     }
