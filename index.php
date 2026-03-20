@@ -1,29 +1,44 @@
 <?php
+session_start(); //Obligatoire pour lire les infos de connexion
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once '/var/www/cesitonstage.fr/site-stages/vendor/autoload.php';
 
+require_once __DIR__.'/vendor/autoload.php';
 
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/src/Models/OffresModel.php';
-require_once __DIR__ . '/src/Controlers/OffresControleur.php';
+require_once __DIR__.'/config.php'; 
 
+require_once __DIR__.'/src/Models/EntrepriseModel.php';
+require_once __DIR__.'/src/Controlers/EntrepriseControleur.php';
 
-use App\Controlers\OffresControleur;
+require_once __DIR__.'/src/Models/OffresModel.php';
+require_once __DIR__.'/src/Controlers/OffresControleur.php';
 
+require_once __DIR__.'/src/Models/UtilisateurModel.php';
+require_once __DIR__.'/src/Controlers/UtilisateurControleur.php';
 
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
+use App\Models\UtilisateurModel;
+use App\Models\EntrepriseModel;
+use App\Models\OffresModel;
+
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
 $twig = new \Twig\Environment($loader);
+
+// Elle donne accès à la variable "session" dans TOUS tes fichiers .twig
+$twig->addGlobal('session', $_SESSION); 
+$userRole = $_SESSION['role'] ?? null;
 
 $page = $_GET['page'] ?? 'accueil';
 
 switch ($page) {
-
     case 'accueil':
         echo $twig->render('index.twig');
         break;
 
+    case 'offres':
+        echo $twig->render('offres.twig');
+        break;
+    
     case 'confidentialite':
         echo $twig->render('confidentialite.twig');
         break;
@@ -37,4 +52,40 @@ switch ($page) {
         $controleur = new OffresControleur($model, $twig);
         $controleur->pagination();
         break;
+    
+    case 'entreprises':
+        // 1. On crée le Modèle
+        $entrepriseModel = new EntrepriseModel($pdo);
+
+        // 2. On injecte le Modèle et Twig dans le Contrôleur
+        $controleur = new EntrepriseControleur($entrepriseModel, $twig);
+
+        // 3. On lance l'action
+        $controleur->pagination();
+        break;
+    
+    case 'offres':
+        // 1. On crée le Modèle
+        $offresModel = new OffresModel($pdo);
+
+        // 2. On injecte le Modèle et Twig dans le Contrôleur
+        $controleur = new OffresControleur($offresModel, $twig);
+
+        // 3. On lance l'action
+        $controleur->pagination();
+        break;
+    
+    case 'afficher_utilisateur':
+    case 'modifier_utilisateur':
+    case 'supprimer_utilisateur':
+
+        $userModel = new UtilisateurModel($pdo);
+        $controleur = new UtilisateurControleur($userModel, $twig);
+
+        // On appelle la méthode correspondante à la page
+        if ($page === 'afficher_utilisateur') $controleur->afficherUtilisateurs();
+        if ($page === 'modifier_utilisateur') $controleur->modifierUtilisateur();
+        if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
+        break;
+
 }

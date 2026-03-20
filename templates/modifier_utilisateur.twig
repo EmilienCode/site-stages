@@ -1,0 +1,82 @@
+{% extends "base.twig" %}
+
+{% block title %}Modifier Utilisateur{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/style_modifier_utilisateur.css"/>
+<main class="admin-container">
+    <div class="admin-header">
+        <h1>Modifier l'utilisateur #{{ user.id_utilisateur }}</h1>
+        <a href="index.php?page=afficher_utilisateur" class="btn-retour">Retour à la liste</a>
+    </div>
+
+    {% if erreur %}
+        <div class="alert error">{{ erreur }}</div>
+    {% endif %}
+
+    <form method="POST" action="index.php?page=modifier_utilisateur&id={{ user.id_utilisateur }}" class="admin-form">
+        
+        <fieldset>
+            <legend>Informations de connexion</legend>
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" value="{{ user.nom }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" value="{{ user.prenom }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+            {% if session.user_id is defined and session.user_id is not null and session.id_role == 3 %}
+                <div class="form-group">
+                    <label for="id_role">Rôle :</label>
+                    <select id="id_role" name="id_role" required>
+                        {% for role in roles %}
+                            <option value="{{ role.id_role }}" {% if role.id_role == user.id_role %}selected{% endif %}>
+                                {{ role.nom_role }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endif %}
+        </fieldset>
+
+        <fieldset>
+            <legend>Coordonnées</legend>
+            <div class="form-group">
+                <label for="ville">Ville :</label>
+                <input type="text" id="ville" name="ville" value="{{ user.ville_coordonnees }}">
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Téléphone :</label>
+                <input type="text" id="telephone" name="telephone" value="{{ user.telephone_coordonnees }}" maxlength="10">
+            </div>
+
+            <div class="form-group">
+                <label for="date_naissance">Date de naissance :</label>
+                <input type="date" id="date_naissance" name="date_naissance" value="{{ user.date_naissance_coordonnees }}">
+            </div>
+
+            <div class="form-group">
+                <label for="sexe">Sexe :</label>
+                <select id="sexe" name="sexe">
+                    {# Assure-toi que ces valeurs correspondent à ta logique BDD (int) #}
+                    <option value="1" {% if user.sexe_coordonnees == 1 %}selected{% endif %}>Homme</option>
+                    <option value="2" {% if user.sexe_coordonnees == 2 %}selected{% endif %}>Femme</option>
+                    <option value="3" {% if user.sexe_coordonnees == 3 %}selected{% endif %}>Autre</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Enregistrer les modifications</button>
+        </div>
+    </form>
+</main>
+{% endblock %}

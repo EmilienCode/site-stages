@@ -1,21 +1,13 @@
 {% extends "base.twig" %}
 {% block title %}
-Gestion Admin
+Gestion Pilote
 {% endblock %}
 {% block content %}
 
-    <style>
-        .admin-container { max-width: 1000px; margin: 40px auto; padding: 20px; font-family: sans-serif; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .btn-add { background-color: #fa8072; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .admin-table { width: 100%; border-collapse: collapse; }
-        .admin-table th, .admin-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        .admin-table th { background-color: #f4f4f4; }
-        .btn-action { padding: 6px 10px; text-decoration: none; color: white; border-radius: 4px; font-size: 14px; margin-right: 5px; }
-        .btn-edit { background-color: #007bff; }
-        .btn-delete { background-color: #dc3545; }
-    </style>
+    <link rel="stylesheet" href="assets/css/root.css"/>
+    <link rel="stylesheet" href="assets/css/styleadmin.css"/>
 
+    {% if session.user_id is defined and session.user_id is not null and session.id_role == 2 %}
     <main class="admin-container">
         <div class="admin-header">
             <h1>Gestion des Utilisateurs</h1>
@@ -42,8 +34,8 @@ Gestion Admin
                         <td>{{ user.email }}</td>
                         <td>{{ user.nom_role|default('Aucun') }}</td>
                         <td>
-                            <a href="modifier_utilisateur.php?id={{ user.id_utilisateur }}" class="btn-action btn-edit">Modifier</a>
-                            <a href="supprimer_utilisateur.php?id={{ user.id_utilisateur }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                            <a href="index.php?page=modifier_utilisateur&id={{ user.id_utilisateur }}" class="btn-action btn-edit">Modifier</a>
+                            <a href="index.php?page=supprimer_utilisateur&id={{ user.id_utilisateur }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
                         </td>
                     </tr>
                 {% else %}
@@ -54,5 +46,11 @@ Gestion Admin
             </tbody>
         </table>
     </main>
+    {% else %}
+        <div class="alert error">
+            <p>Accès refusé. Vous n'avez pas les permissions nécessaires.</p>
+            <a href="/">Retour à l'accueil</a>
+        </div>
+    {% endif %}
 
 {% endblock %}

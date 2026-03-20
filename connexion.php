@@ -1,18 +1,26 @@
 <?php include "includes/header.php"; ?>
 <link rel="stylesheet" href="assets/css/stylelogin.css"/>
-    <main class="connexion-container">
+
+<main class="connexion-container">
     <section class="connexion-card">
         <header class="connexion-header">
             <h1>Connexion</h1>
             <p>Accédez à votre espace personnel</p>
+            
+            <?php if(isset($_GET['error'])): ?>
+                <p style="color: red; font-size: 0.9em; margin-top: 10px;">
+                    Email ou mot de passe incorrect.
+                </p>
+            <?php endif; ?>
         </header>
 
-        <form class="connexion-form">
+        <form class="connexion-form" action="traitementconnexion.php" method="POST">
             <div class="form-line">
                 <label for="username">Email</label>
                 <input
                     type="email"
                     id="username"
+                    name="email" 
                     placeholder="zizouzidane@gmail.com"
                     required
                 />
@@ -23,6 +31,7 @@
                 <input
                     type="password"
                     id="password"
+                    name="password"
                     placeholder="••••••••"
                     required
                 />
@@ -38,6 +47,6 @@
             <a href="creercompte.php">Créer un compte étudiant</a>
         </div>
     </section>
-    </main>
+</main>
 
 <?php include "includes/footer.php"; ?>

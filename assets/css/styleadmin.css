@@ -1,0 +1,52 @@
+.admin-container { 
+    max-width: 1000px; 
+    margin: 40px auto; 
+    padding: 20px; 
+    font-family: var(--font-sans); 
+    background: var(--background); 
+    border-radius: 1rem;
+    border: 1px solid var(--color-gray);
+    box-shadow: 0 4px 6px var(--color-box-shadow-black); 
+    color : var(--color-dark-gray);
+}
+.admin-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+}
+.btn-add { 
+    background-color: var(--primary-color); 
+    color: var(--background); 
+    padding: 10px 15px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-weight: bold; 
+}
+.admin-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.admin-table th, .admin-table td { 
+    padding: 12px; 
+    border: 1px solid var(--color-muted-bg-hover); 
+    text-align: left; 
+    color: var(--color-dark-gray);
+}
+.admin-table th { 
+    background-color: var(--background); 
+}
+.btn-action { 
+    padding: 6px 10px; 
+    text-decoration: none; 
+    color: var(--background); 
+    border-radius: 4px; 
+    font-size: 14px; 
+    margin-right: 5px; 
+}
+.btn-edit { 
+    background-color: #007bff; 
+}
+.btn-delete { 
+    background-color: #dc3545; 
+}
