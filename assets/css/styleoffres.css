@@ -11,6 +11,7 @@
     font-family: var(--font-sans);
     cursor: default;
 }
+
 .ParaLight{
     color: var(--color-light-gray);
     font-size: 1.125rem;
@@ -94,6 +95,29 @@ h1, h2, h3, h4, h5, h6 {
     position: static; 
     transform: none;
     margin: 0;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.pagination-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius);
+    color: var(--primary-color);
+    font-family: var(--font-sans);
+    text-decoration: none;
+    font-weight: var(--font-weight-nom);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--background);
 }
 
 .BoxRechercher:hover{
@@ -217,19 +241,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+/* --- SECTION DES OFFRES (GRILLE) --- */
 .offres {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing) * 6);
-    margin-top: calc(var(--spacing) * 8);
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 par 3 */
+    gap: 25px !important;
     max-width: 80rem;
-    margin-inline: auto;
+    margin: 5rem auto !important;
     padding-inline: calc(var(--spacing) * 6);
-    padding-bottom: calc(var(--spacing) * 12);
-    
 }
 
-.offre {
+/* --- LA CARTE (Fusion entre .offre et .entreprise-card) --- */
+.entreprise-card {
     position: relative;
     overflow: hidden; 
     background-color: var(--background);
@@ -240,105 +263,100 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     gap: calc(var(--spacing) * 2);
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     z-index: 0; 
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-
-.offre h3, .offre p, .offre a , .offre h4{
+/* On s'assure que le contenu est au-dessus de l'animation */
+.card-body-content {
     position: relative;
     z-index: 10;
-    
 }
 
-.offre h3 {
+/* --- TITRES ET TEXTES DANS LA CARTE --- */
+.entreprise-nom {
     color: var(--color-dark-gray);
     font-weight: 700;
     font-size: 1.125rem;
-    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
-.offre h4 {
-    color: var(--color-dark-gray);
-    font-weight: 400;
-    font-size: 1.125rem;
-    margin: 0;
-}
-
-.offre p {
-    color: var(--color-light-gray);
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-.offre a {
-    margin-top: auto;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
+.remuneration {
     color: var(--primary-color);
-    background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);
-    padding: calc(var(--spacing) * 3);
-    border-radius: var(--radius);
-    transition: background-color 0.2s ease;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
-.offre a:hover {
-    background-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
-    color: var(--color-dark-gray);
-    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
+/* --- LE MENU DÉROULANT (HOVER) --- */
+.details-cache {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
 }
 
+.entreprise-card:hover .details-cache {
+    max-height: 600px; /* Assez grand pour le contenu */
+    opacity: 1;
+    margin-top: 15px;
+}
 
-.offre::before {
+/* --- ANIMATION DE BORDURE TOURNANTE --- */
+.entreprise-card::before {
     content: '';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    
-    width: 125%; 
-    height: 60%;
-    
-    background: linear-gradient(180deg, #fa8072,#914941, #6b2c48,#914941, #fa8072);
+    width: 150%; height: 60%;
+    background: linear-gradient(180deg, #fa8072, #914941, #fa8072);
     animation: tourneMonPote 3s linear infinite;
-    
     z-index: 1; 
-    
     opacity: 0; 
     transition: opacity 0.3s ease;
 }
 
-
-.offre::after {
+.entreprise-card::after {
     content: '';
     position: absolute;
     inset: 2px; 
     background: var(--background);
-    border-radius: 12px;   
+    border-radius: 14px;   
     z-index: 2; 
-    opacity: 1; 
 }
 
-
-.offre:hover {
-    transform: translate(0, -5px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(21, 93, 251, 0.2);
-    background-color: var(--color-background-offre);
-    border-color: transparent; 
+/* État au survol */
+.entreprise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(250, 128, 114, 0.2);
 }
 
+.entreprise-card:hover::before { opacity: 1; }
+.entreprise-card:hover::after { background-color: var(--color-background-offre); }
 
-.offre:hover::before {
-    opacity: 1;
+/* --- GRILLE D'INFOS À L'INTÉRIEUR --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 8px;
 }
 
-.offre:hover::after{
-    background-color: var(--color-background-offre);
+.info-item {
+    font-size: 0.85rem;
+    color: var(--color-light-gray);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .offres { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 768px) {
+    .offres { grid-template-columns: 1fr !important; }
 }
 
 @keyframes tourneMonPote {
