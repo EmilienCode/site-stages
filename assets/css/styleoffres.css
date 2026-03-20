@@ -289,18 +289,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 }
 
-/* --- LE MENU DÉROULANT (HOVER) --- */
+/* --- CONTENU DE L'OFFRE (Toujours visible) --- */
 .details-cache {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.3s ease;
-}
-
-.entreprise-card:hover .details-cache {
-    max-height: 600px; /* Assez grand pour le contenu */
-    opacity: 1;
-    margin-top: 15px;
+    max-height: none; /* Affiche tout par défaut */
+    opacity: 1;       /* Rend le texte visible */
+    overflow: visible; 
+    margin-top: 15px; /* Garde un bel espacement avec le titre */
 }
 
 /* --- ANIMATION DE BORDURE TOURNANTE --- */
