@@ -6,21 +6,14 @@ error_reporting(E_ALL);
 
 
 require_once __DIR__.'/vendor/autoload.php';
-
 require_once __DIR__.'/config.php'; 
-
-require_once __DIR__.'/src/Models/EntrepriseModel.php';
-require_once __DIR__.'/src/Controlers/EntrepriseControleur.php';
-
-require_once __DIR__.'/src/Models/OffresModel.php';
-require_once __DIR__.'/src/Controlers/OffresControleur.php';
-
-require_once __DIR__.'/src/Models/UtilisateurModel.php';
-require_once __DIR__.'/src/Controlers/UtilisateurControleur.php';
 
 use App\Models\UtilisateurModel;
 use App\Models\EntrepriseModel;
 use App\Models\OffresModel;
+use App\Controlers\UtilisateurControleur;
+use App\Controlers\EntrepriseControleur;
+use App\Controlers\OffresControleur;
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
 $twig = new \Twig\Environment($loader);

@@ -1,4 +1,6 @@
 <?php
+namespace App\Controlers;
+
 class OffresControleur{
     private $offresModel;
     private $twig;
@@ -27,5 +29,3 @@ class OffresControleur{
     }
 
 }
-
-

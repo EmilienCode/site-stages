@@ -1,4 +1,5 @@
 <?php
+namespace App\Controlers;
 
 class UtilisateurControleur {
     private $userModel;
@@ -23,6 +24,12 @@ class UtilisateurControleur {
     }
 
     public function afficherUtilisateurs() {
+        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        if (!isset($_SESSION['id_role'])) {
+            header('Location: connexion.php'); // Ou ta page de login
+            exit();
+        }
+        $utilisateurs = [];
         // On adapte la requête selon le rôle en session
         if ($_SESSION['id_role'] == 3) {
             $utilisateurs = $this->userModel->getAll(); // Admin voit tout
@@ -50,7 +57,7 @@ class UtilisateurControleur {
 
     public function modifierUtilisateur() {
         // Tout le monde (Pilote=2 ou Admin=3) peut modifier si connecté
-        if (!isset($_SESSION['user_id'])) header('Location: login.php');
+        if (!isset($_SESSION['user_id'])) header('Location: connexion.php');
 
         $id = $_GET['id'] ?? null;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
