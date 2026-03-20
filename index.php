@@ -92,4 +92,13 @@ switch ($page) {
         
         $controleur->supprimerUtilisateur();
         break;
+
+    case 'pilote_utilisateur':
+        // 1. On crée le Modèle
+        $userModel = new UtilisateurModel($pdo);
+        // 2. On injecte le Modèle et Twig dans le Contrôleur
+        $controleur = new AdminControleur($userModel, $twig);
+        
+        $controleur->piloteUtilisateur();
+        break;
 }

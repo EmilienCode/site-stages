@@ -30,6 +30,15 @@
                         </div> 
                     </div>
                 {% endif %}
+                {% if session.user_id is defined and session.user_id is not null and session.id_role == 2 %}
+                    <div class="dropdown">
+                        <button class="dropbtn">Pilote ▾</button>
+                        <div class="dropdown-content">
+                            <a href="index.php?page=pilote_utilisateur">Gestion utilisateurs</a>
+                            <a href="index.php?page=pilote_entreprise">Gestion entreprises</a>
+                        </div> 
+                    </div>
+                {% endif %}
             </div>
 
             <div class="logoDroitNav">
