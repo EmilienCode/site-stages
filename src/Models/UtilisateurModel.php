@@ -1,4 +1,8 @@
 <?php
+namespace App\Models;
+use PDO;
+use Exception;
+
 class UtilisateurModel {
     private $pdo;
 
@@ -23,7 +27,7 @@ class UtilisateurModel {
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute(['id' => $id]);
     }
-    
+
     // 1. Récupérer UN utilisateur avec ses coordonnées
     public function getUserById($id) {
         $query = "
