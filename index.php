@@ -16,8 +16,7 @@ require_once __DIR__.'/src/Models/OffresModel.php';
 require_once __DIR__.'/src/Controlers/OffresControleur.php';
 
 require_once __DIR__.'/src/Models/UtilisateurModel.php';
-require_once __DIR__.'/src/Controlers/AdminControleur.php';
-require_once __DIR__.'/src/Controlers/PiloteControleur.php';
+require_once __DIR__.'/src/Controlers/UtilisateurControleur.php';
 
 use App\Models\UtilisateurModel;
 use App\Models\EntrepriseModel;
@@ -28,6 +27,7 @@ $twig = new \Twig\Environment($loader);
 
 // Elle donne accès à la variable "session" dans TOUS tes fichiers .twig
 $twig->addGlobal('session', $_SESSION); 
+$userRole = $_SESSION['role'] ?? null;
 
 $page = $_GET['page'] ?? 'accueil';
 
@@ -66,47 +66,17 @@ switch ($page) {
         $controleur->pagination();
         break;
     
-    case 'admin_utilisateur':
-        // 1. On crée le Modèle
-        $userModel = new UtilisateurModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
-        $controleur = new AdminControleur($userModel, $twig);
-
-        // 3. On lance l'action
-        $controleur->afficherUtilisateurs();
-        break;  
-    
-    case 'pilote_utilisateur':
-        // 1. On crée le Modèle
-        $userModel = new UtilisateurModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
-        $controleur = new PiloteControleur($userModel, $twig);
-
-        // 3. On lance l'action
-        $controleur->afficherUtilisateurs();
-        break;
-    
+    case 'afficher_utilisateur':
     case 'modifier_utilisateur':
-        // 1. On crée le Modèle
-        $userModel = new UtilisateurModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
-        $controleur = new AdminControleur($userModel, $twig);
-
-        // 3. On lance l'action
-        $controleur->modifierUtilisateur();
-        break;   
-    
     case 'supprimer_utilisateur':
-        // 1. On crée le Modèle
-        $userModel = new UtilisateurModel($pdo);
 
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
-        $controleur = new AdminControleur($userModel, $twig);
-        
-        $controleur->supprimerUtilisateur();
+        $userModel = new UtilisateurModel($pdo);
+        $controleur = new UtilisateurControleur($userModel, $twig);
+
+        // On appelle la méthode correspondante à la page
+        if ($page === 'afficher_utilisateur') $controleur->afficherUtilisateurs();
+        if ($page === 'modifier_utilisateur') $controleur->modifierUtilisateur();
+        if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
         break;
 
 }

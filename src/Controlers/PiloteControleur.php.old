@@ -9,7 +9,7 @@ class PiloteControleur {
     }
 
     private function checkPilote() {
-        // On vérifie si la session existe ET si le rôle est bien 3
+        // On vérifie si la session existe ET si le rôle est bien 2
         if (!isset($_SESSION['user_id']) || $_SESSION['id_role'] != 2) {
             // Si pas Pilote, on redirige vers l'accueil ou login
             header('Location: acceserror.html');
