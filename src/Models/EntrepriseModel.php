@@ -1,4 +1,8 @@
 <?php
+namespace App\Models;
+use PDO;
+use Exception;
+
 class EntrepriseModel {
 
     private $pdo;

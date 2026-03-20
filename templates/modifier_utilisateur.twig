@@ -32,17 +32,18 @@
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" value="{{ user.email }}" required>
             </div>
-
-            <div class="form-group">
-                <label for="id_role">Rôle :</label>
-                <select id="id_role" name="id_role" required>
-                    {% for role in roles %}
-                        <option value="{{ role.id_role }}" {% if role.id_role == user.id_role %}selected{% endif %}>
-                            {{ role.nom_role }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
+            {% if session.user_id is defined and session.user_id is not null and session.id_role == 3 %}
+                <div class="form-group">
+                    <label for="id_role">Rôle :</label>
+                    <select id="id_role" name="id_role" required>
+                        {% for role in roles %}
+                            <option value="{{ role.id_role }}" {% if role.id_role == user.id_role %}selected{% endif %}>
+                                {{ role.nom_role }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endif %}
         </fieldset>
 
         <fieldset>

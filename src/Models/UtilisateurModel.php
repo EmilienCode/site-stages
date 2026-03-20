@@ -20,6 +20,17 @@ class UtilisateurModel {
         return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getUserByRole() {
+        $query = "
+            SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
+            FROM UTILISATEUR u 
+            LEFT JOIN ROLES r ON u.id_role = r.id_role
+            WHERE u.id_role = 1
+            ORDER BY u.id_utilisateur DESC
+        ";
+        return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function deleteUser($id) {
         $query = "
         DELETE FROM UTILISATEUR WHERE id_utilisateur = :id

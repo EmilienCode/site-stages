@@ -1,5 +1,5 @@
 <?php
-class AdminControleur {
+class PiloteControleur {
     private $userModel;
     private $twig;
 
@@ -8,21 +8,21 @@ class AdminControleur {
         $this->twig = $twig;
     }
 
-    private function checkAdmin() {
-        // On vérifie si la session existe ET si le rôle est bien 2
+    private function checkPilote() {
+        // On vérifie si la session existe ET si le rôle est bien 3
         if (!isset($_SESSION['user_id']) || $_SESSION['id_role'] != 2) {
-            // Si pas admin, on redirige vers l'accueil ou login
+            // Si pas Pilote, on redirige vers l'accueil ou login
             header('Location: acceserror.html');
             exit();
         }
     }
 
     public function afficherUtilisateurs() {
-        //check admin
-        $this->checkAdmin();
+        //check Pilote
+        $this->checkPilote();
 
         // Le contrôleur demande au modèle les données
-        $utilisateurs = $this->userModel->getAll();
+        $utilisateurs = $this->userModel->getUserByRole();
 
         // Le contrôleur demande à Twig d'afficher la vue avec ces données
         echo $this->twig->render('pilote_utilisateur.twig', [
@@ -31,8 +31,8 @@ class AdminControleur {
     }
 
     public function supprimerUtilisateur() {
-        //check admin
-        $this->checkAdmin();
+        //check Pilote
+        $this->checkPilote();
 
         // 1. On récupère l'ID passé en paramètre dans l'URL (ex: ?id=5)
         $id = $_GET['id'] ?? null;
@@ -48,7 +48,7 @@ class AdminControleur {
     }
 
     public function modifierUtilisateur() {
-        $this->checkAdmin(); // Sécurité
+        $this->checkPilote(); // Sécurité
 
         $id = $_GET['id'] ?? null;
 
@@ -64,7 +64,6 @@ class AdminControleur {
                 'nom' => $_POST['nom'] ?? '',
                 'prenom' => $_POST['prenom'] ?? '',
                 'email' => $_POST['email'] ?? '',
-                'id_role' => $_POST['id_role'] ?? 1,
                 'ville' => $_POST['ville'] ?? '',
                 'telephone' => $_POST['telephone'] ?? '',
                 'sexe' => $_POST['sexe'] ?? 0, // 0: Non précisé, 1: Homme, 2: Femme par exemple
@@ -74,7 +73,7 @@ class AdminControleur {
             // On met à jour
             if ($this->userModel->updateUser($id, $data)) {
                 // Succès : on redirige vers la liste
-                header('Location: index.php?page=admin_utilisateur&success=update');
+                header('Location: index.php?page=pilote_utilisateur&success=update');
                 exit();
             } else {
                 $erreur = "Une erreur est survenue lors de la modification.";
@@ -82,7 +81,7 @@ class AdminControleur {
         }
 
         // On charge les données pour pré-remplir le formulaire
-        $userToEdit = $this->userModel->getUserById($id_role);
+        $userToEdit = $this->userModel->getUserById($id);
         $roles = $this->userModel->getRoles();
 
         if (!$userToEdit) {

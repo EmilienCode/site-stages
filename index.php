@@ -17,6 +17,11 @@ require_once __DIR__.'/src/Controlers/OffresControleur.php';
 
 require_once __DIR__.'/src/Models/UtilisateurModel.php';
 require_once __DIR__.'/src/Controlers/AdminControleur.php';
+require_once __DIR__.'/src/Controlers/PiloteControleur.php';
+
+use App\Models\UtilisateurModel;
+use App\Models\EntrepriseModel;
+use App\Models\OffresModel;
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
 $twig = new \Twig\Environment($loader);
@@ -72,6 +77,17 @@ switch ($page) {
         $controleur->afficherUtilisateurs();
         break;  
     
+    case 'pilote_utilisateur':
+        // 1. On crée le Modèle
+        $userModel = new UtilisateurModel($pdo);
+
+        // 2. On injecte le Modèle et Twig dans le Contrôleur
+        $controleur = new PiloteControleur($userModel, $twig);
+
+        // 3. On lance l'action
+        $controleur->afficherUtilisateurs();
+        break;
+    
     case 'modifier_utilisateur':
         // 1. On crée le Modèle
         $userModel = new UtilisateurModel($pdo);
@@ -93,12 +109,4 @@ switch ($page) {
         $controleur->supprimerUtilisateur();
         break;
 
-    case 'pilote_utilisateur':
-        // 1. On crée le Modèle
-        $userModel = new UtilisateurModel($pdo);
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
-        $controleur = new AdminControleur($userModel, $twig);
-        
-        $controleur->piloteUtilisateur();
-        break;
 }
