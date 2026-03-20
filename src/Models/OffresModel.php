@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+use PDO;
+use Exception;
 // On enlève les "use" car ils font des warnings sans namespace
 class OffresModel {
     private $pdo;

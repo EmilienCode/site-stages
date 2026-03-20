@@ -20,6 +20,9 @@ require_once __DIR__.'/src/Controlers/UtilisateurControleur.php';
 use App\Models\UtilisateurModel;
 use App\Models\EntrepriseModel;
 use App\Models\OffresModel;
+use App\Controlers\UtilisateurControleur;
+use App\Controlers\EntrepriseControleur;
+use App\Controlers\OffresControleur;
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
 $twig = new \Twig\Environment($loader);
@@ -34,10 +37,6 @@ switch ($page) {
     case 'accueil':
         echo $twig->render('index.twig');
         break;
-
-    case 'offres':
-        echo $twig->render('offres.twig');
-        break;
     
     case 'confidentialite':
         echo $twig->render('confidentialite.twig');
@@ -46,32 +45,18 @@ switch ($page) {
     case 'mentions-legales':
         echo $twig->render('mentions-legales.twig');
         break;
-
-    case 'offres':
-        $model = new OffresModel($pdo); 
-        $controleur = new OffresControleur($model, $twig);
-        $controleur->pagination();
-        break;
     
     case 'entreprises':
-        // 1. On crée le Modèle
+
         $entrepriseModel = new EntrepriseModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
         $controleur = new EntrepriseControleur($entrepriseModel, $twig);
-
-        // 3. On lance l'action
         $controleur->pagination();
         break;
     
     case 'offres':
-        // 1. On crée le Modèle
+        
         $offresModel = new OffresModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
         $controleur = new OffresControleur($offresModel, $twig);
-
-        // 3. On lance l'action
         $controleur->pagination();
         break;
     
