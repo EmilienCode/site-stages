@@ -2,28 +2,30 @@
 namespace App\Models;
 use PDO;
 use Exception;
-
+// On enlève les "use" car ils font des warnings sans namespace
 class OffresModel {
-
     private $pdo;
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
 
-    public function getoffres($limit, $offset) {
+    public function getOffres($limit, $offset) {
         try {
             $sql = "SELECT * FROM OFFRE LIMIT :limit OFFSET :offset";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
-            $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+            // On force le type en INT pour la BDD
+            $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+            $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            // On log l'erreur au lieu de l'afficher directement ici
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
             error_log($e->getMessage());
             return [];
         }
     }
+
+    public function countOffres() {
+        return $this->pdo->query("SELECT COUNT(*) FROM OFFRE")->fetchColumn();
+    }
 }
-?>

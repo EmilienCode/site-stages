@@ -1,6 +1,5 @@
 <?php
 namespace App\Controlers;
-
 class EntrepriseControleur{
     private $entrepriseModel;
     private $twig;

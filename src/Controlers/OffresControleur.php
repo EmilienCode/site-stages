@@ -1,7 +1,7 @@
 <?php
 namespace App\Controlers;
 
-class OffresControleur{
+class OffresControleur {
     private $offresModel;
     private $twig;
 
@@ -10,22 +10,27 @@ class OffresControleur{
         $this->twig = $twig;
     }
 
-    public function pagination(){
-        // Logique de pagination (Le Contrôleur décide)
+    public function pagination() {
+        // Logique de pagination
         $p = isset($_GET['p']) ? (int)$_GET['p'] : 1;
         if ($p < 1) $p = 1;
-        $parPage = 10;
+        
+        $parPage = 12;
         $offset = ($p - 1) * $parPage;
 
         // Récupération des données via le Modèle
-        $entreprises = $this->offresModel->getOffres($parPage, $offset);
+        $offres = $this->offresModel->getOffres($parPage, $offset);
+        $totalOffres = $this->offresModel->countOffres();
+        $totalPages = ceil($totalOffres / $parPage);
 
         // On utilise Twig pour afficher la vue
         echo $this->twig->render('offres.twig', [
-            'entreprises' => $entreprises,
-            'page' => $p,
-            'parPage' => $parPage
+            'offres'      => $offres,
+            'currentPage' => $p,
+            'totalPages'  => $totalPages
         ]);
     }
 
 }
+
+

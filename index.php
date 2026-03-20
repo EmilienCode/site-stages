@@ -1,7 +1,6 @@
 <?php
 session_start(); //Obligatoire pour lire les infos de connexion
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
@@ -38,24 +37,16 @@ switch ($page) {
         break;
     
     case 'entreprises':
-        // 1. On crée le Modèle
+
         $entrepriseModel = new EntrepriseModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
         $controleur = new EntrepriseControleur($entrepriseModel, $twig);
-
-        // 3. On lance l'action
         $controleur->pagination();
         break;
     
     case 'offres':
-        // 1. On crée le Modèle
+        
         $offresModel = new OffresModel($pdo);
-
-        // 2. On injecte le Modèle et Twig dans le Contrôleur
         $controleur = new OffresControleur($offresModel, $twig);
-
-        // 3. On lance l'action
         $controleur->pagination();
         break;
     
