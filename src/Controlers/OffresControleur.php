@@ -30,4 +30,7 @@ class OffresControleur {
             'totalPages'  => $totalPages
         ]);
     }
+
 }
+
+
