@@ -288,7 +288,22 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1rem;
     margin-bottom: 1rem;
 }
+/* --- Style pour le menu déroulant de Tri --- */
+select.selectTrie {
+    /* Cache l'apparence par défaut (la flèche moche du navigateur) */
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    /* On lui redonne un peu d'espace à droite pour compenser la flèche qu'on a enlevée */
+    padding-right: calc(var(--spacing) * 4);
+    
+    /* On change le curseur pour montrer que c'est cliquable */
+    cursor: pointer;
+}
 
+/* Le form GroupeRecherche était en position absolute, on le garde bien tel quel, 
+   on a juste changé <div> en <form> ! */
 /* --- CONTENU DE L'OFFRE (Toujours visible) --- */
 .details-cache {
     max-height: none; /* Affiche tout par défaut */

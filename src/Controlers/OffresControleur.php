@@ -11,26 +11,28 @@ class OffresControleur {
     }
 
     public function pagination() {
-        // Logique de pagination
         $p = isset($_GET['p']) ? (int)$_GET['p'] : 1;
         if ($p < 1) $p = 1;
         
         $parPage = 12;
         $offset = ($p - 1) * $parPage;
 
-        // Récupération des données via le Modèle
-        $offres = $this->offresModel->getOffres($parPage, $offset);
-        $totalOffres = $this->offresModel->countOffres();
+        $metier = $_GET['metier'] ?? '';
+        $ville = $_GET['ville'] ?? '';
+        $tri = $_GET['tri'] ?? 'recents';
+
+        $offres = $this->offresModel->getOffres($parPage, $offset, $metier, $ville, $tri);
+        
+        $totalOffres = $this->offresModel->countOffres($metier, $ville);
         $totalPages = ceil($totalOffres / $parPage);
 
-        // On utilise Twig pour afficher la vue
         echo $this->twig->render('offres.twig', [
             'offres'      => $offres,
             'currentPage' => $p,
-            'totalPages'  => $totalPages
+            'totalPages'  => $totalPages,
+            'metier'      => $metier,
+            'ville'       => $ville,
+            'tri'         => $tri
         ]);
     }
-
 }
-
-
