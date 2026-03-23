@@ -41,18 +41,22 @@ Offres
                     </div>
 
                     <div class="divTrie">
-                        <button type="button" class="btnTrie">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logoTrie" aria-hidden="true">
-                                <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path>
-                            </svg>
-                            Filtres
-                        </button>
+                        
+
+                        <select name="competence" class="btnTrie selectTrie" onchange="this.form.submit()">
+                            <option value="">Toutes les compétences</option>
+                            {% for comp in competences %}
+                                <option value="{{ comp.id_competence }}" {% if comp.id_competence == competence_selected %}selected{% endif %}>
+                                    {{ comp.nom_competence }}
+                                </option>
+                            {% endfor %}
+                        </select>
 
                         <select name="tri" class="btnTrie selectTrie" onchange="this.form.submit()">
-                            <option value="recents">Trier par : Récents</option>
-                            <option value="anciens">Trier par : Anciens</option>
-                            <option value="salaire_asc">Salaire : Croissant</option>
-                            <option value="salaire_desc">Salaire : Décroissant</option>
+                            <option value="recents" {% if tri == 'recents' %}selected{% endif %}>Trier par : Récents</option>
+                            <option value="anciens" {% if tri == 'anciens' %}selected{% endif %}>Trier par : Anciens</option>
+                            <option value="salaire_asc" {% if tri == 'salaire_asc' %}selected{% endif %}>Salaire : Croissant</option>
+                            <option value="salaire_desc" {% if tri == 'salaire_desc' %}selected{% endif %}>Salaire : Décroissant</option>
                         </select>
                     </div>
                 </form>
