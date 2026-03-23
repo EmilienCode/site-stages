@@ -70,4 +70,19 @@ switch ($page) {
         if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
         break;
 
+    case 'connexion':
+        echo $twig->render('connexion.twig');
+        break;
+    
+    case 'creercompte':
+        echo $twig->render('creercompte.twig');
+        break;
+
+    case 'contact':
+        echo $twig->render('contact.twig');
+        break;
+
+    case 'merci-candidature':
+        echo $twig->render('merci-candidature.twig');
+        break;
 }
