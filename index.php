@@ -66,5 +66,9 @@ switch ($page) {
     case 'connexion':
         echo $twig->render('connexion.twig');
         break;
+    
+    case 'creercompte':
+        echo $twig->render('creercompte.twig');
+        break;
 
 }
