@@ -42,4 +42,17 @@ class OffresControleur {
             'competence_selected' => $competence_id     // Pour garder la sélection active
         ]);
     }
+    public function afficherOffre() {
+        if (!isset($_GET['id'])) {
+            die("Offre non trouvée");
+        }
+        $id = $_GET['id'];
+        $offre = $this->offresModel->getOffreById($id);
+        if (!$offre) {
+            die("Offre inexistante");
+        }
+        echo $this->twig->render('postuler.twig', [
+            'offre' => $offre
+        ]);
+    }
 }

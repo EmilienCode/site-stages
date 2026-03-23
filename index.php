@@ -49,6 +49,13 @@ switch ($page) {
         $controleur = new OffresControleur($offresModel, $twig);
         $controleur->pagination();
         break;
+
+    case 'postuler':
+
+        $offresModel = new OffresModel($pdo);
+        $controleur = new OffresControleur($offresModel, $twig);
+        $controleur->afficherOffre();
+        break;
     
     case 'afficher_utilisateur':
     case 'modifier_utilisateur':

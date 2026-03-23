@@ -83,7 +83,7 @@ class OffresModel {
             }
 
             if (!empty($ville)) {
-                $sql .= " AND lieu_offre LIKE :ville"; // Corrigé
+                $sql .= " AND ville LIKE :ville"; // <-- Pareil, vérifie la colonne "ville"
                 $params[':ville'] = '%' . $ville . '%';
             }
 
@@ -106,4 +106,12 @@ class OffresModel {
             return 0; 
         }
     }
+
+    public function getOffreById($id) {
+        $sql = "SELECT * FROM OFFRE WHERE id_offre = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
