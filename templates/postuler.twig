@@ -1,0 +1,77 @@
+{% extends "base.twig" %}
+
+{% block title %}
+Postuler
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/stylepostuler.css"/>
+
+<main class="page">
+
+    <section class="top-links">
+        <a href="?page=offres">← Retour</a>
+    </section>
+
+    <section class="card offer-card">
+        <div class="offer-header">
+            <h1>{{ offre.titre_offre }}</h1>
+        </div>
+
+        <h2>{{ offre.nom_entreprise }}</h2>
+
+        <div class="offer-meta">
+            <span>📍 {{ offre.lieu_offre }}</span>
+            <span>⏳ {{ offre.duree_formation_offre }}</span>
+            <span>💻 {{ offre.domaine_requis_offre }}</span>
+        </div>
+    </section>
+
+    <section class="card form-card">
+        <h3>Votre candidature</h3>
+
+        <form class="form" action="traitement.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id_offre" value="{{ offre.id_offre }}">
+
+            <div class="form-group file-group">
+                <label for="cv">CV (PDF)</label>
+                <input type="file" id="cv" name="CV" accept="application/pdf" required>
+                <span class="file-hint">Format PDF – 2 Mo max</span>
+            </div>
+
+            <div class="form-group">
+                <label for="lm">Lettre de motivation</label>
+                <textarea id="lm" name="LM" placeholder="Expliquez pourquoi ce stage vous intéresse..."></textarea>
+            </div>
+
+            <div class="form-actions">
+                <a href="?page=offres" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">Envoyer ma candidature</button>
+            </div>
+
+        </form>
+    </section>
+
+</main>
+
+<script>
+document.getElementById("cv").addEventListener("change", function() {
+    const file = this.files[0];
+    if (file) {
+        const maxSize = 2 * 1024 * 1024;
+
+        if (file.type !== "application/pdf") {
+            alert("Le fichier doit être au format PDF.");
+            this.value = "";
+            return;
+        }
+
+        if (file.size > maxSize) {
+            alert("Le fichier dépasse 2 Mo.");
+            this.value = "";
+        }
+    }
+});
+</script>
+
+{% endblock %}
