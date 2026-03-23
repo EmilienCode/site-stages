@@ -85,4 +85,8 @@ switch ($page) {
     case 'merci-candidature':
         echo $twig->render('merci-candidature.twig');
         break;
+        
+    case 'wishlist':
+        echo $twig->render('wishlist.twig');
+        break;
 }

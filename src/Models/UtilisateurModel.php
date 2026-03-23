@@ -19,6 +19,34 @@ class UtilisateurModel {
         ";
         return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getAllOffreWishlist($id_utilisateur) {
+        // Ajout de toutes les colonnes requises par Twig
+        // Attention au nom_entrprise (sans 'e') défini dans ton schema SQL
+        $query = "SELECT o.id_offre, o.titre_offre, o.description_offre, o.remuneration_offre, 
+                         o.domaine_requis_offre, o.date_offre, o.lieu_offre, o.duree_formation_offre,
+                         e.nom_entrprise 
+        FROM OFFRE o
+        JOIN MET_EN_FAVORI m ON o.id_offre = m.id_offre
+        JOIN ENTREPRISE e ON o.siret_entreprise = e.siret_entreprise
+        WHERE m.id_utilisateur = :id_utilisateur";
+        
+        $stmt = $this->pdo->prepare($query);
+        // On bind le paramètre pour éviter les erreurs et failles
+        $stmt->execute(['id_utilisateur' => $id_utilisateur]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Nouvelle méthode pour supprimer de la wishlist
+    public function deleteOffreWishlist($id_offre, $id_utilisateur) {
+        $query = "DELETE FROM MET_EN_FAVORI 
+                  WHERE id_offre = :id_offre AND id_utilisateur = :id_utilisateur";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            'id_offre' => $id_offre,
+            'id_utilisateur' => $id_utilisateur
+        ]);
+    }
 
     public function getUserByRole() {
         $query = "
