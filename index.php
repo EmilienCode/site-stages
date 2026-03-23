@@ -74,4 +74,8 @@ switch ($page) {
     case 'contact':
         echo $twig->render('contact.twig');
         break;
+
+    case 'merci-candidature':
+        echo $twig->render('merci-candidature.twig');
+        break;
 }
