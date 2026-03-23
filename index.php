@@ -71,6 +71,14 @@ switch ($page) {
         echo $twig->render('creercompte.twig');
         break;
 
+    case 'contact':
+        echo $twig->render('contact.twig');
+        break;
+
+    case 'merci-candidature':
+        echo $twig->render('merci-candidature.twig');
+        break;
+        
     case 'wishlist':
         echo $twig->render('wishlist.twig');
         break;
