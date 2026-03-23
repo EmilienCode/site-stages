@@ -50,14 +50,13 @@
 </div>
 
 <div class="pagination">
-    {% if page > 1 %}
-        <a href="?p={{ page - 1 }}" class="pagination-btn">Précédent</a>
+    {% if currentPage > 1 %}
+        <a href="?page=offres&p={{ currentPage - 1 }}" class="pagination-btn">Précédent</a>
     {% endif %}
-    
-    {% if entreprises|length >= parPage %}
-        <a href="?p={{ page + 1 }}" class="pagination-btn">Suivant</a>
+
+    {% if currentPage < totalPages %}
+        <a href="?page=offres&p={{ currentPage + 1 }}" class="pagination-btn">Suivant</a>
     {% endif %}
 </div>
-
 <script src="assets/js/scroll-animation.js"></script>
 {% endblock %}
