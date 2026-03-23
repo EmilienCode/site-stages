@@ -63,4 +63,8 @@ switch ($page) {
         if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
         break;
 
+    case 'connexion':
+        echo $twig->render('connexion.twig');
+        break;
+
 }
