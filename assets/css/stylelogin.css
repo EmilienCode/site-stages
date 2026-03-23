@@ -1,208 +1,13 @@
-:root {
-    /* Typographie */
-    --font-weight-titre: 800;
-    --font-weight-nom: 700;
-    --font-weight-moyen: 500;
-
-    --size-text-titre: 3rem;
-    --size-text-nom: 1.25rem;
-    --size-text-NavBarre: 0.875rem;
-
-    --font-sans: ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji",
-        "Segoe UI Symbol", "Noto Color Emoji";
-
-    /* Espacements & formes */
-    --spacing: 0.25rem;
-    --radius: 0.625rem;
-
-    /* Couleurs */
-    --background:#ffffff;
-    --color-gray:#ffd5d0;
-    --color-dark-gray:#0f172a;
-    --color-light-gray:#4e3030;
-
-    --primary-color:#fa8072;
-    --secondary-color:#914941;
-    --tertiary-color: #fac4a7; 
-
-    /* UI */
-    --color-border-light: rgb(229, 231, 235);
-    --color-input-bg: rgb(249, 251, 255);
-    --color-muted-bg: rgb(229, 231, 235);
-    --color-muted-bg-hover: rgb(209, 213, 219);
-
-    /* Effets */
-    --shadow-blue: 0 12px 32px rgba(235, 116, 37, 0.08);
-    --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
-}
-button, input, select, optgroup, textarea {
-    font: inherit;
-    font-feature-settings: inherit;
-    font-variation-settings: inherit;
-    letter-spacing: inherit;
-    color: inherit;
-    opacity: 1;
-    --lightningcss-light: initial;
-    --lightningcss-dark: ;
-    color-scheme: light;
-    background-color: #0000;
-    border-radius: 0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-}
-
 body {
     background: var(--background);
     color: var(--color-dark-gray);
 }
-.logoAcc{
-    text-decoration: none;
-    color: var(--color-dark-gray);
-}
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
-svg {
-    display: block;
-}
-
-.nav{
-    padding-block: calc(var(--spacing) * 4); 
-    padding-inline: calc(var(--spacing) * 6);
-    background-color: var(--background);
-    border-color: var(--color-gray);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    z-index: 50;
-    top: calc(var(--spacing) * 0);
-    position: sticky;
-}
-
-.navInside {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 80rem;
-    margin-inline: auto;
-}
-
-.NomLogoNav {
-    display: flex;
-    gap: calc(var(--spacing) * 2);
-    align-items: center;
-}
-
-.NomNav {
-    color: var(--color-dark-gray);
-    font-weight: var(--font-weight-nom);
-    font-size: var(--size-text-nom);
-    font-family: var(--font-sans);
-}
-
-.LogoNav {
-    padding: calc(var(--spacing) * 2);
-    background-color: var(--primary-color);
-    border-radius: var(--radius);
-}
-
-.LOGO {
-    color: var(--background);
-    width: calc(var(--spacing) * 6);
-    height: calc(var(--spacing) * 6);
-}
-
-.BtnNavOutside {
-    display: flex;
-    gap: calc(var(--spacing) * 8);
-    align-items: center;
-    font-size: var(--size-text-NavBarre);
-    font-weight: var(--font-weight-moyen);
-    color: var(--color-light-gray);
-    font-family: var(--font-sans);
-}
-
-.BtnNavInside {
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.BtnNavInside::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-color);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-}
-
-.BtnNavInside:hover {
-    color: var(--primary-color);
-}
-
-.BtnNavInside:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.logoDroitNav {
-    display: flex;
-    gap: calc(var(--spacing) * 4);
-    align-items: center;
-}
-
-.NotifBtn{
-    border-color: rgba(252, 252, 252, 0);
-    transition: cubic-bezier(.4, 0, .2, 1);
-    transition-duration: 0.15s;
-    color: var(--color-light-gray);
-    padding: calc(var(--spacing) * 2);
-    border-radius: 3.40282e38px;
-}
-.NotifBtn:hover {
-    background-color: var(--color-gray);
-    color: var(--primary-color);
-}
-.svgNotif{
-    width: calc(var(--spacing) * 5);
-    height: calc(var(--spacing) * 5);
-}
-.CompteBtn{
-    display: flex;
-    background-color: var(--background);
-    color: var(--color-light-gray);
-    border-color: transparent;
-    border-style: solid;
-    border-width: 0px;
-    border-radius: 3.40282e38px;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: calc(var(--spacing) * 8);
-    height: calc(var(--spacing) * 8);
-}
-.CompteBtn:hover {
-    background-color: var(--color-gray);
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-.svgCompte{
-    width: calc(var(--spacing) * 5);
-    height: calc(var(--spacing) * 5);
-    border-color: var(--border);
-}
 
 .connexion-container {
     min-height: calc(100vh - 140px);
@@ -210,7 +15,7 @@ svg {
     align-items: center;
     justify-content: center;
     padding: 30px;
-    
+    font-family: var(--font-sans);
 }
 
 .connexion-card {
@@ -333,52 +138,6 @@ textarea {
     
 }
 
-
-footer{
-    padding-block: calc(var(--spacing) * 12);
-    padding-inline: calc(var(--spacing) * 6);
-    margin-top: calc(var(--spacing) * 12);
-    background-color: var(--background);
-    border-color: var(--color-gray);
-    border-top-style: solid;
-    border-top-width: 1px;
-    font-family: var(--font-sans);
-}
-.footerIn{
-    display: flex;
-    margin-inline: auto;
-    flex-direction: row;
-    gap: calc(var(--spacing) * 8);
-    justify-content: space-between;
-    align-items: center;
-    max-width: 80rem;
-}  
-.footerlogonom{
-    gap: calc(var(--spacing) * 2);
-    align-items: center;
-    display: flex;
-}
-.logofooter{
-    padding: calc(var(--spacing) * 1.5);
-    background-color: var(--primary-color);
-    border-radius: calc(var(--radius)  - 2px);
-}
-.svglogofooter{
-    color: var(--background);
-    width: calc(var(--spacing) * 4);
-    height: calc(var(--spacing) * 4);
-    border-color: #0000;
-}
-.nomfooter{
-    color: var(--color-light-gray);
-    font-weight: var(--font-weight-nom);
-}
-.navfooter{
-    color: var(--color-light-gray);
-    font-size: 0.875rem;
-    gap: calc(var(--spacing) * 8);
-    display: flex;
-}
 
 @media (min-width: 768px) {
     .connexion-card {

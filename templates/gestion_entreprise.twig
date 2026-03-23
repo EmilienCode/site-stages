@@ -33,8 +33,8 @@ Gestion Entreprises
                         <td>{{ entreprise.secteur_entreprise }}</td>
                         <td>{{ entreprise.ville_entreprise }}</td>
                         <td>
-                            <a href="index.php?page=modifier_utilisateur&id={{ entreprise.id_utilisateur }}" class="btn-action btn-edit">Modifier</a>
-                            <a href="index.php?page=supprimer_utilisateur&id={{ entreprise.id_utilisateur }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                            <a href="index.php?page=modifier_entreprise&id={{ entreprise.id_utilisateur }}" class="btn-action btn-edit">Modifier</a>
+                            <a href="index.php?page=supprimer_entreprise&id={{ entreprise.id_utilisateur }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
                         </td>
                     </tr>
                 {% else %}
