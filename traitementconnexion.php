@@ -21,7 +21,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         exit();
     } else {
         // ERREUR : Identifiants incorrects
-        header('Location: connexion.php?error=auth');
+        header('Location: index.php?page=connexion&error=1');
         exit();
     }
 }
