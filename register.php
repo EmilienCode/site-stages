@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
         $_SESSION['user_id'] = $id_utilisateur;
         $_SESSION['user_nom'] = $nom;
         $_SESSION['user_prenom'] = $prenom;
-        $_SESSION['id_role'] = 2;
+        $_SESSION['id_role'] = 1;
 
         // Redirection vers l'accueil avec un message de succès
         header("Location: index.php?success=welcome");
