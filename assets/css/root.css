@@ -49,6 +49,9 @@
 
     /* Entreprises & Offres */
     --color-background-offre: #faf3f1;
+
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.05);
 }
 
 /*Resets globaux (présents dans tous nos fichiers)*/

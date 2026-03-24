@@ -201,13 +201,13 @@ h1, h2, h3, h4, h5, h6 {
 
     .navInside {
         flex-direction: column;
-        gap: 1.5rem;
+        gap: var(calc(var(--spacing) * 6));
     }
     
     .BtnNavOutside {
         position: static; 
         transform: none;  
-        gap: 1.5rem; 
+        gap: var(calc(var(--spacing) * 6));
         flex-wrap: wrap; 
         justify-content: center;
     }
@@ -215,7 +215,7 @@ h1, h2, h3, h4, h5, h6 {
     .InsideSection {
         grid-template-columns: 1fr; 
         text-align: center; 
-        gap: 3rem;
+        gap: var(calc(var(--spacing) * 12));
     }
     
     .ParaLight {
@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .BoxRechercher {
         flex-direction: column;
-        padding: 0.5rem;
+        padding: var(calc(var(--spacing) * 2));
     }
 
     .input1, .input2 {
