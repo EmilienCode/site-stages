@@ -1,4 +1,4 @@
-body.dark-mode {
+body.theme-dark {
     /* 1. FOND PRINCIPAL : On passe du blanc à un bleu nuit très profond (élégant) */
     --background: rgb(17, 29, 55); 
     --color-background-offre: #0f0656;

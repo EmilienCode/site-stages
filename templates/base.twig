@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./includes/image/logo.png">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('theme-dark');
+        }
+    </script>
 </head>
 <body>
     {% include "header.twig" %}
