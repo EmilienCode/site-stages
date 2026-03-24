@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
         $stmt1 = $pdo->prepare($sql1);
         $stmt1->execute([$nom, $prenom, $email, $password]);
 
-        // 4. Récupérer l'ID de l'utilisateur qui vient d'être créé
+        // récupérer l'id utilisateur créé
         $id_utilisateur = $pdo->lastInsertId();
 
         // 5. Insertion dans la table COORDONNEES
