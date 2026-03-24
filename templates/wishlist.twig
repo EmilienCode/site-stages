@@ -4,7 +4,7 @@
 {% block content %}
     <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/stylewishlist.css"/>
-
+<div style="padding-top: calc(var(--spacing) * 16);">
     <main class="wishlist-container">
         {# On vérifie si l'utilisateur est connecté ET si son id_role est 1, 2 ou 3 #}
         {% if session.id_role is defined and session.id_role in [1, 2, 3] %}
@@ -57,4 +57,5 @@
             </div>
         {% endif %}
     </main>
+</div>
 {% endblock %}

@@ -14,7 +14,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: calc(var(--spacing) * 16);
     font-family: var(--font-sans);
 }
 
