@@ -11,7 +11,7 @@ class UtilisateurControleur {
     }
 
     // Une seule méthode de sécurité flexible
-    private function checkAccess($requiredRole) {
+    private function checkAccess($allowedRoles) {
         // Si on a passé un seul chiffre (ex: 3), on le transforme en tableau [3]
         if (!is_array($allowedRoles)) {
             $allowedRoles = [$allowedRoles];
@@ -43,8 +43,8 @@ class UtilisateurControleur {
     }
 
     public function supprimerUtilisateur() {
-        // Seul l'admin (3) a le droit de supprimer par exemple
-        $this->checkAccess([2, 3]);
+        
+        $this->checkAccess([2,3]);
 
         $id = $_GET['id'] ?? null;
         if ($id) {

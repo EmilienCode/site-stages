@@ -1,6 +1,6 @@
 body.dark-mode {
     /* 1. FOND PRINCIPAL : On passe du blanc à un bleu nuit très profond (élégant) */
-    --background: #111d37; 
+    --background: rgb(17, 29, 55); 
     --color-background-offre: #0f0656;
 
     /* 2. ÉLÉMENTS "BLANCS" (Box, Nav) : Ils deviennent gris foncé pour se détacher du fond */
@@ -32,4 +32,12 @@ body.dark-mode {
 
     /* 10. COULEUR DES TITRES*/
     --color-light-white: #f1f5f9;
+
+    --glass-background:rgba(17, 29, 55, 0.4);
+    --glass-border:rgba(17, 29, 55, 0.3);
+    --glass-shadow1:rgba(255, 255, 255, 0.05);
+    --glass-shadow2:rgba(17, 29, 55, 0.5);
+    --glass-shadow3:rgba(17, 29, 55, 0.1);
+    --glass-shadow4:rgba(17, 29, 55, 0);
+    --glass-transparent:rgba(17, 29, 55, 0.8);
 }

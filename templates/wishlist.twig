@@ -1,50 +1,61 @@
 {% extends "base.twig" %}
-{% block title %}
-Wish List
-{% endblock %}
-{% block content %}
+{% block title %} Wish List {% endblock %}
 
+{% block content %}
     <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/stylewishlist.css"/>
-
+<div style="padding-top: calc(var(--spacing) * 16);">
     <main class="wishlist-container">
-        <div class="wishlist-header">
-            <h1>Wish List</h1>
-        </div>
+        {# On vérifie si l'utilisateur est connecté ET si son id_role est 1, 2 ou 3 #}
+        {% if session.id_role is defined and session.id_role in [1, 2, 3] %}
+            
+            <div class="wishlist-header">
+                <h1>Wish List</h1>
+            </div>
 
-        <table class="wishlist-table">
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Domaine</th>
-                    <th>Description</th>
-                    <th>Rémunération</th>
-                    <th>Date</th>
-                    <th>Lieu</th>
-                    <th>Durée</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for offre in offres %}
+            <table class="wishlist-table">
+                <thead>
                     <tr>
-                        <td>{{ offre.titre_offre }}</td>
-                        <td>{{ offre.domaine_requis_offre }}</td>
-                        <td>{{ offre.description_offre }}</td>
-                        <td>{{ offre.remuneration_offre }}</td>
-                        <td>{{ offre.date_offre }}</td>
-                        <td>{{ offre.lieu_offre }}</td>
-                        <td>{{ offre.duree_formation_offre }}</td>
-                        <td>
-                            <a href="index.php?page=supprimer_wishlist&id={{ offre.id_offre }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?');">Supprimer</a>
-                        </td>
+                        <th>Titre</th>
+                        <th>Domaine</th>
+                        <th>Description</th>
+                        <th>Rémunération</th>
+                        <th>Date</th>
+                        <th>Lieu</th>
+                        <th>Durée</th>
+                        <th>Action</th>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="7" style="text-align:center;">Aucune offres trouvé.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for offre in offres %}
+                        <tr>
+                            <td>{{ offre.titre_offre }}</td>
+                            <td>{{ offre.domaine_requis_offre }}</td>
+                            <td>{{ offre.description_offre }}</td>
+                            <td>{{ offre.remuneration_offre }}</td>
+                            <td>{{ offre.date_offre }}</td>
+                            <td>{{ offre.lieu_offre }}</td>
+                            <td>{{ offre.duree_formation_offre }}</td>
+                            <td>
+                                <a href="index.php?page=supprimer_wishlist&id={{ offre.id_offre }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?');">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" style="text-align:center;">Aucune offre trouvée.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            {# Message affiché si l'utilisateur n'a pas les droits #}
+            <div style="text-align: center; margin-top: 50px;">
+                <h2>Accès restreint</h2>
+                <p>Vous devez être connecté avec un compte autorisé pour voir votre Wish List.</p>
+                <a href="index.php?page=connexion" class="btn-primary">Se connecter</a>
+            </div>
+        {% endif %}
     </main>
-
+</div>
 {% endblock %}
