@@ -1,4 +1,7 @@
 <?php
+// On démarre la session au tout début
+session_start();
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -14,9 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
     $ville = $_POST["ville"];
     $telephone = $_POST["telephone"];
     $sexe = $_POST["sexe"];
+    
     $date = DateTime::createFromFormat('d/m/Y', $_POST['date_naissance']);
     if (!$date) {
-        die("Format de date incorrect !");
+        // Au lieu de die(), on pourrait rediriger avec une erreur
+        header("Location: index.php?page=creercompte&error=date_format");
+        exit;
     }
     $date = $date->format('Y-m-d');
 
@@ -24,17 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->beginTransaction();
 
-        // insertion utilisateur
-        $sql = "INSERT INTO UTILISATEUR (nom, prenom, email, mot_de_passe)
-                VALUES (?, ?, ?, ?)";
+        // 1. Insertion utilisateur
+        $sql = "INSERT INTO UTILISATEUR (nom, prenom, email, mot_de_passe, id_role)
+                VALUES (?, ?, ?, ?, 2)"; // On force le rôle 2 (Étudiant) par exemple
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$nom, $prenom, $email, $password]);
 
-        // récupérer l'id utilisateur créé
+        // 2. Récupérer l'id utilisateur créé
         $id_utilisateur = $pdo->lastInsertId();
 
-        // insertion coordonnées
+        // 3. Insertion coordonnées
         $sql2 = "INSERT INTO COORDONNEES 
         (ville_coordonnees, telephone_coordonnees, sexe_coordonnees, date_naissance_coordonnees, id_utilisateur)
         VALUES (?, ?, ?, ?, ?)";
@@ -43,15 +49,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
         $stmt2->execute([$ville, $telephone, $sexe, $date, $id_utilisateur]);
 
         $pdo->commit();
-        header("Location: connexion.php");
+
+        // --- CONNEXION AUTOMATIQUE ---
+        // On remplit la session avec les infos qu'on vient d'utiliser
+        $_SESSION['user_id'] = $id_utilisateur;
+        $_SESSION['user_nom'] = $nom;
+        $_SESSION['id_role'] = 2; // Le rôle défini plus haut
+
+        // Redirection vers l'accueil
+        header("Location: index.php?success=welcome");
         exit;
+
     } 
     catch (Exception $e) {
-
         $pdo->rollBack();
-        echo "Erreur : " . $e->getMessage();
-
+        
+        // Gestion spécifique si l'email existe déjà (Erreur 23000)
+        if ($e->getCode() == 23000) {
+            header("Location: index.php?page=creercompte&error=email_taken");
+        } else {
+            echo "Erreur : " . $e->getMessage();
+        }
+        exit;
     }
-
 }
 ?>
