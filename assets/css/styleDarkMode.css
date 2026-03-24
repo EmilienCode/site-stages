@@ -38,6 +38,6 @@ body.dark-mode {
     --glass-shadow1:rgba(255, 255, 255, 0.05);
     --glass-shadow2:rgba(17, 29, 55, 0.5);
     --glass-shadow3:rgba(17, 29, 55, 0.1);
-    --glass-shadow4:rgba(17, 29, 55, 0);
+    --glass-shadow4:rgba(17, 29, 55, 0.059);
     --glass-transparent:rgba(17, 29, 55, 0.8);
 }
