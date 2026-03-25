@@ -110,9 +110,27 @@ h1, h2, h3, h4, h5, h6 {
 .RechercherBTN:hover{
     background-color: var(--secondary-color);
 }
-.planete{
-    display: block;
+.planete {
+    width: 100%;     
+    aspect-ratio: 1; /* Force la div à être un carré parfait, ce qui garantit une planète ronde */
+    min-height: 400px; /* Évite que le conteneur ne s'écrase */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
+    overflow: hidden;
+    cursor: grab; /* Indique à l'utilisateur qu'il peut interagir */
+}
+
+.planete:active {
+    cursor: grabbing;
+}
+
+.planete canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    outline: none; /* Enlève la bordure bleue disgracieuse au clic */
 }
 .barrePopulaire{
     display: flex;
