@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from 'jsm/controls/OrbitControls.js';
 
-import { getFresnelMat } from "./src/getFresnelMat.js";
+import { getFresnelMat } from "./assets/js/getFresnelMat.js";
 
 // 1. Cibler le conteneur en premier pour obtenir ses dimensions
 const container = document.querySelector('.planete');
