@@ -70,6 +70,19 @@ switch ($page) {
         if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
         break;
 
+    case 'afficher_offre':
+    case 'modifier_offre':
+    case 'supprimer_offre':
+
+        $offresModel = new OffresModel($pdo);
+        $controleur = new OffresControleur($offresModel, $twig);
+
+        // On appelle la méthode correspondante à la page
+        if ($page === 'afficher_offre') $controleur->afficherOffre();
+        if ($page === 'modifier_offre') $controleur->modifierOffre();
+        if ($page === 'supprimer_offre') $controleur->supprimerOffre();
+        break;
+
     case 'connexion':
         echo $twig->render('connexion.twig');
         break;

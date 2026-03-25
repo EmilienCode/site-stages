@@ -55,4 +55,12 @@ class OffresControleur {
             'offre' => $offre
         ]);
     }
+
+    public function modifierOffre() {
+        // Logique de modification d'une offre (similaire à afficherOffre mais avec formulaire)
+    }
+
+    public function supprimerOffre() {
+        // Logique de suppression d'une offre
+    }
 }
