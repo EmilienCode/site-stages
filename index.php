@@ -19,7 +19,7 @@ $twig = new \Twig\Environment($loader);
 
 // Elle donne accès à la variable "session" dans TOUS tes fichiers .twig
 $twig->addGlobal('session', $_SESSION); 
-$userRole = $_SESSION['role'] ?? null;
+$userRole = $_SESSION['id_role'] ?? null;
 
 $page = $_GET['page'] ?? 'accueil';
 
@@ -96,9 +96,22 @@ switch ($page) {
         break;
 
     case 'merci-candidature':
-        echo $twig->render('merci-candidature.twig');
-        break;
-        
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            die("Candidature introuvable");
+        }
+        $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise
+                FROM CANDIDATURES c
+                JOIN OFFRE o ON c.id_offre = o.id_offre
+                WHERE c.id_candidature = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $candidature = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo $twig->render('merci-candidature.twig', [
+            'candidature' => $candidature
+        ]);
+        break; 
+
     case 'wishlist':
         echo $twig->render('wishlist.twig');
         break;
