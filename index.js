@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from 'jsm/controls/OrbitControls.js';
 
-import getStarfield from "./src/getStarfield.js";
 import { getFresnelMat } from "./src/getFresnelMat.js";
 
 // 1. Cibler le conteneur en premier pour obtenir ses dimensions
@@ -10,7 +9,7 @@ let w = container.clientWidth;
 let h = container.clientHeight || 500; // Hauteur par défaut si 0
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(23.5, w / h, 0.1, 1000);
 camera.position.z = 5;
 
 // alpha: true permet au fond du canvas d'être transparent pour mieux s'intégrer
@@ -34,30 +33,30 @@ controls.enableZoom = false; // Désactive le zoom molette pour ne pas gêner le
 
 const detail = 12;
 const loader = new THREE.TextureLoader();
-const geometry = new THREE.SphereGeometry(1, 128, 128);
+const geometry = new THREE.SphereGeometry(1, 64, 64);
 const material = new THREE.MeshPhongMaterial({
-  map: loader.load("./textures/8k_earth_daymap.jpg"),
-  specularMap: loader.load("./textures/8k_earth_specular_map.jpg"),
-  normalMap: loader.load("./textures/8k_earth_normal_map.jpg"),
-  normalScale: new THREE.Vector2(1, 1),
+  map: loader.load("./textures/8081_earthmap2k.jpg"),
+  specularMap: loader.load("./textures/8081_earthspec2k.jpg"),
+  bumpMap: loader.load("./textures/01_earthbump1k.jpg"),
+  bumpScale: 0.04,
 });
 
 const earthMesh = new THREE.Mesh(geometry, material);
 earthGroup.add(earthMesh);
 
 const lightsMat = new THREE.MeshBasicMaterial({
-  map: loader.load("./textures/8k_earth_nightmap.jpg"),
+  map: loader.load("./textures/8081_earthlights2k.jpg"),
   blending: THREE.AdditiveBlending,
 });
 const lightsMesh = new THREE.Mesh(geometry, lightsMat);
 earthGroup.add(lightsMesh);
 
 const cloudsMat = new THREE.MeshStandardMaterial({
-  map: loader.load("./textures/8k_earth_clouds.jpg"),
+  map: loader.load("./textures/earthcloudmap.jpg"),
   transparent: true,
   opacity: 0.8,
   blending: THREE.AdditiveBlending,
-  alphaMap: loader.load('./textures/8k_earth_clouds.jpg'),
+  alphaMap: loader.load('./textures/05_earthcloudmaptrans.jpg'),
 });
 const cloudsMesh = new THREE.Mesh(geometry, cloudsMat);
 cloudsMesh.scale.setScalar(1.003);
@@ -67,9 +66,6 @@ const fresnelMat = getFresnelMat();
 const glowMesh = new THREE.Mesh(geometry, fresnelMat);
 glowMesh.scale.setScalar(1.01);
 earthGroup.add(glowMesh);
-
-const stars = getStarfield({numStars: 2000});
-scene.add(stars);
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
 sunLight.position.set(-2, 0.5, 1.5);
@@ -97,3 +93,13 @@ function handleWindowResize () {
   renderer.setSize(w, h);
 }
 window.addEventListener('resize', handleWindowResize, false);
+
+function updateEarthTheme(isDark) {
+    // 1. Ajuster l'intensité du soleil
+    // Mode sombre : lumière plus douce/bleutée, Mode clair : pleine puissance
+    sunLight.intensity = isDark ? 0.7 : 2.5;
+    sunLight.color.setHex(isDark ? 0xccccff : 0xffffff);
+
+    // 2. Optionnel : Ajuster l'opacité des nuages pour qu'ils soient moins "blancs" la nuit
+    cloudsMat.opacity = isDark ? 0.4 : 0.8;
+}
