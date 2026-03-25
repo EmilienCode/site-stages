@@ -35,9 +35,9 @@ const detail = 12;
 const loader = new THREE.TextureLoader();
 const geometry = new THREE.SphereGeometry(1, 64, 64);
 const material = new THREE.MeshPhongMaterial({
-  map: loader.load("./textures/8081_earthmap2k.jpg"),
-  specularMap: loader.load("./textures/8081_earthspec2k.jpg"),
-  bumpMap: loader.load("./textures/01_earthbump1k.jpg"),
+  map: loader.load("./texture/8081_earthmap2k.jpg"),
+  specularMap: loader.load("./texture/8081_earthspec2k.jpg"),
+  bumpMap: loader.load("./texture/8081_earthbump1k.jpg"),
   bumpScale: 0.04,
 });
 
@@ -45,18 +45,18 @@ const earthMesh = new THREE.Mesh(geometry, material);
 earthGroup.add(earthMesh);
 
 const lightsMat = new THREE.MeshBasicMaterial({
-  map: loader.load("./textures/8081_earthlights2k.jpg"),
+  map: loader.load("./texture/8081_earthlights2k.jpg"),
   blending: THREE.AdditiveBlending,
 });
 const lightsMesh = new THREE.Mesh(geometry, lightsMat);
 earthGroup.add(lightsMesh);
 
 const cloudsMat = new THREE.MeshStandardMaterial({
-  map: loader.load("./textures/earthcloudmap.jpg"),
+  map: loader.load("./texture/earthcloudmap.jpg"),
   transparent: true,
   opacity: 0.8,
   blending: THREE.AdditiveBlending,
-  alphaMap: loader.load('./textures/05_earthcloudmaptrans.jpg'),
+  alphaMap: loader.load('./texture/earthcloudmaptrans.jpg'),
 });
 const cloudsMesh = new THREE.Mesh(geometry, cloudsMat);
 cloudsMesh.scale.setScalar(1.003);
