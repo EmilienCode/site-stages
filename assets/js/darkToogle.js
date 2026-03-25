@@ -1,4 +1,4 @@
-
+import { updateEarthTheme } from "./index.js";
 // On récupère la checkbox et le body
 const toggleCheckbox = document.getElementById('btn-theme-toogle');
 const body = document.body;
