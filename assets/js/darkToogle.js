@@ -1,3 +1,4 @@
+
 // On récupère la checkbox et le body
 const toggleCheckbox = document.getElementById('btn-theme-toogle');
 const body = document.body;
@@ -21,10 +22,13 @@ toggleCheckbox.addEventListener('change', function() {
     if (this.checked) {
         body.classList.add('theme-dark');
         localStorage.setItem('theme', 'dark');
+        updateEarthTheme(true);
     } 
     // Si le switch vient d'être désactivé (décoché)
     else {
         body.classList.remove('theme-dark');
         localStorage.setItem('theme', 'light');
+        updateEarthTheme(false);
     }
 });
+updateEarthTheme(toggleCheckbox.checked);
