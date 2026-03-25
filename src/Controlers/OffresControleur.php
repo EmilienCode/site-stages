@@ -51,8 +51,9 @@ class OffresControleur {
         if (!$offre) {
             die("Offre inexistante");
         }
+        $user = $_SESSION['user'] ?? null;
         echo $this->twig->render('postuler.twig', [
-            'offre' => $offre
+            'offre' => $offre, 'user' => $user
         ]);
     }
 

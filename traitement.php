@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 require 'config.php';
 session_start(); //Démarre la session pour accéder aux données utilisateur
 
+if (!isset($_SESSION['user_id'])) {
+    die("Vous devez être connecté pour postuler.");
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $LM = htmlspecialchars($_POST['LM'] ?? '');
@@ -12,10 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_offre = $_POST['id_offre'] ?? null;
     // Récupère l'id de l'offre à laquelle l'utilisateur postule 
     // ?? null permet d'éviter une erreur si la variable n'existe pas
+    $id_utilisateur = $_SESSION['user_id'];
+     // Récupère l'id de l'utilisateur connecté depuis la session
     if (!$id_offre) {
         die("Offre non spécifiée."); //si aucune offre n'est envoyée => erreur
     }
-    $LM = htmlspecialchars($_POST['LM']);
     // Upload CV
     $CV = $_FILES['CV'];
     $CVName = time() . "_" . preg_replace('/[^a-zA-Z0-9._-]/', '_', basename($CV["name"]));
@@ -37,13 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (move_uploaded_file($CV["tmp_name"], $targetFile)) {
 
-        $sql = "INSERT INTO CANDIDATURES (LM_candidature, CV_candidature, id_offre)
-                VALUES (?, ?, ?)";
+        $sql = "INSERT INTO CANDIDATURES (LM_candidature, CV_candidature, id_offre, id_utilisateur)
+                VALUES (?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$LM, $targetFile, $id_offre]);
-        $id = $pdo->lastInsertId();
-        header("Location: merci-candidature.php?id=" . $id);
-        exit();
+        $stmt->execute([$LM, $targetFile, $id_offre, $id_utilisateur]);
+
+         // Récupère l'id de la candidature créée
+         $id = $pdo->lastInsertId();
+         // Redirige vers une page de confirmation avec l'id de la candidature
+         header("Location: index.php?page=merci-candidature&id=" . $id);
+         exit();
 
     } else {
         echo "Erreur upload : ";
