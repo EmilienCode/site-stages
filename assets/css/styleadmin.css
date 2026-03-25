@@ -17,10 +17,10 @@
 }
 .btn-add { 
     background-color: var(--primary-color); 
-    color: var(--background); 
+    color: var(--color-dark-gray); 
     padding: 10px 15px; 
     text-decoration: none; 
-    border-radius: 5px; 
+    border-radius: calc(var(--radius) + 4px); 
     font-weight: bold; 
 }
 .admin-table { 
