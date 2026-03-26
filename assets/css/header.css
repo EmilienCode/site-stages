@@ -18,6 +18,7 @@
     left: 0;
     width: 100%;
     z-index: 50;
+    box-sizing: border-box;
     padding-block: calc(var(--spacing) * 4); 
     padding-inline: calc(var(--spacing) * 6);
   background: var(--glass-background);
@@ -241,11 +242,19 @@
         flex-direction: column;
         gap: 1.5rem;
     }
+    
     .BtnNavOutside {
         position: static; 
         transform: none;  
         gap: 1.5rem; 
         flex-wrap: wrap; 
         justify-content: center;
+        width: 100%; /* Empêche les débordements (remplace le max-content) */
+    }
+
+    .logoDroitNav {
+        flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si besoin */
+        justify-content: center;
+        width: 100%;
     }
 }

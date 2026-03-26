@@ -3,7 +3,6 @@
     font-weight: var(--font-weight-titre);
     line-height: 1.25;
     font-size: var(--size-text-titre);
-    margin-bottom: calc(var(--spacing) * 6);
     font-family: var(--font-sans);
     cursor: default;
 }
@@ -216,6 +215,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- RESPONSIVE MOBILE (Écrans < 768px) --- */
 @media (max-width: 768px) {
+
+    .planete{
+        display: none !important;
+    }
 
     .navInside {
         flex-direction: column;

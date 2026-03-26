@@ -1,105 +1,139 @@
 import * as THREE from "three";
 import { OrbitControls } from 'jsm/controls/OrbitControls.js';
-
 import { getFresnelMat } from "./assets/js/getFresnelMat.js";
 
-// 1. Cibler le conteneur en premier pour obtenir ses dimensions
 const container = document.querySelector('.planete');
-let w = container.clientWidth;
-let h = container.clientHeight || 500; // Hauteur par défaut si 0
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(23.5, w / h, 0.1, 1000);
-camera.position.z = 5;
+// 2. On déclare ces variables en dehors pour que la fonction updateEarthTheme puisse y accéder
+let sunLight;
+let cloudsMat;
+let ambientLight;
 
-// alpha: true permet au fond du canvas d'être transparent pour mieux s'intégrer
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setSize(w, h);
-container.appendChild(renderer.domElement);
+// ON NE LANCE LA 3D QUE SI LE CONTENEUR EXISTE (Page d'accueil)
+if (container) {
+    let w = container.clientWidth;
+    let h = container.clientHeight || 500;
 
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(25, w / h, 0.1, 1000);
+    camera.position.z = 5;
 
-const earthGroup = new THREE.Group();
-earthGroup.rotation.z = -23.4 * Math.PI / 180;
-scene.add(earthGroup);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(w, h);
+    container.appendChild(renderer.domElement);
 
-// 2. Configuration d'OrbitControls pour une meilleure intégration
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true; // Rend la rotation manuelle fluide et agréable
-controls.dampingFactor = 0.05;
-controls.enablePan = false; // Empêche de décaler la planète sur le côté
-controls.enableZoom = false; // Désactive le zoom molette pour ne pas gêner le scroll de la page
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
-const detail = 12;
-const loader = new THREE.TextureLoader();
-const geometry = new THREE.SphereGeometry(1, 64, 64);
-const material = new THREE.MeshPhongMaterial({
-  map: loader.load("./texture/8081_earthmap2k.jpg"),
-  specularMap: loader.load("./texture/8081_earthspec2k.jpg"),
-  bumpMap: loader.load("./texture/8081_earthbump1k.jpg"),
-  bumpScale: 0.04,
-});
+    const earthGroup = new THREE.Group();
+    earthGroup.rotation.z = -23.4 * Math.PI / 180;
+    scene.add(earthGroup);
 
-const earthMesh = new THREE.Mesh(geometry, material);
-earthGroup.add(earthMesh);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enablePan = false;
+    controls.enableZoom = false;
 
-const lightsMat = new THREE.MeshBasicMaterial({
-  map: loader.load("./texture/8081_earthlights2k.jpg"),
-  blending: THREE.AdditiveBlending,
-});
-const lightsMesh = new THREE.Mesh(geometry, lightsMat);
-earthGroup.add(lightsMesh);
+    const loader = new THREE.TextureLoader();
+    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    
+    const material = new THREE.MeshPhongMaterial({
+        map: loader.load("./texture/8081_earthmap2k.jpg"),
+        specularMap: loader.load("./texture/8081_earthspec2k.jpg"),
+        bumpMap: loader.load("./texture/8081_earthbump1k.jpg"),
+        bumpScale: 0.04,
+    });
 
-const cloudsMat = new THREE.MeshStandardMaterial({
-  map: loader.load("./texture/earthcloudmap.jpg"),
-  transparent: true,
-  opacity: 0.8,
-  blending: THREE.AdditiveBlending,
-  alphaMap: loader.load('./texture/earthcloudmaptrans.jpg'),
-});
-const cloudsMesh = new THREE.Mesh(geometry, cloudsMat);
-cloudsMesh.scale.setScalar(1.003);
-earthGroup.add(cloudsMesh);
+    const earthMesh = new THREE.Mesh(geometry, material);
+    earthGroup.add(earthMesh);
 
-const fresnelMat = getFresnelMat();
-const glowMesh = new THREE.Mesh(geometry, fresnelMat);
-glowMesh.scale.setScalar(1.01);
-earthGroup.add(glowMesh);
+    const lightsMat = new THREE.MeshBasicMaterial({
+        map: loader.load("./texture/8081_earthlights2k.jpg"),
+        blending: THREE.AdditiveBlending,
+    });
+    const lightsMesh = new THREE.Mesh(geometry, lightsMat);
+    earthGroup.add(lightsMesh);
 
-const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
-sunLight.position.set(-2, 0.5, 1.5);
-scene.add(sunLight);
+    const cloudsMat = new THREE.MeshStandardMaterial({
+        map: loader.load("./texture/earthcloudmap.jpg"),
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        alphaMap: loader.load('./texture/earthcloudmaptrans.jpg'),
+    });
+    const cloudsMesh = new THREE.Mesh(geometry, cloudsMat);
+    cloudsMesh.scale.setScalar(1.003);
+    earthGroup.add(cloudsMesh);
 
-function animate() {
-  requestAnimationFrame(animate);
+    const fresnelMat = getFresnelMat();
+    const glowMesh = new THREE.Mesh(geometry, fresnelMat);
+    glowMesh.scale.setScalar(1.01);
+    earthGroup.add(glowMesh);
 
-  // 3. Les lignes de rotation automatique ont été supprimées ici 
-  // pour que la planète soit fixe de base.
+    const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    sunLight.position.set(-2, 0.5, 1.5);
+    scene.add(sunLight);
+    ambientLight = new THREE.AmbientLight(0xffffff, 0.2); 
+    scene.add(ambientLight);
 
-  controls.update(); // Nécessaire pour le "enableDamping"
-  renderer.render(scene, camera);
-}
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    }
 
-animate();
+    animate();
 
-function handleWindowResize () {
-  // 4. Mettre à jour avec les dimensions du conteneur parent au lieu du window
-  w = container.clientWidth;
-  h = container.clientHeight || 500;
-  
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  renderer.setSize(w, h);
-}
-window.addEventListener('resize', handleWindowResize, false);
+    function handleWindowResize() {
+        w = container.clientWidth;
+        h = container.clientHeight || 500;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', handleWindowResize, false);
 
-function updateEarthTheme(isDark) {
-    // 1. Ajuster l'intensité du soleil
-    // Mode sombre : lumière plus douce/bleutée, Mode clair : pleine puissance
-    sunLight.intensity = isDark ? 0.7 : 2.5;
-    sunLight.color.setHex(isDark ? 0xccccff : 0xffffff);
+    // --- GESTION DU THÈME SOMBRE DE LA PLANÈTE ---
+    
+    function updateEarthTheme(isDark) {
+      // SÉCURITÉ : On vérifie que nos lumières existent
+      if (!sunLight || !cloudsMat || !ambientLight) return;
 
-    // 2. Optionnel : Ajuster l'opacité des nuages pour qu'ils soient moins "blancs" la nuit
-    cloudsMat.opacity = isDark ? 0.4 : 0.8;
+      if (isDark) {
+          // --- MODE SOMBRE ---
+          // Soleil : Doux et bleuté (façon clair de lune)
+          sunLight.intensity = 0.8; 
+          sunLight.color.setHex(0x99aaff); 
+          
+          // Ambiance : Presque éteinte pour laisser briller les "lumières des villes" (lightsMesh)
+          ambientLight.intensity = 0.1;    
+          ambientLight.color.setHex(0x222244); 
+          
+          // Nuages : Plus transparents la nuit
+          cloudsMat.opacity = 0.3;
+      } else {
+          // --- MODE CLAIR ---
+          // Soleil : Baissé à 1.5 (au lieu de 2.5) pour éviter l'effet flashbang
+          sunLight.intensity = 0.8;        
+          sunLight.color.setHex(0x8a9ec2); 
+          
+          // Ambiance : Montée à 0.6 pour bien éclairer la face cachée de la Terre
+          ambientLight.intensity = 0.8;    
+          // Couleur : Un bleu/gris clair très doux pour simuler la lumière de l'espace/atmosphère
+          ambientLight.color.setHex(0xffffff); 
+          
+          // Nuages : Bien visibles
+          cloudsMat.opacity = 0.7;
+      }
+  }
+
+    // 1. On l'applique au chargement initial
+    const themeSauvegarde = localStorage.getItem('theme');
+    updateEarthTheme(themeSauvegarde === 'dark');
+
+    // 2. On écoute le changement de thème déclenché par le bouton
+    window.addEventListener('themeChanged', function(e) {
+        updateEarthTheme(e.detail.isDark);
+    });
 }
