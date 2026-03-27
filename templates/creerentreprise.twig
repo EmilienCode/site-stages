@@ -1,0 +1,126 @@
+{% extends "base.twig" %}
+
+{% block title %}Créer une entreprise{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="assets/css/stylelogin.css"/>
+    <main class="connexion-container">
+    <section class="connexion-card">
+        <header class="connexion-header">
+            <h1>Créer une entreprise</h1>
+        </header>
+
+        <form class="connexion-form" method="POST" action="index.php?action=inscription_entreprise" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="COMPTE">
+            
+            <h3>Informations Principales</h3>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="nom_entreprise">Nom de l'entreprise *</label>
+                    <input type="text" name="nom_entreprise" id="nom_entreprise" placeholder="Decathlon" maxlength="50" required>
+                </div>
+
+                <div class="form-line">
+                    <label for="siret_entreprise">Siret *</label>
+                    <input type="text" name="siret_entreprise" id="siret_entreprise" placeholder="30613890005523" maxlength="14" required>
+                </div>
+            </div>
+
+            <div class="form-line">
+                <label for="description_entreprise">Description de l'entreprise</label>
+                <textarea name="description_entreprise" id="description_entreprise" placeholder="Décrivez votre activité..." maxlength="500" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="secteur_entreprise">Secteur d'activité</label>
+                    <input type="text" name="secteur_entreprise" id="secteur_entreprise" placeholder="Ex: Commerce de détail" maxlength="50">
+                </div>
+
+                <div class="form-line">
+                    <label for="taille_entreprise">Taille de l'entreprise</label>
+                    <input type="text" name="taille_entreprise" id="taille_entreprise" placeholder="Ex: 50-249 employés" maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-line">
+                <label for="logo_entreprise">Logo de l'entreprise</label>
+                <input type="file" name="logo_entreprise" id="logo_entreprise" accept="image/png, image/jpeg, image/webp">
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+
+            <h3>Contact & En Ligne</h3>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="email_entreprise">Email de contact</label>
+                    <input type="email" name="email_entreprise" id="email_entreprise" placeholder="contact@decathlon.fr" maxlength="100" />
+                </div>
+
+                <div class="form-line">
+                    <label for="telephone_entreprise">Téléphone</label>
+                    <input type="tel" name="telephone_entreprise" id="telephone_entreprise" placeholder="0606060606" maxlength="10" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="site_web_entreprise">Site Web</label>
+                    <input type="url" name="site_web_entreprise" id="site_web_entreprise" placeholder="https://www.decathlon.fr" maxlength="255">
+                </div>
+
+                <div class="form-line">
+                    <label for="linkedin_entreprise">Lien LinkedIn</label>
+                    <input type="url" name="linkedin_entreprise" id="linkedin_entreprise" placeholder="https://linkedin.com/company/..." maxlength="50">
+                </div>
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+
+            <h3>Coordonnées Postales</h3>
+
+            <div class="form-line">
+                <label for="adresse_entreprise">Adresse</label>
+                <input type="text" name="adresse_entreprise" id="adresse_entreprise" placeholder="4 Boulevard de Mons" maxlength="50">
+            </div>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="code_postal_entreprise">Code Postal</label>
+                    <input type="text" name="code_postal_entreprise" id="code_postal_entreprise" placeholder="59650" maxlength="5" pattern="[0-9]{5}">
+                </div>
+
+                <div class="form-line">
+                    <label for="ville_entreprise">Ville</label>
+                    <input type="text" name="ville_entreprise" id="ville_entreprise" placeholder="Villeneuve-d'Ascq" maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-line">
+                <label for="pays_entreprise">Pays</label>
+                <input type="text" name="pays_entreprise" id="pays_entreprise" placeholder="France" maxlength="50">
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+            
+            <div class="form-line" style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" name="est_active_entreprise" id="est_active_entreprise" value="1" checked style="width: auto;">
+                <label for="est_active_entreprise" style="margin: 0;">Activer l'entreprise immédiatement</label>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full" style="margin-top: 20px;">
+                Enregistrer l'entreprise
+            </button>
+
+        </form>
+
+        <div class="connexion-links" style="margin-top: 20px;">
+            <a href="index.php?page=afficher_entreprise">← Retour</a>
+        </div>
+    </section>
+    </main>
+
+{% endblock %}

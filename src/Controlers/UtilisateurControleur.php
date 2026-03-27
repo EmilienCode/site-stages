@@ -118,4 +118,55 @@ class UtilisateurControleur {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
+
+    public function registerUtilisateur() {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST['type']) || $_POST['type'] !== "COMPTE") {
+            header("Location: index.php?page=creercompte");
+            exit;
+        }
+
+        // 1. Nettoyage et Validation
+        $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
+        $date_input = trim($_POST['date_naissance']);
+        $date_obj = DateTime::createFromFormat('d/m/Y', $date_input);
+
+        if (!$email || !$date_obj || $date_obj->format('d/m/Y') !== $date_input) {
+            header("Location: index.php?page=creercompte&error=invalid_data");
+            exit;
+        }
+
+        // 2. Préparation des données pour le modèle
+        $userData = [
+            'nom'            => trim($_POST["nom"]),
+            'prenom'         => trim($_POST["prenom"]),
+            'email'          => $email,
+            'password'       => password_hash($_POST["password"], PASSWORD_DEFAULT),
+            'ville'          => trim($_POST["ville"]),
+            'telephone'      => trim($_POST["telephone"]),
+            'sexe'           => $_POST["sexe"],
+            'date_naissance' => $date_obj->format('Y-m-d') // Format SQL
+        ];
+
+        try {
+            // 3. Appel au modèle
+            $id_utilisateur = $this->model->inscrireEtudiant($userData);
+
+            // 4. Session et Succès
+            $_SESSION['user_id'] = $id_utilisateur;
+            $_SESSION['user_nom'] = $userData['nom'];
+            $_SESSION['user_prenom'] = $userData['prenom'];
+            $_SESSION['id_role'] = 1;
+
+            header("Location: index.php?success=welcome");
+            exit;
+
+        } catch (Exception $e) {
+            if ($e->getCode() == 23000) {
+                header("Location: index.php?page=creercompte&error=email_taken");
+            } else {
+                die("Erreur critique : " . $e->getMessage());
+            }
+            exit;
+        }
+    }
 }

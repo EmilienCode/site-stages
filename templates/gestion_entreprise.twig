@@ -7,11 +7,11 @@ Gestion Entreprises
     <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/styleadmin.css"/>
 
-    {% if session.user_id is defined and session.user_id is not null and session.id_role == 2 or session.id_role == 3 %}
+    {% if session.user_id is defined and session.user_id is not null and (session.id_role == 2 or session.id_role == 3) %}
     <main class="admin-container">
         <div class="admin-header">
             <h1>Gestion des Entreprises</h1>
-            <a href="creercompte.php" class="btn-add">+ Ajouter une entreprise</a>
+            <a href="index.php?page=creerentreprise" class="btn-add">+ Ajouter une entreprise</a>
         </div>
 
         <table class="admin-table">
@@ -22,19 +22,20 @@ Gestion Entreprises
                     <th>Email</th>
                     <th>Secteur</th>
                     <th>Ville</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for entreprise in entreprises %}
+                {% for ent in entreprise %}
                     <tr>
-                        <td>{{ entreprise.siret_entreprise }}</td>
-                        <td>{{ entreprise.nom_entreprise }}</td>
-                        <td>{{ entreprise.email_entreprise }}</td>
-                        <td>{{ entreprise.secteur_entreprise }}</td>
-                        <td>{{ entreprise.ville_entreprise }}</td>
+                        <td>{{ ent.siret_entreprise }}</td>
+                        <td>{{ ent.nom_entreprise }}</td>
+                        <td>{{ ent.email_entreprise }}</td>
+                        <td>{{ ent.secteur_entreprise }}</td>
+                        <td>{{ ent.ville_entreprise }}</td>
                         <td>
-                            <a href="index.php?page=modifier_entreprise&id={{ entreprise.id_utilisateur }}" class="btn-action btn-edit">Modifier</a>
-                            <a href="index.php?page=supprimer_entreprise&id={{ entreprise.id_utilisateur }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                            <a href="index.php?page=modifier_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-edit">Modifier</a>
+                            <a href="index.php?page=supprimer_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
                         </td>
                     </tr>
                 {% else %}

@@ -22,6 +22,24 @@ $twig->addGlobal('session', $_SESSION);
 $userRole = $_SESSION['id_role'] ?? null;
 
 $page = $_GET['page'] ?? 'accueil';
+$action = $_GET['action'] ?? null;
+
+if ($action) {
+    switch ($action) {
+        case 'inscription_entreprise':
+            // Attention : passe bien les objets au constructeur comme tes autres cases
+            $entrepriseModel = new EntrepriseModel($pdo);
+            $controleur = new EntrepriseControleur($entrepriseModel, $twig);
+            $controleur->registerEntreprise();
+            exit; // Très important : on arrête le script après une action qui redirige
+
+        case 'inscription_user':
+            $userModel = new UtilisateurModel($pdo);
+            $controleur = new UtilisateurControleur($userModel, $twig);
+            $controleur->registerUtilisateur();
+            exit;
+    }
+}
 
 switch ($page) {
     case 'accueil':
@@ -69,7 +87,20 @@ switch ($page) {
         if ($page === 'modifier_utilisateur') $controleur->modifierUtilisateur();
         if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
         break;
+    
+    case 'afficher_entreprise':
+    case 'modifier_entreprise':
+    case 'supprimer_entreprise':
 
+        $userModel = new EntrepriseModel($pdo);
+        $controleur = new EntrepriseControleur($userModel, $twig);
+
+        // On appelle la méthode correspondante à la page
+        if ($page === 'afficher_entreprise') $controleur->afficherEntreprises();
+        if ($page === 'modifier_entreprise') $controleur->modifierEntreprise();
+        if ($page === 'supprimer_entreprise') $controleur->supprimerEntreprises();
+        break;
+    
     case 'afficher_offre':
     case 'modifier_offre':
     case 'supprimer_offre':
@@ -89,6 +120,10 @@ switch ($page) {
     
     case 'creercompte':
         echo $twig->render('creercompte.twig');
+        break;
+    
+    case 'creerentreprise':
+        echo $twig->render('creerentreprise.twig');
         break;
 
     case 'contact':
@@ -114,5 +149,10 @@ switch ($page) {
 
     case 'wishlist':
         echo $twig->render('wishlist.twig');
+        break;
+
+    case 'inscription_user':
+        $controller = new UtilisateurControleur($pdo);
+        $controller->registerUtilisateur();
         break;
 }

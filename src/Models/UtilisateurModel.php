@@ -134,5 +134,46 @@ class UtilisateurModel {
             return false;
         }
     }
+
+    public function inscrireEtudiant($data) {
+        try {
+            $this->pdo->beginTransaction();
+
+            // 1. Insertion UTILISATEUR
+            $sql1 = "INSERT INTO UTILISATEUR (nom, prenom, email, mot_de_passe, id_role) 
+                     VALUES (?, ?, ?, ?, 1)";
+            $stmt1 = $this->pdo->prepare($sql1);
+            $stmt1->execute([
+                $data['nom'], 
+                $data['prenom'], 
+                $data['email'], 
+                $data['password']
+            ]);
+
+            $id_utilisateur = $this->pdo->lastInsertId();
+
+            // 2. Insertion COORDONNEES
+            $sql2 = "INSERT INTO COORDONNEES 
+                    (ville_coordonnees, telephone_coordonnees, sexe_coordonnees, date_naissance_coordonnees, id_utilisateur)
+                    VALUES (?, ?, ?, ?, ?)";
+            $stmt2 = $this->pdo->prepare($sql2);
+            $stmt2->execute([
+                $data['ville'], 
+                $data['telephone'], 
+                $data['sexe'], 
+                $data['date_naissance'], 
+                $id_utilisateur
+            ]);
+
+            $this->pdo->commit();
+            return $id_utilisateur;
+
+        } catch (Exception $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            throw $e; // On renvoie l'erreur au contrôleur
+        }
+    }
 }
 ?>
