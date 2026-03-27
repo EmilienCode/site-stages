@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>Titre</th>
+                        <th>Entreprise</th>
                         <th>Domaine</th>
                         <th>Description</th>
                         <th>Rémunération</th>
@@ -30,6 +31,7 @@
                     {% for offre in offres %}
                         <tr>
                             <td>{{ offre.titre_offre }}</td>
+                            <td>{{ offre.nom_entreprise }}</td>
                             <td>{{ offre.domaine_requis_offre }}</td>
                             <td>{{ offre.description_offre }}</td>
                             <td>{{ offre.remuneration_offre }}</td>
