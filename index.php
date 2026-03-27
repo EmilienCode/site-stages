@@ -19,8 +19,6 @@ $twig = new \Twig\Environment($loader);
 
 // Donne accès à la variable "session" dans TOUS tes fichiers .twig
 $twig->addGlobal('session', $_SESSION); 
-$success = $_GET['success'] ?? null;
-$twig->addGlobal('success', $success);
 $userRole = $_SESSION['id_role'] ?? null;
 
 $page = $_GET['page'] ?? 'accueil';
