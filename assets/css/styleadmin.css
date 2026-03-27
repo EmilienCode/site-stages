@@ -25,6 +25,7 @@
 }
 .admin-table { 
     width: 100%; 
+    margin-top: 20px;
     border-collapse: collapse; 
 }
 .admin-table th, .admin-table td { 
@@ -49,4 +50,58 @@
 }
 .btn-delete { 
     background-color: #dc3545; 
+}
+.BoxRechercher {
+   
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 15px 20px -5px #0000001a, 0 8px 10px -6px #0000001a;
+    padding: calc(var(--spacing) * 2);
+    background-color: var(--background);
+    border-color: var(--color-gray);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 1rem;
+    gap: calc(var(--spacing) * 4);
+    transition: all 0.3s cubic-bezier(.4, 0, .2, 1);
+    
+    position: static; 
+    transform: none;
+    margin: 0;
+}
+
+.input1{
+    display: flex;
+    border-bottom-style: solid;
+    border-bottom-width: 0;
+    border-right-style: solid;
+    border-right-width: 1px;
+    padding-block: calc(var(--spacing) * 3);
+    padding-inline: calc(var(--spacing) * 4);
+    border-color: var(--color-gray);
+    gap: calc(var(--spacing) * 3);
+    align-items: center;
+    flex: 1;
+    font-family: var(--font-sans);
+}
+.inputTXT{
+    color: var(--color-light-gray); 
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.RechercherBTN{
+    transition-property: all;
+    transition: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: 0.15s;
+    color: var(--background);
+    white-space: nowrap;
+    font-weight: var(--font-weight-nom);
+    padding-block: calc(var(--spacing) * 3);
+    padding-inline: calc(var(--spacing) * 8);
+    background-color: var(--primary-color);
+    border-radius: calc(var(--radius)  + 4px);
+    border-color: #0000;
+    cursor: pointer;
 }

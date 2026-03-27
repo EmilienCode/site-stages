@@ -23,24 +23,28 @@ class UtilisateurControleur {
         }
     }
 
-    public function afficherUtilisateurs() {
-        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
-        if (!isset($_SESSION['id_role'])) {
-            header('Location: index.php?page=connexion'); // Ou ta page de login
-            exit();
-        }
-        $utilisateurs = [];
-        // On adapte la requête selon le rôle en session
-        if ($_SESSION['id_role'] == 3) {
-            $utilisateurs = $this->userModel->getAll(); // Admin voit tout
-        } elseif ($_SESSION['id_role'] == 2) {
-            $utilisateurs = $this->userModel->getUserByRole(); // Pilote voit restreint
-        }
-
-        echo $this->twig->render('gestion_utilisateur.twig', [
-            'users' => $utilisateurs
-        ]);
+   public function afficherUtilisateurs() {
+    if (!isset($_SESSION['id_role'])) {
+        header('Location: index.php?page=connexion');
+        exit();
     }
+
+    $search = isset($_GET['nom']) ? trim($_GET['nom']) : '';
+    $utilisateurs = [];
+
+    if ($_SESSION['id_role'] == 3) {
+        // L'Admin (3) voit les étudiants (1) et les pilotes (2)
+        $utilisateurs = $this->userModel->getUsersByRoles([1, 2], $search); 
+    } elseif ($_SESSION['id_role'] == 2) {
+        // Le Pilote (2) voit uniquement les étudiants (1)
+        $utilisateurs = $this->userModel->getUsersByRoles([1], $search); 
+    }
+
+    echo $this->twig->render('gestion_utilisateur.twig', [
+        'users' => $utilisateurs,
+        'nom_search' => $search 
+    ]);
+}
 
     public function supprimerUtilisateur() {
         
@@ -79,6 +83,19 @@ class UtilisateurControleur {
         }
 
         $userToEdit = $this->userModel->getUserById($id);
+        if (!$userToEdit) {
+        header('Location: index.php?page=afficher_utilisateur');
+        exit();
+    }
+
+    // Un pilote (2) essaie de modifier un compte qui n'est pas étudiant (1)
+    if ($_SESSION['id_role'] == 2 && $userToEdit['id_role'] != 1) {
+        die("Accès refusé : Vous n'avez pas l'autorisation de modifier ce compte.");
+    }
+    // Un admin (3) essaie de modifier autre chose que 1 ou 2 (sauf s'il a le droit de se modifier lui-même)
+    if ($_SESSION['id_role'] == 3 && !in_array($userToEdit['id_role'], [1, 2, 3])) {
+        die("Accès refusé.");
+    }
         echo $this->twig->render('modifier_utilisateur.twig', [
             'user' => $userToEdit,
             'roles' => $this->userModel->getRoles()

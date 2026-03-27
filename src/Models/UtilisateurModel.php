@@ -10,15 +10,28 @@ class UtilisateurModel {
         $this->pdo = $pdo;
     }
 
-    public function getAll() {
-        $query = "
-            SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
-            FROM UTILISATEUR u 
-            LEFT JOIN ROLES r ON u.id_role = r.id_role
-            ORDER BY u.id_utilisateur DESC
-        ";
-        return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    public function getAll($search = '') {
+    $query = "
+        SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
+        FROM UTILISATEUR u 
+        LEFT JOIN ROLES r ON u.id_role = r.id_role
+    ";
+    
+    $params = [];
+    
+    // Si on a tapé quelque chose dans la barre de recherche
+    if (!empty($search)) {
+        // On cherche dans le nom OU le prénom
+        $query .= " WHERE u.nom LIKE :search OR u.prenom LIKE :search";
+        $params['search'] = '%' . $search . '%'; // Les % permettent de trouver si le texte est "contenu" dans le nom
     }
+    
+    $query .= " ORDER BY u.id_utilisateur DESC";
+    
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
     
     public function getAllOffreWishlist($id_utilisateur) {
         // Ajout de toutes les colonnes requises par Twig
@@ -48,16 +61,28 @@ class UtilisateurModel {
         ]);
     }
 
-    public function getUserByRole() {
-        $query = "
-            SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
-            FROM UTILISATEUR u 
-            LEFT JOIN ROLES r ON u.id_role = r.id_role
-            WHERE u.id_role = 1
-            ORDER BY u.id_utilisateur DESC
-        ";
-        return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    public function getUserByRole($search = '') {
+    $query = "
+        SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
+        FROM UTILISATEUR u 
+        LEFT JOIN ROLES r ON u.id_role = r.id_role
+        WHERE u.id_role = 1
+    ";
+    
+    $params = [];
+    
+    if (!empty($search)) {
+        // Attention ici, on utilise AND car on a déjà un WHERE avant
+        $query .= " AND (u.nom LIKE :search OR u.prenom LIKE :search)";
+        $params['search'] = '%' . $search . '%';
     }
+    
+    $query .= " ORDER BY u.id_utilisateur DESC";
+    
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
     public function deleteUser($id) {
         $query = "
@@ -85,7 +110,29 @@ class UtilisateurModel {
     public function getRoles() {
         return $this->pdo->query("SELECT id_role, nom_role FROM ROLES")->fetchAll(PDO::FETCH_ASSOC);
     }
-
+public function getUsersByRoles(array $roles, $search = '') {
+    // On sécurise la liste des rôles pour SQL (ex: "1,2" ou "1")
+    $rolesList = implode(',', array_map('intval', $roles)); 
+    
+    $query = "
+        SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.id_role, r.nom_role 
+        FROM UTILISATEUR u 
+        LEFT JOIN ROLES r ON u.id_role = r.id_role
+        WHERE u.id_role IN ($rolesList)
+    ";
+    
+    $params = [];
+    if (!empty($search)) {
+        $query .= " AND (u.nom LIKE :search OR u.prenom LIKE :search)";
+        $params['search'] = '%' . $search . '%';
+    }
+    
+    $query .= " ORDER BY u.id_utilisateur DESC";
+    
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
     // 3. Mettre à jour l'utilisateur et ses coordonnées
     public function updateUser($id, $data) {
         try {
@@ -135,4 +182,7 @@ class UtilisateurModel {
         }
     }
 }
+
+
+
 ?>
