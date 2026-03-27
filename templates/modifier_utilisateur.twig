@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label for="id_role">Rôle :</label>
                     <select id="id_role" name="id_role" required>
-                        {% for role in roles %}
+                        {% for role in roles|slice(0, 2) %}
                             <option value="{{ role.id_role }}" {% if role.id_role == user.id_role %}selected{% endif %}>
                                 {{ role.nom_role }}
                             </option>
