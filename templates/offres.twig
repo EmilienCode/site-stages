@@ -67,7 +67,7 @@ Offres
     {% for o in offres %}
     <article class="entreprise-card">
         
-        {% if session.user_id is defined and session.id_role in [1, 2, 3] %}
+        {% if session.user_id is defined and session.id_role == 1 %}
             <a href="index.php?page=ajouter_wishlist&id={{ o.id_offre }}" class="wishlist-heart" title="Ajouter/Retirer des favoris">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" 
                      {# Si l'ID de l'offre est dans le tableau 'favoris', on remplit le coeur en rouge #}
