@@ -63,7 +63,27 @@ switch ($page) {
         $controleur = new OffresControleur($offresModel, $twig);
         $controleur->afficherOffre();
         break;
+    
+    case 'afficher_utilisateur':
+    case 'modifier_utilisateur':
+    case 'supprimer_utilisateur':
+        $userModel = new UtilisateurModel($pdo);
+        $controleur = new UtilisateurControleur($userModel, $twig);
+        if ($page === 'afficher_utilisateur') $controleur->afficherUtilisateurs();
+        if ($page === 'modifier_utilisateur') $controleur->modifierUtilisateur();
+        if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
+        break;
 
+    case 'afficher_offre':
+    case 'modifier_offre':
+    case 'supprimer_offre':
+        $offresModel = new OffresModel($pdo);
+        $controleur = new OffresControleur($offresModel, $twig);
+        if ($page === 'afficher_offre') $controleur->afficherOffre();
+        if ($page === 'modifier_offre') $controleur->modifierOffre();
+        if ($page === 'supprimer_offre') $controleur->supprimerOffre();
+        break;
+    
     case 'connexion':
         echo $twig->render('connexion.twig');
         break;
@@ -121,7 +141,7 @@ switch ($page) {
                     $ins = $pdo->prepare("INSERT INTO MET_EN_FAVORI (id_utilisateur, id_offre) VALUES (?, ?)");
                     $ins->execute([$id_utilisateur, $id_offre]);
                 } else {
-                    // OPTIONNEL : Si on clique sur un coeur déjà plein, on le supprime (Toggle)
+                    // Si on clique sur un coeur déjà plein, on le supprime (Toggle)
                     $del = $pdo->prepare("DELETE FROM MET_EN_FAVORI WHERE id_utilisateur = ? AND id_offre = ?");
                     $del->execute([$id_utilisateur, $id_offre]);
                 }
@@ -149,22 +169,4 @@ switch ($page) {
         exit();
         break;
 
-    default:
-        // Gestion des autres pages (Utilisateurs, Offres Admin, etc.)
-        if (in_array($page, ['afficher_utilisateur', 'modifier_utilisateur', 'supprimer_utilisateur'])) {
-            $userModel = new UtilisateurModel($pdo);
-            $controleur = new UtilisateurControleur($userModel, $twig);
-            if ($page === 'afficher_utilisateur') $controleur->afficherUtilisateurs();
-            if ($page === 'modifier_utilisateur') $controleur->modifierUtilisateur();
-            if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
-        } elseif (in_array($page, ['afficher_offre', 'modifier_offre', 'supprimer_offre'])) {
-            $offresModel = new OffresModel($pdo);
-            $controleur = new OffresControleur($offresModel, $twig);
-            if ($page === 'afficher_offre') $controleur->afficherOffre();
-            if ($page === 'modifier_offre') $controleur->modifierOffre();
-            if ($page === 'supprimer_offre') $controleur->supprimerOffre();
-        } else {
-            echo "Page non trouvée";
-        }
-        break;
 }

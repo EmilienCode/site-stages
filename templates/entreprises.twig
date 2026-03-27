@@ -14,62 +14,48 @@
 <div class="outils">
     <section class="Section">
         <div class="InsideSection">
-                <form class="GroupeRecherche" method="GET" action="index.php">
-                
-                    <input type="hidden" name="page" value="offres">
+            <form class="GroupeRecherche" method="GET" action="index.php">
+                <input type="hidden" name="page" value="entreprises">
 
-                    <div class="BoxRechercher">
-                        <div class="input1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
-                                <path d="m21 21-4.34-4.34"></path>
-                                <circle cx="11" cy="11" r="8"></circle>
-                            </svg>
-                            <input type="text" name="metier" placeholder="Métier, compétence..." class="inputTXT" value="{{ GET.metier ?? '' }}">
-                        </div>
-                        
-                        <div class="input2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
-                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <input type="text" name="ville" placeholder="Ville ou région" class="inputTXT" value="{{ GET.ville ?? '' }}">
-                        </div>
-                        
-                        <div>
-                            <button type="submit" class="RechercherBTN">Rechercher</button>
-                        </div>
+                <div class="BoxRechercher">
+                    <div class="input1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                            <path d="m21 21-4.34-4.34"></path>
+                            <circle cx="11" cy="11" r="8"></circle>
+                        </svg>
+                        <input type="text" name="nom" placeholder="Rechercher par nom d'entreprise..." class="inputTXT" value="{{ nom_search }}">
                     </div>
-
-                    <div class="divTrie">
-                        
-
-                        <select name="competence" class="btnTrie selectTrie" onchange="this.form.submit()">
-                            <option value="">Toutes les compétences</option>
-                            {% for comp in competences %}
-                                <option value="{{ comp.id_competence }}" {% if comp.id_competence == competence_selected %}selected{% endif %}>
-                                    {{ comp.nom_competence }}
-                                </option>
-                            {% endfor %}
-                        </select>
-
-                        <select name="tri" class="btnTrie selectTrie" onchange="this.form.submit()">
-                            <option value="recents" {% if tri == 'recents' %}selected{% endif %}>Trier par : Récents</option>
-                            <option value="anciens" {% if tri == 'anciens' %}selected{% endif %}>Trier par : Anciens</option>
-                            <option value="salaire_asc" {% if tri == 'salaire_asc' %}selected{% endif %}>Salaire : Croissant</option>
-                            <option value="salaire_desc" {% if tri == 'salaire_desc' %}selected{% endif %}>Salaire : Décroissant</option>
-                        </select>
+                    
+                    <div>
+                        <button type="submit" class="RechercherBTN">Rechercher</button>
                     </div>
-                </form>
+                </div>
+
+                <div class="divTrie">
+                    <select name="secteur" class="btnTrie selectTrie" onchange="this.form.submit()">
+                        <option value="">Tous les secteurs</option>
+                        {% for s in secteurs_list %}
+                            <option value="{{ s }}" {% if s == secteur_selected %}selected{% endif %}>{{ s }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="taille" class="btnTrie selectTrie" onchange="this.form.submit()">
+                        <option value="">Toutes les tailles</option>
+                        <option value="GE" {% if taille_selected == 'GE' %}selected{% endif %}>GE</option>
+                        <option value="PME" {% if taille_selected == 'PME' %}selected{% endif %}>PME</option>
+                        <option value="ETI" {% if taille_selected == 'ETI' %}selected{% endif %}>ETI</option>
+                       
+                    </select>
+                </div>
+            </form>
         </div>
     </section>
 </div>
 
 <div class="entreprises-container">
     {% for e in entreprises %}
-        {# On applique le filtre lower sur les clés si vraiment nécessaire, sinon on utilise e.NOM_ENTREPRISE #}
         <div class="entreprise-card">
             <div class="card-body-content">
-                
                 <div class="card-header-simple">
                     <h3 class="entreprise-nom">{{ e.nom_entreprise|default('Nom inconnu') }}</h3>
                     <p class="ville-label">📍 {{ e.ville_entreprise|default('N/A') }}</p>
@@ -98,22 +84,33 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     {% else %}
-        <p>Aucune entreprise trouvée.</p>
+<div class="no-results">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="no-results-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+    <p>Aucune entreprise ne correspond à vos critères de recherche.</p>
+    <a href="?page=entreprises" class="btn-reset">Réinitialiser les filtres</a>
+</div>
     {% endfor %}
 </div>
 
 <div class="pagination">
+    {# On stocke les paramètres pour les répercuter sur les liens suivant/précédent #}
+    {% set params = "&nom=" ~ nom_search ~ "&taille=" ~ taille_selected ~ "&secteur=" ~ secteur_selected %}
+    
     {% if currentPage > 1 %}
-        <a href="?page=offres&p={{ currentPage - 1 }}" class="pagination-btn">Précédent</a>
+        <a href="?page=entreprises&p={{ currentPage - 1 }}{{ params }}" class="pagination-btn">Précédent</a>
     {% endif %}
 
     {% if currentPage < totalPages %}
-        <a href="?page=offres&p={{ currentPage + 1 }}" class="pagination-btn">Suivant</a>
+        <a href="?page=entreprises&p={{ currentPage + 1 }}{{ params }}" class="pagination-btn">Suivant</a>
     {% endif %}
 </div>
+
 <script src="assets/js/scroll-animation.js"></script>
 {% endblock %}
