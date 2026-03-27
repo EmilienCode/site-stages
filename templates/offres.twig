@@ -16,52 +16,49 @@ Offres
 <div class="outils">
     <section class="Section">
         <div class="InsideSection">
-                <form class="GroupeRecherche" method="GET" action="index.php">
-                
-                    <input type="hidden" name="page" value="offres">
+            <form class="GroupeRecherche" method="GET" action="index.php">
+                <input type="hidden" name="page" value="offres">
 
-                    <div class="BoxRechercher">
-                        <div class="input1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
-                                <path d="m21 21-4.34-4.34"></path>
-                                <circle cx="11" cy="11" r="8"></circle>
-                            </svg>
-                            <input type="text" name="metier" placeholder="Métier, compétence..." class="inputTXT" value="{{ GET.metier ?? '' }}">
-                        </div>
-                        
-                        <div class="input2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
-                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <input type="text" name="ville" placeholder="Ville ou région" class="inputTXT" value="{{ GET.ville ?? '' }}">
-                        </div>
-                        
-                        <div>
-                            <button type="submit" class="RechercherBTN">Rechercher</button>
-                        </div>
+                <div class="BoxRechercher">
+                    <div class="input1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                            <path d="m21 21-4.34-4.34"></path>
+                            <circle cx="11" cy="11" r="8"></circle>
+                        </svg>
+                        <input type="text" name="metier" placeholder="Métier, compétence..." class="inputTXT" value="{{ GET.metier ?? '' }}">
                     </div>
-
-                    <div class="divTrie">
-                        
-
-                        <select name="competence" class="btnTrie selectTrie" onchange="this.form.submit()">
-                            <option value="">Toutes les compétences</option>
-                            {% for comp in competences %}
-                                <option value="{{ comp.id_competence }}" {% if comp.id_competence == competence_selected %}selected{% endif %}>
-                                    {{ comp.nom_competence }}
-                                </option>
-                            {% endfor %}
-                        </select>
-
-                        <select name="tri" class="btnTrie selectTrie" onchange="this.form.submit()">
-                            <option value="recents" {% if tri == 'recents' %}selected{% endif %}>Trier par : Récents</option>
-                            <option value="anciens" {% if tri == 'anciens' %}selected{% endif %}>Trier par : Anciens</option>
-                            <option value="salaire_asc" {% if tri == 'salaire_asc' %}selected{% endif %}>Salaire : Croissant</option>
-                            <option value="salaire_desc" {% if tri == 'salaire_desc' %}selected{% endif %}>Salaire : Décroissant</option>
-                        </select>
+                    
+                    <div class="input2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                            <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <input type="text" name="ville" placeholder="Ville ou région" class="inputTXT" value="{{ GET.ville ?? '' }}">
                     </div>
-                </form>
+                    
+                    <div>
+                        <button type="submit" class="RechercherBTN">Rechercher</button>
+                    </div>
+                </div>
+
+                <div class="divTrie">
+                    <select name="competence" class="btnTrie selectTrie" onchange="this.form.submit()">
+                        <option value="">Toutes les compétences</option>
+                        {% for comp in competences %}
+                            <option value="{{ comp.id_competence }}" {% if comp.id_competence == competence_selected %}selected{% endif %}>
+                                {{ comp.nom_competence }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="tri" class="btnTrie selectTrie" onchange="this.form.submit()">
+                        <option value="recents" {% if tri == 'recents' %}selected{% endif %}>Trier par : Récents</option>
+                        <option value="anciens" {% if tri == 'anciens' %}selected{% endif %}>Trier par : Anciens</option>
+                        <option value="salaire_asc" {% if tri == 'salaire_asc' %}selected{% endif %}>Salaire : Croissant</option>
+                        <option value="salaire_desc" {% if tri == 'salaire_desc' %}selected{% endif %}>Salaire : Décroissant</option>
+                    </select>
+                </div>
+            </form>
         </div>
     </section>
 </div>
@@ -69,26 +66,36 @@ Offres
 <section class="offres">
     {% for o in offres %}
     <article class="entreprise-card">
+        
+        {% if session.user_id is defined and session.id_role == 1 %}
+            <a href="index.php?page=ajouter_wishlist&id={{ o.id_offre }}" class="wishlist-heart" title="Ajouter/Retirer des favoris">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" 
+                     {# Si l'ID de l'offre est dans le tableau 'favoris', on remplit le coeur en rouge #}
+                     fill="{{ o.id_offre in favoris ? '#e74c3c' : 'none' }}" 
+                     stroke="#e74c3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+            </a>
+        {% endif %}
+
         <div class="card-body-content">
             <h3 class="entreprise-nom">{{ o.titre_offre }}</h3>
-            <p class="remuneration">🏢 {{ o.nom_entreprise  }} </p>
+            <p class="remuneration">🏢 {{ o.nom_entreprise }} </p>
 
             <div class="details-cache">
                 <div class="details-content">
                     <p class="description">{{ o.description_offre }}</p>
                     <div class="info-grid">
-                        <div class="info-item">💰 <strong>Rémunération :</strong> {{ o.remuneration_offre}} €/mois</div>
+                        <div class="info-item">💰 <strong>Rémunération :</strong> {{ o.remuneration_offre }} €/mois</div>
                         <div class="info-item">📅 <strong>Publié le :</strong> {{ o.date_offre|date("d/m/Y") }}</div>
                     </div>
-                    <a href="?page=postuler&id={{ o.id_offre }}" class="RechercherBTN" style="display: block; text-align: center; text-decoration: none;">En savoir plus</a>
+                    <a href="?page=postuler&id={{ o.id_offre }}" class="RechercherBTN" style="display: block; text-align: center; text-decoration: none; margin-top: 10px;">En savoir plus</a>
                 </div>
             </div>
         </div>
     </article>
     {% endfor %}
 </section>
-
-
 
 <div class="pagination">
     {% if currentPage > 1 %}

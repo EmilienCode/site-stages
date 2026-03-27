@@ -9,11 +9,16 @@
     <section class="connexion-card">
         <header class="connexion-header">
             <h1>Créer un compte</h1>
-            <p>Créer un compte étudiant pour plus de fonctionnalitées</p>
+            <p>Créer un compte pour plus de fonctionnalitées</p>
         </header>
+
+
+        {# Vérification des droits : seul pilote (2) et admin (3) peuvent créer #}
+        {% if session.id_role == 2 or session.id_role == 3 %}
 
         <form class="connexion-form" method="POST" action="index.php?action=inscription_user" onsubmit="return checkPassword()">
             <input type="hidden" name="type" value="COMPTE">
+
             <div class="form-row">
                 <div class="form-line">
                     <label for="nom">Nom</label>
@@ -70,7 +75,7 @@
                 <span id="error" style="color:#914941;"></span><br><br>
             </div>
 
-                    <!-- BLOC COORDONNÉES -->
+            <!-- BLOC COORDONNÉES -->
             <h3>Coordonnées</h3>
 
             <div class="form-line">
@@ -86,6 +91,28 @@
                 </div>
             </div>
 
+            <div class="form-line">
+                <label>Rôle</label>
+
+                {# ADMIN : peut choisir le rôle #}
+                {% if session.id_role == 3 %}
+                <div class="form-row">
+                    <label>
+                        <input type="radio" name="role" value="1" required> Étudiant
+                    </label>
+
+                    <label>
+                        <input type="radio" name="role" value="2"> Pilote
+                    </label>
+                </div>
+
+                {# PILOTE : ne peut créer que des étudiants (champ caché) #}
+                {% elseif session.id_role == 2 %}
+                    <input type="hidden" name="role" value="1">
+                    <p><strong>Étudiant</strong></p>
+                {% endif %}
+            </div>
+            
             <div class="form-line">
                 <label for="naissance">Date de naissance</label>
                 <input
@@ -125,6 +152,14 @@
             </button>
 
         </form>
+
+        {% else %}
+            <div class="alert error">
+                <p>Accès refusé. Vous n'avez pas les permissions nécessaires.</p>
+                <a href="/">Retour à l'accueil</a>
+            </div>
+        {% endif %}
+
         <script>
             function checkPassword() {
                 const pass = document.getElementById("password").value;
@@ -142,7 +177,7 @@
         </script>
 
         <div class="connexion-links">
-            <a href="index.php?page=connexion">← Retour</a>
+            <a href="index.php?page=afficher_utilisateur">← Retour</a>
         </div>
     </section>
     </main>

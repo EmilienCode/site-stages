@@ -235,25 +235,43 @@ h1, h2, h3, h4, h5, h6 {
     
     /* On annule le positionnement absolu qui fait sortir la barre de l'écran */
     .GroupeRecherche {
-        position: relative; /* On la remet dans le flux normal */
-        transform: none;    /* On enlève le centrage mathématique */
-        top: auto; left: auto;
-        
-        flex-direction: column; /* On empile la barre et les filtres */
-        align-items: stretch;
-        width: 100%;
-        gap: 1.5rem;
-    }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; 
+    
+    /* MODIFICATION ICI : On passe d'un contenu serré à une largeur définie */
+    width: 90%;            /* Prend 90% de la section */
+    max-width: 1100px;     /* Mais ne dépasse pas 1100px pour rester élégant */
+    z-index: 10;
+}
 
     /* La boite blanche des inputs */
 
     .BoxRechercher {
-        flex-direction: column;
-        padding: 0.5rem;
-    }
+    display: flex;
+    flex-direction: row;
+    /* ... tes autres styles (shadow, padding, etc.) ... */
+    
+    /* MODIFICATION ICI : Elle doit manger tout l'espace disponible dans GroupeRecherche */
+    flex: 2;               /* Elle sera deux fois plus grande que les filtres à côté */
+    min-width: 0;          /* Sécurité pour le flexbox */
+    
+    /* Tes styles existants conservés */
+    padding: calc(var(--spacing) * 2);
+    background-color: var(--background);
+    border: 1px solid var(--color-gray);
+    border-radius: 1rem;
+    gap: calc(var(--spacing) * 4);
+}
 
     /* On nettoie les bordures des inputs pour le mode vertical */
-    .input1, .input2 {
+    .input2 {
         width: 100%;
         border-right: none; 
         border-bottom: 1px solid var(--color-gray); 
@@ -263,11 +281,33 @@ h1, h2, h3, h4, h5, h6 {
         border-bottom: none;
     }
    
-
-    .RechercherBTN {
-        width: 100%;
-    }
+.input1 {
+    display: flex;
+    align-items: center;
+    border-right-width: 1px;
+    padding-block: calc(var(--spacing) * 3);
+    padding-inline: calc(var(--spacing) * 4);
+    gap: calc(var(--spacing) * 3);
     
+    /* MODIFICATION MAJEURE ICI : On force l'input à "pousser" */
+    flex: 1;               /* Il va s'étendre pour prendre tout l'espace disponible dans .BoxRechercher */
+    min-width: 0;          /* Sécurité pour le flexbox */
+}
+    .RechercherBTN {
+    transition-property: all;
+    /* ... tes autres styles (couleurs, etc.) ... */
+    
+    /* MODIFICATION ICI : On réduit sa largeur */
+    padding-block: calc(var(--spacing) * 3);
+    /* padding-inline initial était à * 8, on le réduit pour un bouton plus "carré" */
+    padding-inline: calc(var(--spacing) * 5); 
+    
+    border-radius: calc(var(--radius) + 4px);
+    white-space: nowrap;   /* Pour ne pas que le texte "Rechercher" saute à la ligne */
+    
+    /* MODIFICATION ICI : Il ne doit PAS s'étendre */
+    flex-shrink: 0;        /* Il garde sa taille minimale nécessaire */
+}
     /* On s'assure que les offres sont en colonne sur mobile */
     .offres {
         flex-direction: column;
@@ -279,11 +319,13 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .divTrie {
-        width : 100%;
-        flex-wrap: wrap ; 
-        justify-content: center;
-        margin-top: none;
-    }
+    display: flex;
+    gap: calc(var(--spacing) * 3);
+    align-items: center;
+    
+    /* MODIFICATION ICI : On s'assure qu'ils ne sont pas écrasés */
+    flex: 1;               
+}
 }
 
 .Section{
@@ -449,4 +491,45 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-dark-gray);
     font-weight: 600;
     font-size: 0.875rem;
+}
+
+/* Style pour le message d'absence de résultats */
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--spacing) * 12);
+    background-color: var(--background);
+    border: 2px dashed var(--color-gray);
+    border-radius: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--color-light-gray);
+    font-family: var(--font-sans);
+}
+
+.no-results-icon {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+}
+
+.no-results p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* Petit bouton pour revenir à zéro rapidement */
+.btn-reset {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.btn-reset:hover {
+    color: var(--secondary-color);
 }

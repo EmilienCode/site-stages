@@ -27,7 +27,7 @@ Postuler
         </div>
     </section>
 
-    {% if session.user_id %}
+    {% if session.user_id and session.id_role == 1 %}
         <section class="card form-card">
             <h3>Votre candidature</h3>
 
@@ -56,19 +56,15 @@ Postuler
 
         <!-- VERSION NON CONNECTÉ -->
         <section class="card form-card" style="text-align:center;">
-            <h3>Connexion requise</h3>
+            <h3>Accès non autorisé</h3>
 
             <p style="margin:20px 0; color: var(--color-light-gray);">
-                Veuillez vous connecter à votre compte étudiant pour postuler à cette offre.
+                Seuls les étudiants peuvent postuler à une offre.
             </p>
 
             <div class="form-actions" style="justify-content:center;">
                 <a href="?page=connexion" class="btn btn-primary">
                     Se connecter
-                </a>
-
-                <a href="?page=creercompte" class="btn btn-secondary">
-                    Créer un compte
                 </a>
             </div>
         </section>

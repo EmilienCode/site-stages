@@ -9,27 +9,28 @@ Accueil
                 <div style="opacity: 1;transform: none;">
                     <h1 class="TxtBlack animated-title-glitch">Trouvez votre <span class="TxtBlue">stage idéal</span> ou le candidat parfait.</h1>
                     <p class="ParaLight">La plateforme dédiée aux étudiants et aux entreprises pour faciliter la recherche de stages et d'alternances. Publiez votre profil ou parcourez les offres.</p>
-                    <div class="BoxRechercher">
-                        <div class="input1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
-                                <path d="m21 21-4.34-4.34"></path>
-                                <circle cx="11" cy="11" r="8"></circle>
-                            </svg>
-                            <input type="text" placeholder="Métier, compétence..." class="inputTXT">
-                        </div>
-                        <div class="input2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
-                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <input type="text" placeholder="Ville ou région" class="inputTXT">
-                        </div>
-                        <div>
-                            <button class="RechercherBTN">
-                                Rechercher
-                            </button>
-                        </div>
-                    </div>
+                        <form action="index.php" method="GET" class="BoxRechercher">
+                            <input type="hidden" name="page" value="offres">
+                            <div class="input1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                                    <path d="m21 21-4.34-4.34"></path>
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                </svg>
+                                <input type="text" name="metier" placeholder="Métier, compétence..." class="inputTXT">
+                            </div>
+                            <div class="input2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+                                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <input type="text" name="ville" placeholder="Ville ou région" class="inputTXT">
+                            </div>
+                            <div>
+                                <button type="submit" class="RechercherBTN">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </form>
                     <div class="barrePopulaire">
                         <span class="populaire">Populaire :</span>
                         <span class="populaireTXT">Développement Web</span>
