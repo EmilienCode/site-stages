@@ -251,6 +251,19 @@ h1, h2, h3, h4, h5, h6 {
     padding-inline: calc(var(--spacing) * 6);
 }
 
+.offrestitre{
+    color: rgb(0,0,0);
+    font-weight: var(--font-weight-titre);
+    line-height: 1.25;
+    font-size: var(--size-text-titre);
+    margin-bottom: calc(var(--spacing) * 6);
+    font-family: var(--font-sans);
+    cursor: default;
+    max-width: 70rem;
+    margin-inline: auto;
+    margin-top: 7rem;
+}
+
 /* --- LA CARTE (Fusion entre .offre et .entreprise-card) --- */
 .entreprise-card {
     position: relative;
@@ -428,9 +441,11 @@ select.selectTrie {
     /* On s'assure que les offres sont en colonne sur mobile */
     .offres {
         flex-direction: column;
+        flex-wrap: wrap;
     }
     .offre {
         width: 100%;
+        width: calc(33.333% - 1rem); 
     }
 
     .divTrie {
@@ -439,17 +454,7 @@ select.selectTrie {
         justify-content: center;
         margin-top: none;
     }
-}
-@media (min-width: 768px) {
-    .offres {
-        flex-direction: row;
-        flex-wrap: wrap; 
-    }
 
-    .offre {
-        /* Ton calcul précis pour avoir 3 boites */
-        width: calc(33.333% - 1rem); 
-    }
 }
 
  
