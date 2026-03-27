@@ -11,6 +11,12 @@ require 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['type'] === "COMPTE") {
 
+    // Sécurité : vérifier que l'utilisateur est autorisé (admin ou pilote)
+    if (!isset($_SESSION['id_role']) || ($_SESSION['id_role'] != 2 && $_SESSION['id_role'] != 3)) {
+        header("Location: index.php?page=creercompte&error=unauthorized");
+        exit;
+    }
+
     // 1. Récupération et nettoyage des données de base
     $nom = trim($_POST["nom"]);
     $prenom = trim($_POST["prenom"]);
@@ -20,7 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
     $ville = trim($_POST["ville"]);
     $telephone = trim($_POST["telephone"]);
     $sexe = $_POST["sexe"]; // 0 ou 1
-    
+    $role = $_POST["role"];
+
+    // Sécurité : un pilote ne peut créer que des étudiants
+    if ($_SESSION['id_role'] == 2) {
+        $role = 1;
+    }
+
     // 2. Traitement sécurisé de la date
     $date_input = trim($_POST['date_naissance']);
     $date_obj = DateTime::createFromFormat('d/m/Y', $date_input);
@@ -43,10 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
 
         // 3. Insertion dans la table UTILISATEUR
         $sql1 = "INSERT INTO UTILISATEUR (nom, prenom, email, mot_de_passe, id_role)
-                 VALUES (?, ?, ?, ?, 1)"; // 1 = rôle Etudiant par défaut
+                 VALUES (?, ?, ?, ?, ?)"; 
 
         $stmt1 = $pdo->prepare($sql1);
-        $stmt1->execute([$nom, $prenom, $email, $password]);
+        $stmt1->execute([$nom, $prenom, $email, $password, $role]);
 
         // récupérer l'id utilisateur créé
         $id_utilisateur = $pdo->lastInsertId();
@@ -68,14 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['type']) && $_POST['ty
         // Si tout est bon, on valide définitivement en base de données
         $pdo->commit();
 
-        // 6. Connexion automatique après inscription
-        $_SESSION['user_id'] = $id_utilisateur;
-        $_SESSION['user_nom'] = $nom;
-        $_SESSION['user_prenom'] = $prenom;
-        $_SESSION['id_role'] = 1;
-
-        // Redirection vers l'accueil avec un message de succès
-        header("Location: index.php?success=welcome");
+        // Redirection vers la gestion utilisateur
+        header("Location: index.php?page=afficher_utilisateur&success=created");
         exit;
 
     } 
