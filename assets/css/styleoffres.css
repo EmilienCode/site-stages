@@ -251,6 +251,19 @@ h1, h2, h3, h4, h5, h6 {
     padding-inline: calc(var(--spacing) * 6);
 }
 
+.offrestitre{
+    color: rgb(0,0,0);
+    font-weight: var(--font-weight-titre);
+    line-height: 1.25;
+    font-size: var(--size-text-titre);
+    margin-bottom: calc(var(--spacing) * 6);
+    font-family: var(--font-sans);
+    cursor: default;
+    max-width: 70rem;
+    margin-inline: auto;
+    margin-top: 7rem;
+}
+
 /* --- LA CARTE (Fusion entre .offre et .entreprise-card) --- */
 .entreprise-card {
     position: relative;
@@ -378,11 +391,6 @@ select.selectTrie {
 }
 
 
-
-/* =========================================
-   1. VERSION MOBILE (ECRANS < 768px)
-   On gère la barre de recherche qui cassait tout
-   ========================================= */
 @media (max-width: 767px) {
     .InsideSection {
         grid-template-columns: 1fr; 
@@ -390,26 +398,23 @@ select.selectTrie {
         gap: 3rem;
     }
     
-    /* On annule le positionnement absolu qui fait sortir la barre de l'écran */
     .GroupeRecherche {
-        position: relative; /* On la remet dans le flux normal */
-        transform: none;    /* On enlève le centrage mathématique */
+        position: relative;
+        transform: none;
         top: auto; left: auto;
         
-        flex-direction: column; /* On empile la barre et les filtres */
+        flex-direction: column;
         align-items: stretch;
         width: 100%;
         gap: 1.5rem;
     }
 
-    /* La boite blanche des inputs */
 
     .BoxRechercher {
         flex-direction: column;
         padding: 0.5rem;
     }
 
-    /* On nettoie les bordures des inputs pour le mode vertical */
     .input1, .input2 {
         width: 100%;
         border-right: none; 
@@ -425,12 +430,13 @@ select.selectTrie {
         width: 100%;
     }
     
-    /* On s'assure que les offres sont en colonne sur mobile */
     .offres {
         flex-direction: column;
+        flex-wrap: wrap;
     }
     .offre {
         width: 100%;
+        width: calc(33.333% - 1rem); 
     }
 
     .divTrie {
@@ -439,17 +445,31 @@ select.selectTrie {
         justify-content: center;
         margin-top: none;
     }
-}
-@media (min-width: 768px) {
-    .offres {
-        flex-direction: row;
-        flex-wrap: wrap; 
-    }
 
-    .offre {
-        /* Ton calcul précis pour avoir 3 boites */
-        width: calc(33.333% - 1rem); 
-    }
 }
-
  
+.wishlist-heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 50;
+    width: 45px; 
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border-radius: 50%;
+}
+
+.wishlist-heart:hover {
+    transform: scale(1.1);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.wishlist-heart svg {
+    pointer-events: none; 
+    color: #e74c3c;
+}
