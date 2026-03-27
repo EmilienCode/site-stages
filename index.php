@@ -65,7 +65,27 @@ switch ($page) {
         $controleur = new OffresControleur($offresModel, $twig);
         $controleur->afficherOffre();
         break;
+    
+    case 'afficher_utilisateur':
+    case 'modifier_utilisateur':
+    case 'supprimer_utilisateur':
+        $userModel = new UtilisateurModel($pdo);
+        $controleur = new UtilisateurControleur($userModel, $twig);
+        if ($page === 'afficher_utilisateur') $controleur->afficherUtilisateurs();
+        if ($page === 'modifier_utilisateur') $controleur->modifierUtilisateur();
+        if ($page === 'supprimer_utilisateur') $controleur->supprimerUtilisateur();
+        break;
 
+    case 'afficher_offre':
+    case 'modifier_offre':
+    case 'supprimer_offre':
+        $offresModel = new OffresModel($pdo);
+        $controleur = new OffresControleur($offresModel, $twig);
+        if ($page === 'afficher_offre') $controleur->afficherOffre();
+        if ($page === 'modifier_offre') $controleur->modifierOffre();
+        if ($page === 'supprimer_offre') $controleur->supprimerOffre();
+        break;
+    
     case 'connexion':
         echo $twig->render('connexion.twig');
         break;
