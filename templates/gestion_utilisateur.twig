@@ -22,6 +22,23 @@ Gestion Utilisateur
                 </div>
             {% endif %}
 
+            <form method="GET" action="index.php" class="BoxRechercher">
+    <input type="hidden" name="page" value="afficher_utilisateur">
+
+    <div class="input1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgLoop" aria-hidden="true">
+            <path d="m21 21-4.34-4.34"></path>
+            <circle cx="11" cy="11" r="8"></circle>
+        </svg>
+        <input type="text" name="nom" placeholder="Rechercher nom ou prénom" class="inputTXT" value="{{ nom_search }}">
+    </div>
+        
+    <div>
+        <button type="submit" class="RechercherBTN">Rechercher</button>
+    </div>
+</form>
+
+
             <table class="admin-table">
                 <thead>
                     <tr>
