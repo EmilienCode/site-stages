@@ -52,7 +52,6 @@
                             <span class="wishlist-text">Wishlist</span>
                         </button>
                     </a>
-                {% endif %}
                 <a href="index.php?page=candidatures" style="text-decoration: none;">
                     <button class="NotifBtn NotificationBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
@@ -63,7 +62,19 @@
                         </svg>
                         <span class="notif-text">Candidatures</span>
                     </button>
-
+                {% endif %}
+                {% if session.user_id is defined and session.id_role == 2 %}
+                <a href="index.php?page=candidatures_pilotes" style="text-decoration: none;">
+                    <button class="NotifBtn NotificationBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svgNotif" aria-hidden="true">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <path d="M12 18v-6"></path>
+                            <path d="m9 15 3-3 3 3"></path>
+                        </svg>
+                        <span class="notif-text">Candidatures</span>
+                    </button>
+                {% endif %}
                     <div class="CompteBtn">
                         {% if session.user_id is defined and session.user_id is not null %}
                             

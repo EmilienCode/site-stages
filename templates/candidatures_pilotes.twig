@@ -1,0 +1,57 @@
+{% extends "base.twig" %}
+
+{% block title %}Gestion des Candidatures{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/root.css"/>
+<link rel="stylesheet" href="assets/css/styleadmin.css"/>
+
+<div style="padding-top: calc(var(--spacing) * 16);">
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1>Suivi global des Candidatures</h1>
+            <p>Liste de tous les étudiants ayant postulé à une offre.</p>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Étudiant</th>
+                    <th>Entreprise</th>
+                    <th>Offre</th>
+                    <th>Lieu</th>
+                    <th>Letter de motivation</th>
+                    <th>Date</th>
+                    <th>Documents</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidature in candidatures %}
+                    <tr>
+                        <td>
+                            <strong>{{ candidature.nom_etudiant|upper }} {{ candidature.prenom_etudiant }}</strong><br>
+                            <small style="color: gray;">{{ candidature.email_etudiant }}</small>
+                        </td>
+                        <td>{{ candidature.nom_entreprise }}</td>
+                        <td>{{ candidature.titre_offre }}</td>
+                        <td>{{ candidature.lieu_offre }}</td>
+                        <td style="max-width: 200px; font-style: italic; font-size: 0.85em;">
+                            "{{ candidature.LM_candidature }}"
+                        </td>
+                        <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
+                        <td>
+                            <div style="display: flex; gap: 5px;">
+                                <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit" title="Voir le CV">CV</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align:center; padding: 30px;">Aucune candidature enregistrée pour le moment.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</div>
+{% endblock %}

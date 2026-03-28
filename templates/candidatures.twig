@@ -19,6 +19,8 @@
                     <th>Date</th>
                     <th>Entreprise</th>
                     <th>Offre</th>
+                    <th>Lieu</th>
+                    <th>Letter de motivation</th>
                     <th>Documents</th>
                 </tr>
             </thead>
@@ -28,15 +30,12 @@
                         <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
                         <td><strong>{{ candidature.nom_entreprise }}</strong></td>
                         <td>{{ candidature.titre_offre }}</td>
+                        <td>{{ candidature.lieu_offre }}</td>
                         <td>
-                            <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit">Voir le CV envoyé</a>
+                            <small>{{ candidature.LM_candidature|slice(0, 50) }}...</small>
                         </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="5" style="text-align:center; padding: 30px;">
-                            Vous n'avez pas encore postulé à des offres. <br>
-                            <a href="index.php?page=offres" style="color: var(--color-primary);">Parcourir les offres</a>
+                        <td>
+                            <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit">Voir CV</a>
                         </td>
                     </tr>
                 {% endfor %}
