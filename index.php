@@ -103,7 +103,7 @@ switch ($page) {
         // On appelle la méthode correspondante à la page
         if ($page === 'afficher_entreprise') $controleur->afficherEntreprises();
         if ($page === 'modifier_entreprise') $controleur->modifierEntreprise();
-        if ($page === 'supprimer_entreprise') $controleur->supprimerEntreprises();
+        if ($page === 'supprimer_entreprise') $controleur->supprimerEntreprise();
         break;
     
     case 'afficher_offre':
