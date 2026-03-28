@@ -1,0 +1,47 @@
+{% extends "base.twig" %}
+
+{% block title %}Mes Candidatures{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/root.css"/>
+<link rel="stylesheet" href="assets/css/styleadmin.css"/>
+
+<div style="padding-top: calc(var(--spacing) * 16);">
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1>Mes Candidatures envoyées</h1>
+            <p>Retrouvez ici le suivi de vos demandes de stage.</p>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Entreprise</th>
+                    <th>Offre</th>
+                    <th>Documents</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidature in candidatures %}
+                    <tr>
+                        <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
+                        <td><strong>{{ candidature.nom_entreprise }}</strong></td>
+                        <td>{{ candidature.titre_offre }}</td>
+                        <td>
+                            <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit">Voir le CV envoyé</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align:center; padding: 30px;">
+                            Vous n'avez pas encore postulé à des offres. <br>
+                            <a href="index.php?page=offres" style="color: var(--color-primary);">Parcourir les offres</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</div>
+{% endblock %}

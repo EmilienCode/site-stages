@@ -169,4 +169,20 @@ switch ($page) {
         exit();
         break;
 
+    case 'candidatures':
+        $id_utilisateur = $_SESSION['user_id'] ?? null;
+        $candidatures = [];
+
+        if ($id_utilisateur) {
+            try {
+                $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise FROM CANDIDATURES c JOIN OFFRE o ON c.id_offre = o.id_offre WHERE c.id_utilisateur = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$id_utilisateur]);
+                $candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("Erreur Candidatures : " . $e->getMessage());
+            }
+        }
+        echo $twig->render('candidatures.twig', ['candidatures' => $candidatures]);
+        break;
 }
