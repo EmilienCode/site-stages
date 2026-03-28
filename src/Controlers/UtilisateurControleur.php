@@ -1,6 +1,6 @@
 <?php
 namespace App\Controlers;
-
+use DateTime;
 class UtilisateurControleur {
     private $userModel;
     private $twig;
@@ -39,10 +39,12 @@ class UtilisateurControleur {
         // Le Pilote (2) voit uniquement les étudiants (1)
         $utilisateurs = $this->userModel->getUsersByRoles([1], $search); 
     }
+    $success = $_GET['success'] ?? null;
 
     echo $this->twig->render('gestion_utilisateur.twig', [
         'users' => $utilisateurs,
-        'nom_search' => $search 
+        'nom_search' => $search,
+        'success' => $success
     ]);
 }
 
@@ -61,7 +63,10 @@ class UtilisateurControleur {
 
     public function modifierUtilisateur() {
         // Tout le monde (Pilote=2 ou Admin=3) peut modifier si connecté
-        if (!isset($_SESSION['user_id'])) header('Location: connexion.php');
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: connexion.php');
+            exit();
+        }
 
         $id = $_GET['id'] ?? null;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -144,21 +149,48 @@ class UtilisateurControleur {
 
         // 1. Nettoyage et Validation
         $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
+
         $date_input = trim($_POST['date_naissance']);
         $date_obj = DateTime::createFromFormat('d/m/Y', $date_input);
+        $errors = DateTime::getLastErrors();
 
-        if (!$email || !$date_obj || $date_obj->format('d/m/Y') !== $date_input) {
+        if (
+            !$email ||
+            !$date_obj ||
+            $errors['warning_count'] > 0 ||
+            $errors['error_count'] > 0
+        ) {
             header("Location: index.php?page=creercompte&error=invalid_data");
+            exit;
+        }
+
+        $now = new DateTime();
+        if ($date_obj > $now) {
+            header("Location: index.php?page=creercompte&error=future_date");
+            exit;
+        }
+        
+        $emailDomain = strtolower(explode('@', $email)[1] ?? '');
+        $blockedDomains = [
+            "tempmail.com",
+            "10minutemail.com",
+            "guerrillamail.com",
+            "mailinator.com",
+            "yopmail.com"
+        ];
+
+        if (in_array($emailDomain, $blockedDomains)) {
+            header("Location: index.php?page=creercompte&error=email_temp");
             exit;
         }
 
         // 2. Préparation des données pour le modèle
         $userData = [
-            'nom'            => trim($_POST["nom"]),
-            'prenom'         => trim($_POST["prenom"]),
+            'nom'            => strtoupper(trim($_POST["nom"])), // on met le nom en majuscules pour une meilleure présentation et uniformité
+            'prenom'         => ucfirst(strtolower(trim($_POST["prenom"]))), // on met la première lettre en majuscule et le reste en minuscule pour une meilleure présentation et stockage 
             'email'          => $email,
             'password'       => password_hash($_POST["password"], PASSWORD_DEFAULT),
-            'ville'          => trim($_POST["ville"]),
+            'ville'          => ucfirst(strtolower(trim($_POST["ville"]))), // même traitement que pour le prénom pour une meilleure présentation et un meilleur stockage
             'telephone'      => trim($_POST["telephone"]),
             'sexe'           => $_POST["sexe"],
             'date_naissance' => $date_obj->format('Y-m-d') // Format SQL
@@ -166,24 +198,21 @@ class UtilisateurControleur {
 
         try {
             // 3. Appel au modèle
-            $id_utilisateur = $this->model->inscrireEtudiant($userData);
+            $id_utilisateur = $this->userModel->inscrireEtudiant($userData);
 
-            // 4. Session et Succès
-            $_SESSION['user_id'] = $id_utilisateur;
-            $_SESSION['user_nom'] = $userData['nom'];
-            $_SESSION['user_prenom'] = $userData['prenom'];
-            $_SESSION['id_role'] = 1;
-
-            header("Location: index.php?success=welcome");
+            header("Location: index.php?page=afficher_utilisateur&success=created");
             exit;
 
-        } catch (Exception $e) {
-            if ($e->getCode() == 23000) {
+        } catch (\PDOException $e) {
+            if ((string)$e->getCode() === '23000') {
+                // Code d'erreur 23000 = violation de contrainte d'unicité (ex: email déjà pris)
                 header("Location: index.php?page=creercompte&error=email_taken");
-            } else {
-                die("Erreur critique : " . $e->getMessage());
+                // On redirige vers la page de création de compte avec une erreur spécifique
+                exit;
             }
-            exit;
+
+            die("Erreur SQL : " . $e->getMessage());
+            //cette ligne est surtout utile en développement pour comprendre ce qui a mal tourné. En production, il vaudrait mieux logguer l'erreur dans un fichier plutôt que de l'afficher à l'utilisateur.
         }
     }
 }
