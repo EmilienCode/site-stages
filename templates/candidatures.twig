@@ -1,0 +1,46 @@
+{% extends "base.twig" %}
+
+{% block title %}Mes Candidatures{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/root.css"/>
+<link rel="stylesheet" href="assets/css/styleadmin.css"/>
+
+<div style="padding-top: calc(var(--spacing) * 16);">
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1>Mes Candidatures envoyées</h1>
+            <p>Retrouvez ici le suivi de vos demandes de stage.</p>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Entreprise</th>
+                    <th>Offre</th>
+                    <th>Lieu</th>
+                    <th>Letter de motivation</th>
+                    <th>Documents</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidature in candidatures %}
+                    <tr>
+                        <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
+                        <td><strong>{{ candidature.nom_entreprise }}</strong></td>
+                        <td>{{ candidature.titre_offre }}</td>
+                        <td>{{ candidature.lieu_offre }}</td>
+                        <td>
+                            <small>{{ candidature.LM_candidature|slice(0, 50) }}...</small>
+                        </td>
+                        <td>
+                            <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit">Voir CV</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</div>
+{% endblock %}
