@@ -2,7 +2,7 @@
 namespace App\Controlers;
 
 
-class EntrepriseControleur {
+class EntrepriseControleur extends UtilisateurControleur {
     private $entrepriseModel;
     private $twig;
 
@@ -50,7 +50,7 @@ class EntrepriseControleur {
         $entreprise = [];
         // On adapte la requête selon le rôle en session
         if ($_SESSION['id_role'] == 3||$_SESSION['id_role'] == 2) {
-            $entreprise = $this->entrepriseModel->getAllEntreprise(); 
+            $entreprise = $this->entrepriseModel->getAllEntreprise();
             //var_dump($entreprise); die(); //permet d'afficher le resultat de la requete (debut)
         }
 
@@ -59,7 +59,7 @@ class EntrepriseControleur {
         ]);
     }
 
-    public function supprimerEntreprise() {
+    public function supprimerEntreprise(){
         
         $this->checkAccess([2,3]);
 
@@ -102,14 +102,15 @@ class EntrepriseControleur {
 
             // Appel au modèle Entreprise (et non UserModel)
             if ($this->entrepriseModel->updateEntreprise($siret, $data)) {
-                header('Location: index.php?page=gestion_entreprises&success=update');
+                header('Location: index.php?page=afficher_entreprise&success=update');
                 exit();
             }
         }
 
         // Récupération des infos actuelles pour pré-remplir le formulaire
         $entrepriseToEdit = $this->entrepriseModel->getEntrepriseBySiret($siret);
-
+        //var_dump($entrepriseToEdit);
+        //die();
         echo $this->twig->render('modifier_entreprise.twig', [
             'entreprise' => $entrepriseToEdit
         ]);

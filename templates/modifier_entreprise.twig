@@ -1,76 +1,113 @@
 {% extends "base.twig" %}
 
-{% block title %}Modifier Utilisateur{% endblock %}
+{% block title %}Modifier Entreprise{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="assets/css/style_modifier_utilisateur.css"/>
 <main class="admin-container">
     <div class="admin-header">
-        <h1>Modifier l'utilisateur #{{ user.id_utilisateur }}</h1>
-        <a href="index.php?page=afficher_utilisateur" class="btn-retour">Retour à la liste</a>
+        <h1>Modifier l'entreprise #{{ entreprise.siret_entreprise }}</h1>
+        <a href="index.php?page=afficher_entreprise" class="btn-retour">Retour à la liste</a>
     </div>
 
     {% if erreur %}
         <div class="alert error">{{ erreur }}</div>
     {% endif %}
 
-    <form method="POST" action="index.php?page=modifier_utilisateur&id={{ user.id_utilisateur }}" class="admin-form">
+    {# Ajout de l'enctype pour permettre la modification du logo #}
+    <form method="POST" action="index.php?page=modifier_entreprise&id={{ entreprise.siret_entreprise }}" class="admin-form" enctype="multipart/form-data">
         
         <fieldset>
-            <legend>Informations de connexion</legend>
+            <legend>Informations Principales</legend>
+            
             <div class="form-group">
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom" value="{{ user.nom }}" required>
+                <label for="nom_entreprise">Nom de l'entreprise * :</label>
+                <input type="text" id="nom_entreprise" name="nom_entreprise" value="{{ entreprise.nom_entreprise }}" maxlength="50" required>
             </div>
 
             <div class="form-group">
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" value="{{ user.prenom }}" required>
+                <label for="siret_entreprise">Siret * :</label>
+                <input type="text" id="siret_entreprise" name="siret_entreprise" value="{{ entreprise.siret_entreprise }}" maxlength="14" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                <label for="description_entreprise">Description de l'entreprise :</label>
+                <textarea id="description_entreprise" name="description_entreprise" maxlength="500" rows="3">{{ entreprise.description_entreprise }}</textarea>
             </div>
-            {% if session.user_id is defined and session.user_id is not null and session.id_role == 3 %}
-                <div class="form-group">
-                    <label for="id_role">Rôle :</label>
-                    <select id="id_role" name="id_role" required>
-                        {% for role in roles|slice(0, 2) %}
-                            <option value="{{ role.id_role }}" {% if role.id_role == user.id_role %}selected{% endif %}>
-                                {{ role.nom_role }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-            {% endif %}
+
+            <div class="form-group">
+                <label for="secteur_entreprise">Secteur d'activité :</label>
+                <input type="text" id="secteur_entreprise" name="secteur_entreprise" value="{{ entreprise.secteur_entreprise }}" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="taille_entreprise">Taille de l'entreprise :</label>
+                <input type="text" id="taille_entreprise" name="taille_entreprise" value="{{ entreprise.taille_entreprise }}" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="logo_entreprise">Logo de l'entreprise :</label>
+                <input type="file" id="logo_entreprise" name="logo_entreprise" accept="image/png, image/jpeg, image/webp">
+                {% if entreprise.logo_entreprise %}
+                    <small>Laissez vide pour conserver le logo actuel.</small>
+                {% endif %}
+            </div>
         </fieldset>
 
         <fieldset>
-            <legend>Coordonnées</legend>
+            <legend>Contact & En Ligne</legend>
+            
             <div class="form-group">
-                <label for="ville">Ville :</label>
-                <input type="text" id="ville" name="ville" value="{{ user.ville_coordonnees }}">
+                <label for="email_entreprise">Email de contact :</label>
+                <input type="email" id="email_entreprise" name="email_entreprise" value="{{ entreprise.email_entreprise }}" maxlength="100">
             </div>
 
             <div class="form-group">
-                <label for="telephone">Téléphone :</label>
-                <input type="text" id="telephone" name="telephone" value="{{ user.telephone_coordonnees }}" maxlength="10">
+                <label for="telephone_entreprise">Téléphone :</label>
+                <input type="tel" id="telephone_entreprise" name="telephone_entreprise" value="{{ entreprise.telephone_entreprise }}" maxlength="10">
             </div>
 
             <div class="form-group">
-                <label for="date_naissance">Date de naissance :</label>
-                <input type="date" id="date_naissance" name="date_naissance" value="{{ user.date_naissance_coordonnees }}">
+                <label for="site_web_entreprise">Site Web :</label>
+                <input type="url" id="site_web_entreprise" name="site_web_entreprise" value="{{ entreprise.site_web_entreprise }}" maxlength="255">
             </div>
 
             <div class="form-group">
-                <label for="sexe">Sexe :</label>
-                <select id="sexe" name="sexe">
-                    {# Assure-toi que ces valeurs correspondent à ta logique BDD (int) #}
-                    <option value="1" {% if user.sexe_coordonnees == 1 %}selected{% endif %}>Homme</option>
-                    <option value="2" {% if user.sexe_coordonnees == 2 %}selected{% endif %}>Femme</option>
-                    <option value="3" {% if user.sexe_coordonnees == 3 %}selected{% endif %}>Autre</option>
-                </select>
+                <label for="linkedin_entreprise">Lien LinkedIn :</label>
+                <input type="url" id="linkedin_entreprise" name="linkedin_entreprise" value="{{ entreprise.linkedin_entreprise }}" maxlength="50">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Coordonnées Postales</legend>
+            
+            <div class="form-group">
+                <label for="adresse_entreprise">Adresse :</label>
+                <input type="text" id="adresse_entreprise" name="adresse_entreprise" value="{{ entreprise.adresse_entreprise }}" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="code_postal_entreprise">Code Postal :</label>
+                <input type="text" id="code_postal_entreprise" name="code_postal_entreprise" value="{{ entreprise.code_postal_entreprise }}" maxlength="5" pattern="[0-9]{5}">
+            </div>
+
+            <div class="form-group">
+                <label for="ville_entreprise">Ville :</label>
+                <input type="text" id="ville_entreprise" name="ville_entreprise" value="{{ entreprise.ville_entreprise }}" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="pays_entreprise">Pays :</label>
+                <input type="text" id="pays_entreprise" name="pays_entreprise" value="{{ entreprise.pays_entreprise }}" maxlength="50">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Statut</legend>
+            
+            <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px;">
+                <input type="checkbox" id="est_active_entreprise" name="est_active_entreprise" value="1" {% if entreprise.est_active_entreprise == 1 %}checked{% endif %} style="width: auto;">
+                <label for="est_active_entreprise" style="margin: 0;">Entreprise active</label>
             </div>
         </fieldset>
 

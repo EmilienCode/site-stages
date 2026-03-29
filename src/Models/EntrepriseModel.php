@@ -13,7 +13,7 @@ class EntrepriseModel {
 
     public function getEntreprises($limit, $offset, $nom = '', $taille = '', $secteur = '') {
         try {
-            $sql = "SELECT * FROM ENTREPRISE WHERE 1=1";
+            $sql = "SELECT * FROM ENTREPRISE WHERE 1=1 AND est_active_entreprise = 1";
             $params = [];
 
             if (!empty($nom)) {
@@ -48,7 +48,7 @@ class EntrepriseModel {
 
     public function countEntreprises($nom = '', $taille = '', $secteur = '') {
         try {
-            $sql = "SELECT COUNT(*) FROM ENTREPRISE WHERE 1=1";
+            $sql = "SELECT COUNT(*) FROM ENTREPRISE WHERE 1=1 AND est_active_entreprise = 1";
             $params = [];
 
             if (!empty($nom)) {
@@ -86,7 +86,7 @@ class EntrepriseModel {
     public function getEntrepriseBySiret($siret) {
         try {
             // 1. On prépare la requête avec l'étoile (*) pour tout récupérer
-            $query = "SELECT * FROM entreprise WHERE siret_entreprise = :siret";
+            $query = "SELECT * FROM ENTREPRISE WHERE siret_entreprise = :siret";
             $stmt = $this->pdo->prepare($query);
 
             // 2. On lie le paramètre et on exécute

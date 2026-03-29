@@ -11,7 +11,7 @@ class UtilisateurControleur {
     }
 
     // Une seule méthode de sécurité flexible
-    private function checkAccess($allowedRoles) {
+    protected function checkAccess($allowedRoles) {
         // Si on a passé un seul chiffre (ex: 3), on le transforme en tableau [3]
         if (!is_array($allowedRoles)) {
             $allowedRoles = [$allowedRoles];
