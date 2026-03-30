@@ -238,23 +238,55 @@
 }
 
 @media (max-width: 768px) {
+    .nav {
+        padding-block: calc(var(--spacing) * 2); /* réduit hauteur */
+        transition: transform 0.3s ease;
+    }
+    .nav.hide {
+        transform: translateY(-100%);
+    }
+    .LogoNav {
+        padding: calc(var(--spacing) * 1.2);
+    }
+    .LOGO {
+        width: calc(var(--spacing) * 4);
+        height: calc(var(--spacing) * 4);
+    }
+    .NomNav {
+        font-size: 0.9rem;
+    }
     .navInside {
         flex-direction: column;
         gap: 1.5rem;
     }
-    
     .BtnNavOutside {
         position: static; 
         transform: none;  
-        gap: 1.5rem; 
+        gap: 1rem; 
         flex-wrap: wrap; 
         justify-content: center;
         width: 100%; /* Empêche les débordements (remplace le max-content) */
+        gap: calc(var(--spacing)*4);
+        font-size: smaller;
     }
-
     .logoDroitNav {
         flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si besoin */
         justify-content: center;
         width: 100%;
+    }
+    .NotifBtn {
+        padding: calc(var(--spacing) * 0.8);
+    }
+    .svgNotif {
+        width: calc(var(--spacing) * 4);
+        height: calc(var(--spacing) * 4);
+    }
+    .CompteBtn {
+        width: calc(var(--spacing) * 5);
+        height: calc(var(--spacing) * 5);
+    }
+    .svgCompte {
+        width: calc(var(--spacing) * 4);
+        height: calc(var(--spacing) * 4);
     }
 }
