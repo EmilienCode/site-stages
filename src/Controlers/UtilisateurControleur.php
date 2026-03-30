@@ -170,7 +170,7 @@ class UtilisateurControleur {
             exit;
         }
         
-        $emailDomain = strtolower(explode('@', $email)[1] ?? '');
+        $emailDomain = strtolower(explode('@', $email)[1] ?? ''); // Récupère le domaine de l'email et le met en minuscules pour la comparaison
         $blockedDomains = [
             "tempmail.com",
             "10minutemail.com",
@@ -179,7 +179,8 @@ class UtilisateurControleur {
             "yopmail.com"
         ];
 
-        if (in_array($emailDomain, $blockedDomains)) {
+        if (in_array($emailDomain, $blockedDomains)) { 
+            // Si le domaine de l'email est dans la liste des domaines bloqués, on redirige avec une erreur spécifique
             header("Location: index.php?page=creercompte&error=email_temp");
             exit;
         }

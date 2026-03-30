@@ -17,11 +17,11 @@
 /* Ta grille d'infos pour qu'elle soit bien visible */
 .info-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Deux colonnes */
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin: 15px 0;
     padding: 10px;
-    background: rgba(250, 128, 114, 0.05); /* Rappel de ta couleur primary très léger */
+    background: rgba(250, 128, 114, 0.05);
     border-radius: 8px;
 }
 .links-footer {
@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .entreprisestitre{
-    color: rgb(0,0,0);
+    color: var(--primary-color);
     font-weight: var(--font-weight-titre);
     line-height: 1.25;
     font-size: var(--size-text-titre);

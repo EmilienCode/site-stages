@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -252,7 +251,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .offrestitre{
-    color: rgb(0,0,0);
+    color: var(--primary-color);
     font-weight: var(--font-weight-titre);
     line-height: 1.25;
     font-size: var(--size-text-titre);
