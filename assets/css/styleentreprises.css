@@ -13,6 +13,7 @@
     margin-top: 1rem;
 }
 
+
 /* Ta grille d'infos pour qu'elle soit bien visible */
 .info-grid {
     display: grid;
@@ -25,8 +26,29 @@
 }
 .links-footer {
     display: flex;
-    gap: 10px;
+    margin-left:1100px;
+    
+}
+
+.entreprise-card .entreprise-nom {
+    font-size: 1.6rem; /* mets la taille que tu veux */
+    font-weight: 500;
+}
+.desc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.description {
+    flex: 1;
     margin-top: 10px;
+}
+
+.desc-row .pagination-btn {
+    flex-shrink: 0;
+    height: fit-content;
 }
 .info-item {
     font-size: 0.85rem;

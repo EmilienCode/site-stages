@@ -56,18 +56,24 @@
     {% for e in entreprises %}
         <div class="entreprise-card">
             <div class="card-body-content">
+            <div class="desc-row">
                 <div class="card-header-simple">
-                    <h3 class="entreprise-nom">{{ e.nom_entreprise|default('Nom inconnu') }}</h3>
-                    <p class="ville-label">📍 {{ e.ville_entreprise|default('N/A') }}</p>
+                    <h3 class="entreprise-nom"> {{ e.nom_entreprise|default('Nom inconnu') }}</h3>
+                    <p class="ville-label">{{ e.ville_entreprise|default('N/A') }}📍</p>
                 </div>
+                
+                    <p class="description">
+                        <strong>À propos :</strong><br>
+                        {{ e.description_entreprise|default('Aucune description.')|nl2br }}
+                    </p>
 
+                    {% if e.site_web_entreprise is not empty %}
+                        <a href="{{ e.site_web_entreprise }}" target="_blank" class="pagination-btn">Site Web</a>
+                    {% endif %}
+                </div>
                 <div class="details-cache">
                     <div class="details-content">
-                        <p class="description">
-                            <strong>À propos :</strong><br>
-                            {{ e.description_entreprise|default('Aucune description.')|nl2br }}
-                        </p>
-
+                        
                         <div class="info-grid">
                             <div class="info-item"><strong>🆔 SIRET :</strong> {{ e.siret_entreprise|default('/') }}</div>
                             <div class="info-item"><strong>📞 Tel :</strong> {{ e.telephone_entreprise|default('/') }}</div>
@@ -77,11 +83,7 @@
                             <div class="info-item"><strong>🌍 Site Web :</strong> {{ e.site_web_entreprise|default('/') }}</div>
                         </div>
 
-                        <div class="links-footer">
-                            {% if e.site_web_entreprise is not empty %}
-                                <a href="{{ e.site_web_entreprise }}" target="_blank" class="pagination-btn">Site Web</a>
-                            {% endif %}
-                        </div>
+                        
                     </div>
                 </div>
             </div>
