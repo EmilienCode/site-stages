@@ -39,18 +39,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Fichier trop volumineux.");
     }
 
+
     if (move_uploaded_file($CV["tmp_name"], $targetFile)) {
 
+        // 1. Enregistrement de la candidature
         $sql = "INSERT INTO CANDIDATURES (LM_candidature, CV_candidature, id_offre, id_utilisateur)
                 VALUES (?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$LM, $targetFile, $id_offre, $id_utilisateur]);
 
-         // Récupère l'id de la candidature créée
-         $id = $pdo->lastInsertId();
-         // Redirige vers une page de confirmation avec l'id de la candidature
-         header("Location: index.php?page=merci-candidature&id=" . $id);
-         exit();
+        // Récupère l'id de la candidature créée
+        $id = $pdo->lastInsertId();
+
+        // ---------------------------------------------------------
+        // NOUVEAU : 2. Incrémentation du nombre de postulants
+        // ---------------------------------------------------------
+        $updateSql = "UPDATE OFFRE SET nombredepostulants = nombredepostulants + 1 WHERE id_offre = ?";
+        $updateStmt = $pdo->prepare($updateSql);
+        $updateStmt->execute([$id_offre]);
+        // ---------------------------------------------------------
+
+        // 3. Redirige vers une page de confirmation avec l'id de la candidature
+        header("Location: index.php?page=merci-candidature&id=" . $id);
+        exit();
 
     } else {
         echo "Erreur upload : ";

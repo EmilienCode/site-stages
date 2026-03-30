@@ -88,6 +88,8 @@ Offres
                     <div class="info-grid">
                         <div class="info-item">💰 <strong>Rémunération :</strong> {{ o.remuneration_offre }} €/mois</div>
                         <div class="info-item">📅 <strong>Publié le :</strong> {{ o.date_offre|date("d/m/Y") }}</div>
+                        <div class="info-item">👁️ <strong>Vues :</strong> {{ o.nombredevues }}</div>
+                        <div class="info-item">📝 <strong>Postulants :</strong> {{ o.nombredepostulants }}</div>
                     </div>
                     <a href="?page=postuler&id={{ o.id_offre }}" class="RechercherBTN" style="display: block; text-align: center; text-decoration: none; margin-top: 10px;">En savoir plus</a>
                 </div>

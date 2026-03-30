@@ -75,6 +75,10 @@ switch ($page) {
         break;
 
     case 'postuler':
+        $id_offre = $_GET['id'] ?? null;
+        $sqlVue = "UPDATE OFFRE SET nombredevues = nombredevues + 1 WHERE id_offre = ?";
+        $stmtVue = $pdo->prepare($sqlVue);
+        $stmtVue->execute([$id_offre]);
         $offresModel = new OffresModel($pdo);
         $controleur = new OffresControleur($offresModel, $twig);
         $controleur->afficherOffre();
