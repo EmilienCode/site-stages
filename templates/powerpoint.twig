@@ -1,0 +1,128 @@
+
+
+{% block content %}
+<link rel="stylesheet" href="assets/css/powerpoint.css"/>
+
+<div class="powerpoint-wrapper">
+    
+    <section class="scene hero-scene">
+        <h1 class="hero-title">Nom de ton <br><span class="highlight">Projet</span></h1>
+        <p class="hero-subtitle">Une introduction percutante pour poser les bases de la présentation.</p>
+        <div class="scroll-indicator">↓ Scrollez pour le Sommaire ↓</div>
+    </section>
+
+    <section class="scene text-reveal-scene">
+        <div class="text-container">
+            <h2 class="reveal-text">01. Contexte</h2>
+            <h2 class="reveal-text">02. Objectifs</h2>
+            <h2 class="reveal-text">03. Cahier des Charges</h2>
+            <h2 class="reveal-text">04. Analyse & Diagrammes</h2>
+            <h2 class="reveal-text">05. Développement & Innovation</h2>
+            <h2 class="reveal-text">06. Architecture MVC & MCD</h2>
+        </div>
+    </section>
+
+    <section class="scene horizontal-scene">
+        <div class="horizontal-container">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <h3>01. Contexte</h3>
+                        <p>Détaille ici l'origine du projet, le problème actuel du marché et pourquoi ton idée est la solution qu'il manquait.</p>
+                    </div>
+                    <div class="panel-image">Image Contexte</div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <h3>02. Objectifs</h3>
+                        <p>Quelles sont les cibles ? Augmenter la productivité, améliorer l'UX, déployer une nouvelle techno ?</p>
+                    </div>
+                    <div class="panel-image">Image Objectifs</div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <h3>03. Contraintes</h3>
+                        <p>Exigences techniques, délais, budget, langages de programmation imposés...</p>
+                    </div>
+                    <div class="panel-image">Image Contraintes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scene diagrams-scene">
+        <div class="diagrams-header">
+            <h2>04. Analyse & Diagrammes</h2>
+            <p>Visualisation de l'architecture et des flux du projet.</p>
+        </div>
+        <div class="diagrams-grid">
+            <div class="diagram-card">
+                <div class="diag-box">Diagramme 1</div>
+                <p>Cas d'utilisation / Flux utilisateur</p>
+            </div>
+            <div class="diagram-card">
+                <div class="diag-box">Diagramme 2</div>
+                <p>Maquettage / Wireframes</p>
+            </div>
+            <div class="diagram-card">
+                <div class="diag-box">Diagramme 3</div>
+                <p>Arborescence</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scene epic-scene-1">
+        <div class="epic-container">
+            <h2 class="bg-title">INNOVATION</h2>
+            <div class="box-3d-wrapper">
+                <div class="layer layer-back">Back-End<br>(BDD, API)</div>
+                <div class="layer layer-front">Interface<br>(Front-End)</div>
+                <div class="layer layer-mid">Logique Métier<br>(Core)</div>
+            </div>
+            <p class="epic-desc">Notre architecture en couches permet une évolutivité maximale et se déploie sans friction.</p>
+        </div>
+    </section>
+
+    <section class="scene mvc-mcd-scene">
+        <div class="tech-panel mvc-panel">
+            <h3 class="tech-title">Modèle MVC</h3>
+            <p class="tech-desc">Séparation claire entre les données (Model), l'interface (View) et la logique (Controller).</p>
+            <div class="tech-img-large">Insère ta très grande image MVC ici</div>
+        </div>
+        <div class="tech-panel mcd-panel">
+            <h3 class="tech-title">Modèle Conceptuel (MCD)</h3>
+            <p class="tech-desc">Structure relationnelle optimisée pour garantir l'intégrité de notre base de données.</p>
+            <div class="tech-img-large mcd-glow">Insère ta très grande image MCD ici</div>
+        </div>
+    </section>
+
+    <section class="scene experience-wow-scene">
+        <h2 class="bg-massive-text">VOICI</h2>
+        <div class="reveal-portal">
+            <div class="portal-content">
+                <h3 class="brand-title">CESITONSTAGE</h3>
+                <p class="brand-slogan">TROUVEZ votre stage idéal ou le candidat parfait !</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scene final-smooth-scene">
+        <div class="grid-overlay"></div>
+        <div class="smooth-words-container">
+            <div class="smooth-word word-1">PLACE</div>
+            <div class="smooth-word word-2">À LA</div>
+            <div class="smooth-word word-3 highlight-glow">DÉMONSTRATION</div>
+        </div>
+        <a href="?page=accueil" class="btn-retour final-btn">Découvrir le site</a>
+    </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="assets/js/powerpoint.js"></script>
+{% endblock %}

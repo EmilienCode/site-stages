@@ -221,4 +221,8 @@ switch ($page) {
         $toutes_candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo $twig->render('candidatures_pilotes.twig', ['candidatures' => $toutes_candidatures]);
         break;
+
+    case 'powerpoint':
+        echo $twig->render('powerpoint.twig');
+        break;
 }
