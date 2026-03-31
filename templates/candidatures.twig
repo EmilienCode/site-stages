@@ -31,8 +31,8 @@
                         <td><strong>{{ candidature.nom_entreprise }}</strong></td>
                         <td>{{ candidature.titre_offre }}</td>
                         <td>{{ candidature.lieu_offre }}</td>
-                        <td>
-                            <small>{{ candidature.LM_candidature|slice(0, 50) }}...</small>
+                        <td style="max-width: 200px; font-style: italic; font-size: 0.85em;">
+                            "{{ candidature.LM_candidature }}"
                         </td>
                         <td>
                             <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit">Voir CV</a>
