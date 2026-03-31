@@ -122,7 +122,9 @@ switch ($page) {
         break;
     
     case 'creercompte':
-        echo $twig->render('creercompte.twig');
+        $userModel = new UtilisateurModel($pdo);
+        $controleur = new UtilisateurControleur($userModel, $twig);
+        $controleur->afficherFormCreation(); // Cette méthode gère le render avec les pilotes
         break;
     
     case 'creerentreprise':

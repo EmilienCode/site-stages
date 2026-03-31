@@ -5,13 +5,12 @@
 {% block content %}
 
 <link rel="stylesheet" href="assets/css/stylelogin.css"/>
-    <main class="connexion-container">
+<main class="connexion-container">
     <section class="connexion-card">
         <header class="connexion-header">
             <h1>Créer un compte</h1>
-            <p>Créer un compte pour plus de fonctionnalitées</p>
+            <p>Créer un compte pour plus de fonctionnalités</p>
         </header>
-
 
         {# Vérification des droits : seul pilote (2) et admin (3) peuvent créer #}
         {% if session.id_role == 2 or session.id_role == 3 %}
@@ -36,29 +35,24 @@
                 <input
                     type="text"
                     name="email"
-                    id="username" 
+                    id="username"
                     placeholder="zizouzidane@gmail.com"
                     required
                 />
-                <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"= regex qui vérifie qu'on a un email valide -->
                 <span id="error-email" style="color:#914941;"></span>
-                
             </div>
 
             <div class="form-line">
-                <label for="password">Définissez un mot de passe   </label>
+                <label for="password">Définissez un mot de passe</label>
                 <input
                     type="password"
                     name="password"
                     id="password"
-                    minlength="8" 
-                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" 
+                    minlength="8"
+                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$"
                     placeholder="••••••••"
                     required
-                /> <!-- (?=.*[A-Z]) → au moins 1 majuscule
-                        (?=.*\d) → au moins 1 chiffre
-                        (?=.*[^A-Za-z0-9]) → au moins 1 caractère spécial
-                        {8,} → 8 caractères minimum-->
+                />
                 <br>      
                 <small class="password-hint">
                      8 caractères minimum, <strong>1 majuscule</strong>, <strong>1 chiffre</strong> et <strong>1 caractère spécial</strong>
@@ -66,7 +60,7 @@
             </div>
 
             <div class="form-line">
-                <label for="password">Confirmez votre mot de passe</label>
+                <label for="confirm">Confirmez votre mot de passe</label>
                 <input
                     type="password"
                     id="confirm"
@@ -75,11 +69,11 @@
                     placeholder="••••••••"
                     required
                 />
-                <span id="error" style="color:#914941;"></span><br><br>
+                <span id="error" style="color:#914941;"></span><br>
             </div>
 
-            <!-- BLOC COORDONNÉES -->
-            <h3>Coordonnées</h3>
+            <hr>
+            <h3>Coordonnées et Rôle</h3>
 
             <div class="form-line">
                 <label>Sexe</label>
@@ -87,7 +81,6 @@
                     <label>
                         <input type="radio" name="sexe" value="0" required> M.
                     </label>
-
                     <label>
                         <input type="radio" name="sexe" value="1"> Mme.
                     </label>
@@ -95,27 +88,43 @@
             </div>
 
             <div class="form-line">
-                <label>Rôle</label>
-
-                {# ADMIN : peut choisir le rôle #}
+                <label>Rôle du nouveau compte</label>
+                {# ADMIN : peut choisir le rôle entre Étudiant et Pilote #}
                 {% if session.id_role == 3 %}
-                <div class="form-row">
-                    <label>
-                        <input type="radio" name="role" value="1" required> Étudiant
-                    </label>
-
-                    <label>
-                        <input type="radio" name="role" value="2"> Pilote
-                    </label>
-                </div>
-
-                {# PILOTE : ne peut créer que des étudiants (champ caché) #}
+                    <div class="form-row">
+                        <label>
+                            <input type="radio" name="role" value="1" class="role-selector" required checked> Étudiant
+                        </label>
+                        <label>
+                            <input type="radio" name="role" value="2" class="role-selector"> Pilote
+                        </label>
+                    </div>
                 {% elseif session.id_role == 2 %}
+                    {# PILOTE : ne peut créer que des étudiants #}
                     <input type="hidden" name="role" value="1">
                     <p><strong>Étudiant</strong></p>
                 {% endif %}
             </div>
-            
+
+            {# SECTION ASSIGNATION PILOTE #}
+            <div id="section-pilote" class="form-line">
+                {% if session.id_role == 3 %}
+                    <label for="id_pilote">Assigner à un pilote référent</label>
+                    <select name="id_pilote" id="id_pilote" class="form-select">
+                        <option value="">-- Aucun pilote (Optionnel) --</option>
+                        {% for pilote in pilotes %}
+                            <option value="{{ pilote.id_utilisateur }}">
+                                {{ pilote.nom|upper }} {{ pilote.prenom }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                {% elseif session.id_role == 2 %}
+                    <p style="color: #666; font-style: italic;">
+                        <small>Note : En tant que pilote, cet étudiant vous sera automatiquement assigné.</small>
+                    </p>
+                {% endif %}
+            </div>
+
             <div class="form-line">
                 <label for="naissance">Date de naissance</label>
                 <input
@@ -126,7 +135,7 @@
                     required
                 />
             </div>
-            <span id="error-date" style="color:#914941;"></span><br><br>
+            <span id="error-date" style="color:#914941;"></span>
 
             <div class="form-line">
                 <label for="telephone">Téléphone</label>
@@ -151,11 +160,11 @@
                     placeholder="Orléans"
                     required
                 />
-                <span id="error-ville" style="color:#914941;"></span><br><br>
+                <span id="error-ville" style="color:#914941;"></span><br>
             </div>
 
             <button type="submit" class="btn-primary btn-full">
-                Créer un compte
+                Créer le compte
             </button>
 
         </form>
@@ -166,11 +175,14 @@
                 <a href="/">Retour à l'accueil</a>
             </div>
         {% endif %}
+
         <script src="assets/js/formulaire.js"></script>
+        <script src="assets/js/gestion_role.js"></script>
+
         <div class="connexion-links">
-            <a href="index.php?page=afficher_utilisateur">← Retour</a>
+            <a href="index.php?page=afficher_utilisateur">← Retour à la liste</a>
         </div>
     </section>
-    </main>
+</main>
 
 {% endblock %}
