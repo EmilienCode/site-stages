@@ -371,6 +371,32 @@ select.selectTrie {
     border-radius: 8px;
 }
 
+
+.wishlist-heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 50;
+    width: 45px; 
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border-radius: 50%;
+}
+
+.wishlist-heart:hover {
+    transform: scale(1.1);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.wishlist-heart svg {
+    pointer-events: none; 
+    color: #e74c3c;
+}
 .info-item {
     font-size: 0.85rem;
     color: var(--color-light-gray);
@@ -432,73 +458,6 @@ select.selectTrie {
         justify-content: center;
         margin-top: none;
     }
-}
-@media (max-width: 768px) {
-    .offres { grid-template-columns: 1fr !important; }
-}
-
-@keyframes tourneMonPote {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-
-@media (max-width: 767px) {
-
-
-    .InsideSection {
-        grid-template-columns: 1fr; 
-        text-align: center; 
-        gap: 3rem;
-    }
-    
-    .GroupeRecherche {
-        position: relative;
-        transform: none;
-        top: auto; left: auto;
-        
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        gap: 1.5rem;
-    }
-
-
-    .BoxRechercher {
-        flex-direction: column;
-        padding: 0.5rem;
-    }
-
-    .input1, .input2 {
-        width: 100%;
-        border-right: none; 
-        border-bottom: 1px solid var(--color-gray); 
-        justify-content: center; 
-    }
-    .input2 {
-        border-bottom: none;
-    }
-   
-
-    .RechercherBTN {
-        width: 100%;
-    }
-    
-    .offres {
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
-    .offre {
-        width: 100%;
-        width: calc(33.333% - 1rem); 
-    }
-
-    .divTrie {
-        width : 100%;
-        flex-wrap: wrap ; 
-        justify-content: center;
-        margin-top: none;
-    }
 
     .offrestitre {
         margin-top: 180px;
@@ -508,29 +467,21 @@ select.selectTrie {
         
     }
 }
- 
-.wishlist-heart {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 50;
-    width: 45px; 
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    text-decoration: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    border-radius: 50%;
+@media (max-width: 768px) {
+    .offres { grid-template-columns: 1fr !important; }
+    .offrestitre {
+        margin-top: 180px;
+        display: flex;
+  align-items: center;
+  justify-content: center;
+        
+    }
 }
 
-.wishlist-heart:hover {
-    transform: scale(1.1);
-    background-color: rgba(231, 76, 60, 0.1);
+@keyframes tourneMonPote {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-.wishlist-heart svg {
-    pointer-events: none; 
-    color: #e74c3c;
-}
+
+
