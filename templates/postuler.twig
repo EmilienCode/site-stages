@@ -33,8 +33,7 @@ Postuler
     {% if session.user_id and session.id_role == 1 %}
         <section class="card form-card">
             <h3>Votre candidature</h3>
-
-            <form class="form" action="traitement.php" method="POST" enctype="multipart/form-data">
+            <form action="index.php?page=candidature" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_offre" value="{{ offre.id_offre }}">
 
                 <div class="form-group file-group">
