@@ -57,11 +57,56 @@ class OffresControleur {
         ]);
     }
 
+    public function afficherEntrepriseOffre(){
+        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        if (!isset($_SESSION['id_role'])) {
+            header('Location: index.php?page=connexion'); // Ou ta page de login
+            exit();
+        }
+        $entreprise = [];
+        // On adapte la requête selon le rôle en session
+        if ($_SESSION['id_role'] == 3||$_SESSION['id_role'] == 2) {
+            $entreprise = $this->offresModel->getAllEntrepriseMinInfos();
+            //var_dump($entreprise); die(); //permet d'afficher le resultat de la requete (debut)
+        }
+
+        echo $this->twig->render('gestion_entreprise_offre.twig', [
+            'entreprise' => $entreprise
+        ]);
+    }
+
+    public function afficherOffreByNomEntreprise(){
+        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        if (!isset($_SESSION['id_role'])) {
+            header('Location: index.php?page=connexion'); // Ou ta page de login
+            exit();
+        }
+        $offres = [];
+        $nom_entreprise = $_GET['nom'] ?? null;
+        // On adapte la requête selon le rôle en session
+        if ($_SESSION['id_role'] == 3||$_SESSION['id_role'] == 2) {
+            $offres = $this->offresModel->afficherOffreByNomEntrepriseSQL($nom_entreprise);
+            //var_dump($entreprise); die(); //permet d'afficher le resultat de la requete (debut)
+        }
+
+        echo $this->twig->render('gestion_offres.twig', [
+            'offres' => $offres
+        ]);
+    }
+
     public function modifierOffre() {
         // Logique de modification d'une offre (similaire à afficherOffre mais avec formulaire)
     }
 
     public function supprimerOffre() {
-        // Logique de suppression d'une offre
+        $this->checkAccess([2,3]);
+
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $this->offreModel->deleteOffre($id);
+        }
+        echo $this->twig->render('gestion_offres.twig', [
+            'offres' => $offres
+        ]);
     }
 }
