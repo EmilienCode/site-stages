@@ -12,7 +12,7 @@ function checkForm() {
     const errorDate = document.getElementById("error-date");
     let valid = true;
 
-    // ---- PASSWORD CHECK ----
+    //  PASSWORD CHECK 
     if (pass !== confirm) {
         error.textContent = "⚠️ Les mots de passe ne correspondent pas !";
         document.getElementById("confirm").scrollIntoView({ behavior: "smooth", block: "center" });
@@ -21,7 +21,7 @@ function checkForm() {
         error.textContent = "";
     }
 
-    // ---- EMAIL CHECK ----
+    //  EMAIL CHECK 
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     const blockedDomains = [
         "tempmail.com",
@@ -58,7 +58,7 @@ function checkForm() {
     } else {
         errorVille.textContent = "";
     }
-    //---- DATE CHECK ----
+    // DATE CHECK 
     // On vérifie que la date est au format jj/mm/aaaa et qu'elle est valide (ex: pas de 31/02/2020) et pas dans le futur
     const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
     const match = date.match(dateRegex);

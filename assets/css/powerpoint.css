@@ -1,0 +1,97 @@
+/* --- RESET ET CONTENEUR GLOBAL --- */
+html, body { margin: 0 !important; padding: 0 !important; background-color: #050505 !important; overflow-x: hidden; }
+.powerpoint-wrapper { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); width: 100vw; overflow-x: hidden; background-color: #050505; color: #ffffff; font-family: var(--font-sans, system-ui, sans-serif); margin-top: 0; padding: 0; box-sizing: border-box; }
+.powerpoint-wrapper * { box-sizing: inherit; }
+.scene { width: 100vw; min-height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+.highlight { color: #fa8072; } 
+
+/* --- SCÈNES 1 À 4 --- */
+.hero-scene { flex-direction: column; text-align: center; }
+.hero-title { font-size: 5rem; margin-bottom: 1rem; font-weight: 900; opacity: 0; }
+.hero-subtitle { font-size: 1.5rem; color: #888; max-width: 600px; opacity: 0; }
+.scroll-indicator { position: absolute; bottom: 30px; letter-spacing: 2px; text-transform: uppercase; animation: float 2s infinite ease-in-out; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.text-reveal-scene { background: #0a0a0a; padding: 0 10%; }
+.text-container { width: 100%; max-width: 800px; }
+.reveal-text { font-size: 3.5rem; margin-bottom: 1rem; color: #ffffff; opacity: 0.15; }
+
+.horizontal-scene { align-items: flex-start; justify-content: flex-start; }
+.horizontal-container { display: flex; width: 300vw; height: 100vh; }
+.panel { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; padding: 5rem; }
+.panel:nth-child(1) { background: #111; } .panel:nth-child(2) { background: #1a1a2e; } .panel:nth-child(3) { background: #16213e; }
+.panel-content { display: flex; gap: 4rem; max-width: 1200px; width: 100%; align-items: center; }
+.panel-text { flex: 1; } .panel-text h3 { font-size: 3rem; margin-bottom: 1.5rem; color: #fa8072; } .panel-text p { font-size: 1.2rem; line-height: 1.8; color: #ddd; }
+.panel-image { flex: 1; height: 400px; background: #333; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: #666; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+
+.diagrams-scene { flex-direction: column; background: #080808; padding: 5rem 2rem; justify-content: flex-start;}
+.diagrams-header { text-align: center; margin-bottom: 5rem; margin-top: 5rem; } .diagrams-header h2 { font-size: 3rem; color: #fa8072; }
+.diagrams-grid { display: flex; justify-content: center; gap: 3rem; width: 100%; max-width: 1400px; flex-wrap: wrap; }
+.diagram-card { flex: 1; min-width: 300px; text-align: center; opacity: 0; }
+.diag-box { width: 100%; aspect-ratio: 4/3; background: #151515; border: 1px solid #333; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem; font-size: 1.2rem; color: #555; }
+
+/* --- 5. EPIC SCENE INNOVATION (MODIFIÉE POUR LE CARRÉ) --- */
+.epic-scene-1 { background: #000; perspective: 2000px; }
+.epic-container { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.bg-title { position: absolute; font-size: 12vw; font-weight: 900; color: rgba(255, 255, 255, 0.03); pointer-events: none; }
+
+/* Nouveau format : des cartes CARRÉES */
+.box-3d-wrapper { 
+    position: relative; 
+    width: 400px;  /* Format Carré */
+    height: 400px; /* Format Carré */
+    transform-style: preserve-3d; 
+    transform: rotateX(55deg) rotateZ(-30deg); /* Bien penché au départ */
+}
+.layer { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    border-radius: 20px; display: flex; justify-content: center; align-items: center; 
+    font-weight: bold; font-size: 2rem; text-align: center; padding: 2rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8); 
+    background: rgba(15, 15, 15, 1); /* OPAQUE */
+    border: 3px solid #333; 
+    backface-visibility: hidden; 
+}
+
+/* Gestion du Z-index pour l'empilement */
+.layer-back { border-color: #3742fa; color: #3742fa; z-index: 1; } 
+.layer-front { border-color: #fa8072; color: #fa8072; z-index: 2; }
+.layer-mid { border-color: #2ed573; color: #2ed573; z-index: 3; } 
+
+.epic-desc { margin-top: 5rem; font-size: 1.5rem; color: #aaa; text-align: center; max-width: 600px; opacity: 0; position: relative; z-index: 10;}
+
+/* --- 6 À 8 --- */
+.mvc-mcd-scene { background: #050505; }
+.tech-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; opacity: 0; }
+.tech-title { font-size: 3rem; margin-bottom: 1rem; color: #fff; }
+.tech-desc { font-size: 1.2rem; color: #aaa; margin-bottom: 2rem; text-align: center; max-width: 800px; }
+.tech-img-large { width: 80vw; max-width: 1200px; height: 50vh; background: #111; border: 1px dashed #555; border-radius: 20px; display: flex; justify-content: center; align-items: center; color: #666; font-size: 2rem; font-weight: bold; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+.mcd-glow { border-color: #3742fa; box-shadow: 0 0 50px rgba(55, 66, 250, 0.2); }
+
+.experience-wow-scene { background: #000; }
+.bg-massive-text { position: absolute; font-size: 25vw; font-weight: 900; color: rgba(255, 255, 255, 0.05); white-space: nowrap; z-index: 1; }
+.reveal-portal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #fa8072 0%, #914941 100%); -webkit-clip-path: circle(0% at 50% 50%); clip-path: circle(0% at 50% 50%); display: flex; justify-content: center; align-items: center; z-index: 10; }
+.portal-content { text-align: center; color: #fff; max-width: 1000px; padding: 2rem; }
+.brand-title { font-size: 8vw; margin-bottom: 1rem; text-shadow: 0 10px 30px rgba(0,0,0,0.3); font-weight: 900; letter-spacing: 2px;}
+.brand-slogan { font-size: 2.5rem; font-weight: 500; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+.final-smooth-scene { background: #000; flex-direction: column; perspective: 1500px; }
+.grid-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(250, 128, 114, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(250, 128, 114, 0.1) 1px, transparent 1px); background-size: 50px 50px; transform: rotateX(60deg) translateY(100px) translateZ(-200px); opacity: 0; }
+.smooth-words-container { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 10; }
+.smooth-word { font-size: 7vw; font-weight: 800; line-height: 1.1; color: #fff; text-transform: uppercase; opacity: 0; }
+.highlight-glow { color: #fa8072; text-shadow: 0 0 20px rgba(250, 128, 114, 0.5); }
+.final-btn { opacity: 0; margin-top: 4rem; position: relative; z-index: 20; box-shadow: 0 0 30px rgba(250, 128, 114, 0.3); border: none; }
+.btn-retour { display: inline-block; padding: 1rem 3rem; background: #fff; color: #fa8072; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.2rem; transition: transform 0.3s; cursor: pointer; }
+.btn-retour:hover { transform: scale(1.05); }
+
+@media (max-width: 900px) {
+    .panel-content { flex-direction: column; text-align: center; padding: 0 2rem; }
+    .reveal-text { font-size: 2rem; }
+    .hero-title { font-size: 3.5rem; }
+    .diagrams-grid { flex-direction: column; align-items: center; }
+    .box-3d-wrapper { width: 300px; height: 300px; } /* Ajusté pour mobile */
+    .tech-img-large { width: 95vw; height: 30vh; }
+    .brand-title { font-size: 12vw; }
+    .brand-slogan { font-size: 1.5rem; }
+    .smooth-word { font-size: 10vw; }
+}
