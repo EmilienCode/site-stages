@@ -9,8 +9,20 @@
 <div style="padding-top: calc(var(--spacing) * 16);">
     <main class="admin-container">
         <div class="admin-header">
-            <h1>Suivi global des Candidatures</h1>
-            <p>Liste de tous les étudiants ayant postulé à une offre.</p>
+            <h1>
+                {% if session.id_role == 3 %}
+                    Suivi global des Candidatures
+                {% else %}
+                    Suivi de mes Étudiants
+                {% endif %}
+            </h1>
+            <p>
+                {% if session.id_role == 3 %}
+                    Liste de tous les étudiants ayant postulé à une offre dans le système.
+                {% else %}
+                    Liste des candidatures déposées par les étudiants qui vous sont rattachés.
+                {% endif %}
+            </p>
         </div>
 
         <table class="admin-table">
@@ -20,7 +32,7 @@
                     <th>Entreprise</th>
                     <th>Offre</th>
                     <th>Lieu</th>
-                    <th>Letter de motivation</th>
+                    <th>Lettre de motivation</th>
                     <th>Date</th>
                     <th>Documents</th>
                 </tr>
@@ -35,23 +47,32 @@
                         <td>{{ candidature.nom_entreprise }}</td>
                         <td>{{ candidature.titre_offre }}</td>
                         <td>{{ candidature.lieu_offre }}</td>
-                        <td style="max-width: 200px; font-style: italic; font-size: 0.85em;">
+                        <td style="max-width: 200px; font-style: italic; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis;">
                             "{{ candidature.LM_candidature }}"
                         </td>
                         <td>{{ candidature.date_candidature|date("d/m/Y") }}</td>
                         <td>
                             <div style="display: flex; gap: 5px;">
+                                {# Le lien vers le CV (vérifiez que le chemin stocké en BDD est correct) #}
                                 <a href="{{ candidature.CV_candidature }}" target="_blank" class="btn-action btn-edit" title="Voir le CV">CV</a>
                             </div>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5" style="text-align:center; padding: 30px;">Aucune candidature enregistrée pour le moment.</td>
+                        {# Colspan mis à 7 car il y a 7 colonnes définies dans le thead #}
+                        <td colspan="7" style="text-align:center; padding: 40px; color: #666;">
+                            <i class="fas fa-folder-open"></i><br>
+                            Aucune candidature enregistrée pour vos étudiants actuellement.
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        <div class="connexion-links" style="margin-top: 20px;">
+            <a href="index.php?page=accueil">← Retour au tableau de bord</a>
+        </div>
     </main>
 </div>
 {% endblock %}

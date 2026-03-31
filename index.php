@@ -12,6 +12,8 @@ use App\Models\OffresModel;
 use App\Controlers\UtilisateurControleur;
 use App\Controlers\EntrepriseControleur;
 use App\Controlers\OffresControleur;
+use App\Models\CandidatureModel;
+use App\Controlers\CandidatureControleur;
 
 // --- INITIALISATION TWIG ---
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
@@ -83,6 +85,12 @@ switch ($page) {
         $controleur = new OffresControleur($offresModel, $twig);
         $controleur->afficherOffre();
         break;
+
+    case 'candidature':
+        $model = new CandidatureModel($pdo);
+        $controleur = new CandidatureControleur($model, $twig);
+        $controleur->postuler();
+        break;
     
     case 'afficher_utilisateur':
     case 'modifier_utilisateur':
@@ -122,7 +130,9 @@ switch ($page) {
         break;
     
     case 'creercompte':
-        echo $twig->render('creercompte.twig');
+        $userModel = new UtilisateurModel($pdo);
+        $controleur = new UtilisateurControleur($userModel, $twig);
+        $controleur->afficherFormCreation(); // Cette méthode gère le render avec les pilotes
         break;
     
     case 'creerentreprise':
@@ -136,13 +146,10 @@ switch ($page) {
     case 'merci-candidature':
         $id = $_GET['id'] ?? null;
         if (!$id) { die("Candidature introuvable"); }
-        // Utilisation de OFFRE au singulier
-        $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise FROM CANDIDATURES c JOIN OFFRE o ON c.id_offre = o.id_offre WHERE c.id_candidature = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$id]);
-        $candidature = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo $twig->render('merci-candidature.twig', ['candidature' => $candidature]);
-        break; 
+        $model = new CandidatureModel($pdo);
+        $controleur = new CandidatureControleur($model, $twig);
+        $controleur->afficherMerci($id);
+        break;
 
     case 'wishlist':
         $id_utilisateur = $_SESSION['user_id'] ?? null;
