@@ -1,0 +1,92 @@
+{% extends "base.twig" %}
+
+{% block title %}Modifier l'offre{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="assets/css/style_modifier_utilisateur.css"/>
+<main class="admin-container">
+    <div class="admin-header">
+        <h1>Modifier l'offre #{{ offre.id_offre }}</h1>
+        <a href="index.php?page=afficher_offre&nom={{ offre.nom_entreprise }}" class="btn-retour">Retour à la liste</a>
+    </div>
+
+    {% if erreur %}
+        <div class="alert error">{{ erreur }}</div>
+    {% endif %}
+
+    <form method="POST" action="index.php?page=modifier_offre&id={{ offre.id_offre }}" class="admin-form">
+        
+        <fieldset>
+            <legend>Informations Principales</legend>
+            
+            <div class="form-group">
+                <label for="titre_offre">Titre de l'offre * :</label>
+                <input type="text" id="titre_offre" name="titre_offre" value="{{ offre.titre_offre }}" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="domaine_requis_offre">Domaine requis :</label>
+                <input type="text" id="domaine_requis_offre" name="domaine_requis_offre" value="{{ offre.domaine_requis_offre }}" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label for="description_offre">Description de l'offre :</label>
+                <textarea id="description_offre" name="description_offre" maxlength="500" rows="4">{{ offre.description_offre }}</textarea>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Détails du stage / emploi</legend>
+            
+            <div class="form-group">
+                <label for="lieu_offre">Lieu :</label>
+                <input type="text" id="lieu_offre" name="lieu_offre" value="{{ offre.lieu_offre }}" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label for="duree_formation_offre">Durée :</label>
+                <input type="text" id="duree_formation_offre" name="duree_formation_offre" value="{{ offre.duree_formation_offre }}" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="remuneration_offre">Rémunération (€/mois) :</label>
+                <input type="number" step="0.01" id="remuneration_offre" name="remuneration_offre" value="{{ offre.remuneration_offre }}">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Entreprise & Compétences</legend>
+            
+            <div class="form-group">
+                <label for="nom_entreprise">Entreprise * :</label>
+                <select name="nom_entreprise" id="nom_entreprise" required>
+                    <option value="">-- Sélectionnez une entreprise --</option>
+                    {% for ent in entreprises %}
+                        <option value="{{ ent.nom_entreprise }}" {% if ent.nom_entreprise == offre.nom_entreprise %}selected{% endif %}>
+                            {{ ent.nom_entreprise }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="id_competence">Compétence clé :</label>
+                <select name="id_competence" id="id_competence">
+                    <option value="">-- Sélectionnez une compétence --</option>
+                    {% for comp in competences %}
+                        <option value="{{ comp.id_competence }}" {% if comp.id_competence == offre.id_competence %}selected{% endif %}>
+                            {{ comp.nom_competence }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Enregistrer les modifications</button>
+        </div>
+    </form>
+</main>
+
+{% endblock %}

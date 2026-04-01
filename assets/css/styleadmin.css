@@ -1,20 +1,48 @@
+/* =========================
+   RESET GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.admin-table td {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   ADMIN CONTAINER
+========================= */
+
 .admin-container { 
     max-width: 1000px; 
     margin: 40px auto; 
+    margin-top: 100px;
     padding: 20px; 
     font-family: var(--font-sans); 
     background: var(--background); 
     border-radius: 1rem;
     border: 1px solid var(--color-gray);
     box-shadow: 0 4px 6px var(--color-box-shadow-black); 
-    color : var(--color-dark-gray);
+    color: var(--color-dark-gray);
 }
+
+/* =========================
+   HEADER
+========================= */
+
 .admin-header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     margin-bottom: 20px; 
 }
+
+/* =========================
+   BUTTONS
+========================= */
+
 .btn-add { 
     background-color: var(--primary-color); 
     color: var(--background); 
@@ -23,20 +51,7 @@
     border-radius: calc(var(--radius) + 4px); 
     font-weight: bold; 
 }
-.admin-table { 
-    width: 100%; 
-    margin-top: 20px;
-    border-collapse: collapse; 
-}
-.admin-table th, .admin-table td { 
-    padding: 12px; 
-    border: 1px solid var(--color-muted-bg-hover); 
-    text-align: left; 
-    color: var(--color-dark-gray);
-}
-.admin-table th { 
-    background-color: var(--background); 
-}
+
 .btn-action { 
     padding: 6px 10px; 
     text-decoration: none; 
@@ -45,66 +60,193 @@
     font-size: 14px; 
     margin-right: 5px; 
 }
-.btn-edit { 
-    background-color: #007bff; 
+
+.btn-edit { background-color: #007bff; }
+.btn-delete { background-color: #dc3545; }
+.btn-note { background-color: #ffe100; }
+
+/* =========================
+   TABLE (DESKTOP)
+========================= */
+
+.admin-table { 
+    width: 100%; 
+    margin-top: 20px;
+    border-collapse: collapse; 
+    table-layout: fixed; 
 }
-.btn-delete { 
-    background-color: #dc3545; 
+
+.admin-table th, 
+.admin-table td { 
+    padding: 12px; 
+    border: 1px solid var(--color-muted-bg-hover); 
+    text-align: left; 
+    color: var(--color-dark-gray);
+    vertical-align: top;
 }
-.btn-note { 
-    background-color: #ffe100; 
+
+.admin-table th { 
+    background-color: var(--background); 
 }
+
+/* =========================
+   SEARCH BAR
+========================= */
+
 .BoxRechercher {
-   
     display: flex;
     flex-direction: row;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 15px 20px -5px #0000001a, 0 8px 10px -6px #0000001a;
     padding: calc(var(--spacing) * 2);
     background-color: var(--background);
-    border-color: var(--color-gray);
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid var(--color-gray);
     border-radius: 1rem;
     gap: calc(var(--spacing) * 4);
-    transition: all 0.3s cubic-bezier(.4, 0, .2, 1);
-    
-    position: static; 
-    transform: none;
-    margin: 0;
+    box-shadow: 0 15px 20px -5px #0000001a;
 }
 
-.input1{
+.input1 {
     display: flex;
-    border-bottom-style: solid;
-    border-bottom-width: 0;
-    border-right-style: solid;
-    border-right-width: 1px;
-    padding-block: calc(var(--spacing) * 3);
-    padding-inline: calc(var(--spacing) * 4);
-    border-color: var(--color-gray);
-    gap: calc(var(--spacing) * 3);
     align-items: center;
     flex: 1;
-    font-family: var(--font-sans);
-}
-.inputTXT{
-    color: var(--color-light-gray); 
-    width: 100%;
-    outline: none;
-    border: none;
+    gap: calc(var(--spacing) * 3);
+    padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4);
+    border-right: 1px solid var(--color-gray);
 }
 
-.RechercherBTN{
-    transition-property: all;
-    transition: cubic-bezier(.4, 0, .2, 1);
-    transition-duration: 0.15s;
-    color: var(--background);
-    white-space: nowrap;
-    font-weight: var(--font-weight-nom);
-    padding-block: calc(var(--spacing) * 3);
-    padding-inline: calc(var(--spacing) * 8);
+.inputTXT {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--color-light-gray);
+}
+
+.RechercherBTN {
+    padding: calc(var(--spacing) * 3) calc(var(--spacing) * 8);
     background-color: var(--primary-color);
-    border-radius: calc(var(--radius)  + 4px);
-    border-color: #0000;
+    color: var(--background);
+    border-radius: calc(var(--radius) + 4px);
+    border: none;
     cursor: pointer;
+    font-weight: var(--font-weight-nom);
+    white-space: nowrap;
+}
+
+/* =========================
+   TABLETTE
+========================= */
+
+@media (max-width: 1024px) {
+
+    .admin-container {
+        margin: 20px;
+        padding: 16px;
+        margin-top: 100px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .BoxRechercher {
+        flex-direction: column;
+    }
+
+    .input1 {
+        border-right: none;
+        border-bottom: 1px solid var(--color-gray);
+    }
+
+    .RechercherBTN {
+        width: 100%;
+    }
+}
+
+/* =========================
+   MOBILE (CARDS MODE)
+========================= */
+
+@media (max-width: 768px) {
+
+    .admin-table thead {
+        display: none;
+    }
+    .admin-container{
+        margin-top: 190px;
+    }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tr {
+        margin-bottom: 15px;
+        padding: 14px;
+        border: 1px solid var(--color-gray);
+        border-radius: 12px;
+        background: var(--background);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .admin-table td {
+        display: block;
+        padding: 6px 0;
+        border: none;
+        font-size: 13px;
+    }
+    .admin-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        color: var(--color-dark-gray);
+        margin-bottom: 2px;
+    }
+
+    .btn-action {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 6px;
+    }
+}
+
+/* =========================
+   MOBILE SMALL
+========================= */
+
+@media (max-width: 480px) {
+
+    .admin-container {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    .admin-header h1 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .admin-table tr {
+        padding: 10px;
+    }
+
+    .admin-table td {
+        font-size: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .BoxRechercher {
+        padding: calc(var(--spacing) * 1.5);
+    }
+
+    .inputTXT {
+        font-size: 13px;
+    }
 }

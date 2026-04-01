@@ -4,7 +4,6 @@ Gestion Entreprises
 {% endblock %}
 {% block content %}
 
-    <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/styleadmin.css"/>
 
     {% if session.user_id is defined and session.user_id is not null and (session.id_role == 2 or session.id_role == 3) %}
@@ -29,18 +28,19 @@ Gestion Entreprises
             <tbody>
                 {% for ent in entreprise %}
                     <tr>
-                        <td>{{ ent.siret_entreprise }}</td>
-                        <td>{{ ent.nom_entreprise }}</td>
-                        <td>{{ ent.email_entreprise }}</td>
-                        <td>{{ ent.secteur_entreprise }}</td>
-                        <td>{{ ent.ville_entreprise }}</td>
-                        <td>
+                        <td data-label="Siret">{{ ent.siret_entreprise }}</td>
+                        <td data-label="Nom de l'entreprise">{{ ent.nom_entreprise }}</td>
+                        <td data-label="Email">{{ ent.email_entreprise }}</td>
+                        <td data-label="Secteur">{{ ent.secteur_entreprise }}</td>
+                        <td data-label="Ville">{{ ent.ville_entreprise }}</td>
+                        <td data-label="Note">
                             {% if ent.note_evaluation is not null %}
                                 {{ent.note_evaluation}} / 5
                             {%else%}
                                 Aucune
                             {% endif %}
                         </td>
+
                         <td>
                             <a href="index.php?page=modifier_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-edit">Modifier</a>
                             <a href="index.php?page=supprimer_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">Supprimer</a>

@@ -23,6 +23,13 @@ class OffresModel {
         }
     }
 
+    public function getAllNomsEntreprises() {
+        // On récupère juste le nom, trié par ordre alphabétique
+        $sql = "SELECT nom_entreprise FROM ENTREPRISE ORDER BY nom_entreprise ASC";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // MISE À JOUR : Ajout du paramètre $competence_id et correction de lieu_offre
     public function getOffres($limit, $offset, $metier = '', $ville = '', $tri = 'recents', $competence_id = '') {
         try {
@@ -151,5 +158,43 @@ class OffresModel {
         ";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute(['id' => $id]);
+    }
+
+    public function updateOffre($id, $data) {
+        try {
+            // Une seule table à modifier : pas besoin de transaction ici
+            $query = "
+                UPDATE OFFRE 
+                SET 
+                    titre_offre = :titre, 
+                    description_offre = :desc, 
+                    remuneration_offre = :rem, 
+                    lieu_offre = :lieu, 
+                    duree_formation_offre = :duree, 
+                    domaine_requis_offre = :domaine, 
+                    nom_entreprise = :nomE, 
+                    id_competence = :idComp
+                WHERE id_offre = :id
+            ";
+
+            $stmt = $this->pdo->prepare($query);
+            
+            return $stmt->execute([
+                'titre'      => $data['titre_offre'],
+                'desc'    => $data['description_offre'],
+                'rem'      => $data['remuneration_offre'],
+                'lieu'     => $data['lieu_offre'],
+                'duree'    => $data['duree_formation_offre'],
+                'domaine'     => $data['domaine_requis_offre'],
+                'nomE'  => $data['nom_entreprise'],
+                'idComp'   => $data['id_competence'],
+                'id'    => $id
+            ]);
+
+        } catch (Exception $e) {
+            // Log de l'erreur pour le debug
+            error_log("Erreur updateOffre : " . $e->getMessage());
+            return false;
+        }
     }
 }
