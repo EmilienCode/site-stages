@@ -141,6 +141,12 @@ switch ($page) {
     case 'creerentreprise':
         echo $twig->render('creerentreprise.twig');
         break;
+    
+    case 'creeroffre':
+        $offresModel = new OffresModel($pdo);
+        $controleur = new OffresControleur($offresModel, $twig);
+        $controleur->afficherFormulaireCreation();
+        break;
 
     case 'contact':
         echo $twig->render('contact.twig');
@@ -155,82 +161,21 @@ switch ($page) {
         break;
 
     case 'wishlist':
-        $id_utilisateur = $_SESSION['user_id'] ?? null;
-        $offres_favoris = [];
-        if ($id_utilisateur) {
-            try {
-                // Utilisation de OFFRE au singulier
-                $sql = "SELECT o.* FROM OFFRE o 
-                        JOIN MET_EN_FAVORI f ON o.id_offre = f.id_offre 
-                        WHERE f.id_utilisateur = ?";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([$id_utilisateur]);
-                $offres_favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                die("Erreur Wishlist : " . $e->getMessage());
-            }
-        }
-        echo $twig->render('wishlist.twig', ['offres' => $offres_favoris]);
+        require_once __DIR__ . '/traitementwishlist.php';
         break;
 
     case 'ajouter_wishlist':
-        $id_offre = $_GET['id'] ?? null;
-        $id_utilisateur = $_SESSION['user_id'] ?? null;
-        if ($id_offre && $id_utilisateur) {
-            try {
-                $check = $pdo->prepare("SELECT * FROM MET_EN_FAVORI WHERE id_utilisateur = ? AND id_offre = ?");
-                $check->execute([$id_utilisateur, $id_offre]);
-                if ($check->rowCount() == 0) {
-                    $ins = $pdo->prepare("INSERT INTO MET_EN_FAVORI (id_utilisateur, id_offre) VALUES (?, ?)");
-                    $ins->execute([$id_utilisateur, $id_offre]);
-                } else {
-                    $del = $pdo->prepare("DELETE FROM MET_EN_FAVORI WHERE id_utilisateur = ? AND id_offre = ?");
-                    $del->execute([$id_utilisateur, $id_offre]);
-                }
-            } catch (PDOException $e) {
-                die("Erreur SQL Ajout : " . $e->getMessage());
-            }
-        }
-        header("Location: index.php?page=offres");
-        exit();
+        require_once __DIR__ . '/traitementajoutwishlist.php';
+        break;
 
     case 'candidatures':
-        $id_utilisateur = $_SESSION['user_id'] ?? null;
-        $mes_candidatures = [];
-        if ($id_utilisateur) {
-            try {
-                // Ajout de o.lieu_offre et c.LM_candidature dans le SELECT
-                $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise, o.lieu_offre 
-                        FROM CANDIDATURES c 
-                        JOIN OFFRE o ON c.id_offre = o.id_offre 
-                        WHERE c.id_utilisateur = ? 
-                        ORDER BY c.date_candidature DESC";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([$id_utilisateur]);
-                $mes_candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                die("Erreur Candidatures : " . $e->getMessage());
-            }
-        }
-        echo $twig->render('candidatures.twig', ['candidatures' => $mes_candidatures]);
+        require_once __DIR__ . '/traitementcandidatures.php';
         break;
 
     case 'candidatures_pilotes':
-        if (!isset($_SESSION['user_id']) || ($_SESSION['id_role'] != 2 && $_SESSION['id_role'] != 3)) {
-            header("Location: index.php?page=connexion");
-            exit();
-        }
-        // Ajout de o.lieu_offre et c.LM_candidature dans le SELECT pour le pilote
-        $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise, o.lieu_offre, u.nom as nom_etudiant, u.prenom as prenom_etudiant 
-                FROM CANDIDATURES c 
-                JOIN OFFRE o ON c.id_offre = o.id_offre 
-                JOIN UTILISATEUR u ON c.id_utilisateur = u.id_utilisateur 
-                ORDER BY c.date_candidature DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $toutes_candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo $twig->render('candidatures_pilotes.twig', ['candidatures' => $toutes_candidatures]);
+        require_once __DIR__ . '/traitementcandidaturespilotes.php';
         break;
+
 
     case 'powerpoint':
         echo $twig->render('powerpoint.twig');

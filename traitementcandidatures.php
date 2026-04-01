@@ -1,27 +1,22 @@
 <?php
-// Vérification de la connexion
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php?page=connexion");
-    exit();
+$id_utilisateur = $_SESSION['user_id'] ?? null;
+$mes_candidatures = [];
+
+if ($id_utilisateur) {
+    try {
+        $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise, o.lieu_offre 
+                FROM CANDIDATURES c 
+                JOIN OFFRE o ON c.id_offre = o.id_offre 
+                WHERE c.id_utilisateur = ? 
+                ORDER BY c.date_candidature DESC";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id_utilisateur]);
+        $mes_candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (PDOException $e) {
+        die("Erreur Candidatures : " . $e->getMessage());
+    }
 }
 
-$user_id = $_SESSION['user_id'];
-
-// Requête pour récupérer les candidatures avec les infos de l'offre et de l'entreprise
-$sql = "SELECT c.id_candidature, c.date_candidature, c.CV_candidature, 
-               o.titre_offre, e.nom_entreprise, o.lieu_offre
-        FROM CANDIDATURES c
-        JOIN OFFRES o ON c.id_offre = o.id_offre
-        JOIN ENTREPRISE e ON o.id_entreprise = e.id_entreprise
-        WHERE c.id_utilisateur = ?
-        ORDER BY c.date_candidature DESC";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$user_id]);
-$mes_candidatures = $stmt->fetchAll();
-
-// On envoie à Twig
-echo $twig->render('traitementcandidatures.twig', [
-    'candidatures' => $mes_candidatures,
-    'session' => $_SESSION
-]);
+echo $twig->render('candidatures.twig', ['candidatures' => $mes_candidatures]);

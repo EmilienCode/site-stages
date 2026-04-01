@@ -1,7 +1,7 @@
 <?php
 namespace App\Controlers;
 
-class OffresControleur {
+class OffresControleur extends UtilisateurControleur{
     private $offresModel;
     private $twig;
 
@@ -90,23 +90,130 @@ class OffresControleur {
         }
 
         echo $this->twig->render('gestion_offres.twig', [
-            'offres' => $offres
+            'offres' => $offres,
+            'nom_entreprise' => $nom_entreprise
+        ]);
+    }
+
+    public function afficherOffreById(){
+        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        if (!isset($_SESSION['id_role'])) {
+            header('Location: index.php?page=connexion'); // Ou ta page de login
+            exit();
+        }
+        $offres = [];
+        $id_offre = $_GET['id'] ?? null;
+        // On adapte la requête selon le rôle en session
+        if ($_SESSION['id_role'] == 3||$_SESSION['id_role'] == 2) {
+            $offres = $this->offresModel->afficherOffreByIdSQL($id);
+            //var_dump($entreprise); die(); //permet d'afficher le resultat de la requete (debut)
+        }
+
+        echo $this->twig->render('gestion_offres.twig', [
+            'offres' => $offres,
+            'nom_entreprise' => $nom_entreprise
+        ]);
+    
+    }
+
+    public function supprimerOffre() {
+        // 1. Vérification des droits
+        $this->checkAccess([2,3]);
+
+        $id = $_GET['id'] ?? null;
+
+        if ($id) {
+            // 2. On récupère les infos de l'offre AVANT de la détruire
+            $offre = $this->offresModel->getOffreById($id);
+
+            if ($offre) {
+                // On sauvegarde le nom de l'entreprise pour la redirection
+                $nom_entreprise = $offre['nom_entreprise'];
+
+                // 3. On supprime l'offre
+                $this->offresModel->deleteOffre($id);
+
+                // 4. On redirige vers la liste des offres de CETTE entreprise
+                // urlencode() sécurise le nom dans l'URL (remplace les espaces par %20 etc.)
+                header('Location: index.php?page=afficher_offre&nom=' . urlencode($nom_entreprise) . '&success=delete');
+                exit(); 
+            }
+        }
+
+        // 5. Sécurité : Si l'ID est invalide ou l'offre introuvable, on renvoie à la page globale
+        header('Location: index.php?page=afficher_entreprise_offre&error=notfound');
+        exit();
+    }
+
+    public function afficherFormulaireCreation() {
+        // 1. On récupère la liste des entreprises
+        $entreprises = $this->offresModel->getAllNomsEntreprises();
+        
+        // 2. (Bonus) Tu peux faire pareil pour les compétences !
+        $competences = $this->offresModel->getAllCompetences(); 
+
+        // 3. On envoie tout à la vue Twig
+        echo $this->twig->render('creeroffre.twig', [
+            'entreprises' => $entreprises,
+            'competences' => $competences
         ]);
     }
 
     public function modifierOffre() {
-        // Logique de modification d'une offre (similaire à afficherOffre mais avec formulaire)
-    }
-
-    public function supprimerOffre() {
-        $this->checkAccess([2,3]);
-
-        $id = $_GET['id'] ?? null;
-        if ($id) {
-            $this->offreModel->deleteOffre($id);
+        // Sécurité : Vérification du rôle (Admin=3 ou Pilote=2)
+        if (!isset($_SESSION['id_role']) || ($_SESSION['id_role'] != 3 && $_SESSION['id_role'] != 2)) {
+            header('Location: index.php?page=connexion');
+            exit();
         }
-        echo $this->twig->render('gestion_offres.twig', [
-            'offres' => $offres
+
+        // On récupère le id depuis l'URL (ex: index.php?page=modifier_entreprise&id=3061389...)
+        $id = $_GET['id'] ?? null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $remuneration = $_POST['remuneration_offre'] ?? '';
+            if ($remuneration === '') $remuneration = null;
+
+            $competence = $_POST['id_competence'] ?? '';
+            if ($competence === '') $competence = null;
+
+            // Préparation des données avec les noms exacts de la BDD
+            $data = [
+                'titre_offre'         => $_POST['titre_offre'] ?? '',
+                'description_offre'       => $_POST['description_offre'] ?? '',
+                'remuneration_offre'   => $_POST['remuneration_offre'] ?? '',
+                'lieu_offre' => $_POST['lieu_offre'] ?? '',
+                'duree_formation_offre'     => $_POST['duree_formation_offre'] ?? '',
+                'domaine_requis_offre' => $_POST['domaine_requis_offre'] ?? '',
+                'nom_entreprise'       => $_POST['nom_entreprise'] ?? '',
+                'id_competence'        => $_POST['id_competence'] ?? '',
+            ];
+
+            // Appel au modèle Entreprise (et non UserModel)
+            if ($this->offresModel->updateOffre($id, $data)) {
+                $offre = $this->offresModel->getOffreById($id);
+                if ($offre) {
+                    // On sauvegarde le nom de l'entreprise pour la redirection
+                    $nom_entreprise = $offre['nom_entreprise'];
+                    header('Location: index.php?page=afficher_offre&nom=' . urlencode($nom_entreprise) . '&success=update');
+                    exit();
+                }
+            }
+        }
+
+        // Récupération des infos actuelles pour pré-remplir le formulaire
+        $offreToEdit = $this->offresModel->getOffreById($id);
+        // 1. On récupère la liste des entreprises
+        $entreprises = $this->offresModel->getAllNomsEntreprises();
+        
+        // 2. (Bonus) Tu peux faire pareil pour les compétences !
+        $competences = $this->offresModel->getAllCompetences(); 
+        //var_dump($offreToEdit);
+        //die();
+        echo $this->twig->render('modifier_offre.twig', [
+            'offre' => $offreToEdit,
+            'entreprises' => $entreprises,
+            'competences' => $competences
         ]);
     }
 }
