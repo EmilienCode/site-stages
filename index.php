@@ -216,21 +216,9 @@ switch ($page) {
         break;
 
     case 'candidatures_pilotes':
-        if (!isset($_SESSION['user_id']) || ($_SESSION['id_role'] != 2 && $_SESSION['id_role'] != 3)) {
-            header("Location: index.php?page=connexion");
-            exit();
-        }
-        // Ajout de o.lieu_offre et c.LM_candidature dans le SELECT pour le pilote
-        $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise, o.lieu_offre, u.nom as nom_etudiant, u.prenom as prenom_etudiant 
-                FROM CANDIDATURES c 
-                JOIN OFFRE o ON c.id_offre = o.id_offre 
-                JOIN UTILISATEUR u ON c.id_utilisateur = u.id_utilisateur 
-                ORDER BY c.date_candidature DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $toutes_candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo $twig->render('candidatures_pilotes.twig', ['candidatures' => $toutes_candidatures]);
+        require_once __DIR__ . '/traitementcandidaturespilotes.php';
         break;
+
 
     case 'powerpoint':
         echo $twig->render('powerpoint.twig');
