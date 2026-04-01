@@ -51,6 +51,9 @@
 .btn-delete { 
     background-color: #dc3545; 
 }
+.btn-note { 
+    background-color: #ffe100; 
+}
 .BoxRechercher {
    
     display: flex;
