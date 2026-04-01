@@ -38,6 +38,7 @@ Accueil
                         <span class="populaireTXT">Design UX</span>
                     </div>
                 </div>
+                
                 <div class="planete">
                     <script type="importmap">
                         {
@@ -52,5 +53,10 @@ Accueil
                 </div>
             </div>
         </section>
+        {% if session.user_id is defined and session.user_id == 66 %}
+        <a href="?page=powerpoint" class="btn-powerpoint">Voir le meilleur powerpoint !</a>
+        {% endif %}
+
+             
         
 {% endblock %}

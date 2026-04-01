@@ -81,6 +81,68 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     flex: 1;
 }
+
+/* --- LE BOUTON POWERPOINT --- */
+.btn-powerpoint {
+    /* --- MODIFICATIONS POUR CENTRER --- */
+    display: flex; 
+    width: fit-content; /* Le bouton s'adapte à la taille du texte */
+    margin: 2rem auto; /* 'auto' à gauche et à droite centre le bouton ! */
+    
+    /* ... (le reste des styles ne change pas) ... */
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #fa8072 0%, #914941 100%);
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(145, 73, 65, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* L'effet au survol de la souris */
+.btn-powerpoint:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(250, 128, 114, 0.6);
+    color: #ffffff;
+}
+
+/* --- L'EFFET "REFLET LUMINEUX" (SHIMMER) --- */
+/* Ça crée une barre blanche transparente qui traverse le bouton */
+.btn-powerpoint::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg); /* On penche le reflet */ 
+    z-index: -1;
+    animation: shimmerPowerpoint 3s infinite; /* Le reflet passe toutes les 3 secondes */
+}
+
+/* L'animation du reflet */
+@keyframes shimmerPowerpoint {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; } /* On attend un peu avant de relancer */
+}
+
 .svgLoop{
     color: var(--primary-color);
     flex-shrink: 0;
@@ -120,16 +182,28 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     cursor: grab; /* Indique à l'utilisateur qu'il peut interagir */
 }
-
 .planete:active {
     cursor: grabbing;
 }
-
 .planete canvas {
     width: 100%;
     height: 100%;
     display: block;
     outline: none; /* Enlève la bordure bleue disgracieuse au clic */
+}
+.planet-label {
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    margin-top: -1em; /* Pour centrer légèrement */
+    pointer-events: auto; /* Permet de cliquer sur l'étiquette si besoin */
+}
+.planet-label:hover{
+    transform: scale(1.5);
 }
 .barrePopulaire{
     display: flex;

@@ -114,4 +114,42 @@ class OffresModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
+    public function getAllEntrepriseMinInfos() {
+        $query = "
+            SELECT 
+                nom_entreprise, 
+                email_entreprise,
+                secteur_entreprise, 
+                EVALUATION.note_evaluation
+            FROM ENTREPRISE LEFT JOIN EVALUATION ON ENTREPRISE.siret_entreprise = EVALUATION.siret_entreprise;
+        ";
+        return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function afficherOffreByNomEntrepriseSQL($nom_entreprise){
+        $sql = "
+            SELECT 
+                id_offre, 
+                titre_offre,
+                description_offre, 
+                remuneration_offre, 
+                date_offre,
+                lieu_offre,
+                duree_formation_offre,
+                OFFRE.nom_entreprise,
+                nombredevues,
+                nombredepostulants
+
+            FROM OFFRE LEFT JOIN ENTREPRISE ON OFFRE.nom_entreprise  = ENTREPRISE.nom_entreprise WHERE OFFRE.nom_entreprise = ?;
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$nom_entreprise]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function deleteOffre($id){
+        $query = "
+        DELETE FROM OFFRE WHERE id_offre = :id
+        ";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute(['id' => $id]);
+    }
 }

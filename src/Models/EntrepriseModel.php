@@ -102,9 +102,9 @@ class EntrepriseModel {
     }
 
     public function getAllEntreprise() {
-        $query = "
+        $sql = "
             SELECT 
-                siret_entreprise, 
+                ENTREPRISE.siret_entreprise, 
                 email_entreprise, 
                 telephone_entreprise, 
                 site_web_entreprise, 
@@ -119,10 +119,13 @@ class EntrepriseModel {
                 code_postal_entreprise, 
                 ville_entreprise, 
                 pays_entreprise, 
-                est_active_entreprise 
-            FROM ENTREPRISE;
+                est_active_entreprise,
+                EVALUATION.note_evaluation
+            FROM ENTREPRISE LEFT JOIN EVALUATION ON ENTREPRISE.siret_entreprise = EVALUATION.siret_entreprise;
         ";
-        return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
     public function deleteEntreprise($id) {

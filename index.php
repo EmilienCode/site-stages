@@ -1,6 +1,7 @@
 <?php
 session_start(); // Indispensable pour gérer la connexion
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__.'/vendor/autoload.php';
@@ -115,14 +116,16 @@ switch ($page) {
         if ($page === 'supprimer_entreprise') $controleur->supprimerEntreprise();
         break;
     
-    case 'afficher_offre':
+    case 'afficher_entreprise_offre':
     case 'modifier_offre':
     case 'supprimer_offre':
+    case 'afficher_offre':
         $offresModel = new OffresModel($pdo);
         $controleur = new OffresControleur($offresModel, $twig);
-        if ($page === 'afficher_offre') $controleur->afficherOffre();
+        if ($page === 'afficher_entreprise_offre') $controleur->afficherEntrepriseOffre();
         if ($page === 'modifier_offre') $controleur->modifierOffre();
         if ($page === 'supprimer_offre') $controleur->supprimerOffre();
+        if ($page === 'afficher_offre') $controleur->afficherOffreByNomEntreprise();
         break;
     
     case 'connexion':
@@ -227,5 +230,9 @@ switch ($page) {
         $stmt->execute();
         $toutes_candidatures = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo $twig->render('candidatures_pilotes.twig', ['candidatures' => $toutes_candidatures]);
+        break;
+
+    case 'powerpoint':
+        echo $twig->render('powerpoint.twig');
         break;
 }

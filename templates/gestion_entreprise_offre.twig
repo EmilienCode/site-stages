@@ -1,6 +1,6 @@
 {% extends "base.twig" %}
 {% block title %}
-Gestion Entreprises
+Gestion Offres/Entreprise
 {% endblock %}
 {% block content %}
 
@@ -10,18 +10,15 @@ Gestion Entreprises
     {% if session.user_id is defined and session.user_id is not null and (session.id_role == 2 or session.id_role == 3) %}
     <main class="admin-container">
         <div class="admin-header">
-            <h1>Gestion des Entreprises</h1>
-            <a href="index.php?page=creerentreprise" class="btn-add">+ Ajouter une entreprise</a>
+            <h1>Gestion des Offres/Entreprise</h1>
         </div>
 
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>Siret</th>
                     <th>Nom entreprise</th>
                     <th>Email</th>
                     <th>Secteur</th>
-                    <th>Ville</th>
                     <th>Note</th>
                     <th>Actions</th>
                 </tr>
@@ -29,27 +26,23 @@ Gestion Entreprises
             <tbody>
                 {% for ent in entreprise %}
                     <tr>
-                        <td>{{ ent.siret_entreprise }}</td>
                         <td>{{ ent.nom_entreprise }}</td>
                         <td>{{ ent.email_entreprise }}</td>
                         <td>{{ ent.secteur_entreprise }}</td>
-                        <td>{{ ent.ville_entreprise }}</td>
                         <td>
-                            {% if ent.note_evaluation is not null %}
-                                {{ent.note_evaluation}} / 5
-                            {%else%}
-                                Aucune
-                            {% endif %}
+                        {% if ent.note_evaluation is not null %}
+                            {{ent.note_evaluation}} / 5
+                        {%else%}
+                            Aucune
+                        {% endif %}
                         </td>
                         <td>
-                            <a href="index.php?page=modifier_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-edit">Modifier</a>
-                            <a href="index.php?page=supprimer_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">Supprimer</a>
-                            <a href="index.php?page=evaluer_entreprise&id={{ ent.siret_entreprise }}" class="btn-action btn-note">Evaluer</a>
+                            <a href="index.php?page=afficher_offre&nom={{ ent.nom_entreprise }}" class="btn-action btn-edit">Voir offres</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="7" style="text-align:center;">Aucune entreprises trouvé.</td>
+                        <td colspan="5" style="text-align:center;">Aucune entreprises trouvé.</td>
                     </tr>
                 {% endfor %}
             </tbody>
