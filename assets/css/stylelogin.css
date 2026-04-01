@@ -8,7 +8,6 @@ a {
     color: inherit;
 }
 
-
 .connexion-container {
     min-height: calc(100vh - 140px);
     display: flex;
@@ -43,6 +42,7 @@ a {
     font-size: 0.95rem;
     color: var(--color-light-gray);
 }
+
 .connexion-form {
     display: flex;
     flex-direction: column;
@@ -58,57 +58,18 @@ a {
 .form-line input {
     width: 100%;
 }
+
 .form-row {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
+/* --- Boutons --- */
 .btn-full {
     width: 100%;
     padding: 0.8em;
     font-size: 1rem;
-}
-
-.connexion-links {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 24px;
-    font-size: 0.85rem;
-    color: var(--primary-color);
-}
-input,
-textarea {
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid var(--color-border-light);
-    background: var(--color-input-bg);
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: var(--focus-ring-blue);
-}
-
-textarea {
-    min-height: 130px;
-    resize: vertical;
-}
-
-.file-hint {
-    font-size: 0.75rem;
-    color: var(--color-light-gray);
-    margin-top: 4px;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 14px;
-    margin-top: 10px;
 }
 
 .btn-primary {
@@ -123,6 +84,7 @@ textarea {
     padding: 0.6em 1em; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
     transition: all 0.3s ease; 
+    cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -130,15 +92,67 @@ textarea {
     opacity: 0.95;
     box-shadow: 0 6px 12px rgba(0,0,0,0.2); 
 }
-.password-hint {
-    flex-basis: 100%;      /* force le retour à la ligne */
-    font-size: 0.75rem;
-    color: var(--color-light-gray);
-    margin-left: 0px;    /* aligné sous l'input en PC */
-    
+
+/* --- Inputs, Textarea & SELECT (Le menu burger amélioré) --- */
+input,
+textarea,
+.form-select {
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border-light);
+    background: var(--color-input-bg);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--color-dark-gray);
 }
 
+/* Style spécifique au menu déroulant */
+.form-select {
+    width: 100%;
+    cursor: pointer;
+    appearance: none; /* Supprime le style natif moche */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Flèche personnalisée fine en SVG */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
 
+input:focus,
+textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--focus-ring-blue);
+    background-color: #fff;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* --- Divers --- */
+.connexion-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
+
+.password-hint {
+    flex-basis: 100%;
+    font-size: 0.75rem;
+    color: var(--color-light-gray);
+    margin-left: 0px; 
+}
+
+/* --- Responsive --- */
 @media (min-width: 768px) {
     .connexion-card {
         max-width: 560px;
@@ -148,17 +162,14 @@ textarea {
         align-items: center;
         gap: 5px;
     }
-
     .form-row .form-line {
         flex: 1; 
     }
-
     .form-line label {
         min-width: 50px;
         font-size: 0.9rem;
     }
-
-    .form-line input {
+    .form-line input, .form-line .form-select {
         flex: 1;
     }
     .form-row {
@@ -168,10 +179,11 @@ textarea {
         gap: 16px;
     }
 }
+
 @media (min-width: 1024px) {
     .connexion-card {
         max-width: 800px;
-        padding: 60px;
+        padding: 60px; /* Retour à ton padding exact de 60px */
     }
     .form-line {
         flex-direction: row;
@@ -179,13 +191,11 @@ textarea {
         align-items: center;
         gap: 16px;
     }
-
     .form-line label {
         min-width: 150px;
         font-size: 0.9rem;
     }
-
-    .form-line input {
+    .form-line input, .form-line .form-select {
         flex: 1;
     }
 }
