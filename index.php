@@ -141,6 +141,12 @@ switch ($page) {
     case 'creerentreprise':
         echo $twig->render('creerentreprise.twig');
         break;
+    
+    case 'creeroffre':
+        $offresModel = new OffresModel($pdo);
+        $controleur = new OffresControleur($offresModel, $twig);
+        $controleur->afficherFormulaireCreation();
+        break;
 
     case 'contact':
         echo $twig->render('contact.twig');

@@ -13,7 +13,6 @@ if (container) {
     let targetCameraPos = new THREE.Vector3();
     let isZooming = false;
     const ZOOM_DISTANCE = 2.0;
-    const defaultCameraPos = new THREE.Vector3(0, 0, 5);
 
     let w = container.clientWidth;
     let h = container.clientHeight || 500;
@@ -163,7 +162,8 @@ if (container) {
         // Si la distance est très petite (moins de 5 pixels), c'est un vrai clic, pas une rotation
         if (distance < 5) {
             // On renvoie la caméra à sa position de départ
-            targetCameraPos.copy(defaultCameraPos);
+            const currentDirection = camera.position.clone().normalize();
+            targetCameraPos.copy(currentDirection.multiplyScalar(5));
             isZooming = true;
         }
     });

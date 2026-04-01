@@ -1,0 +1,101 @@
+{% extends "base.twig" %}
+
+{% block title %}Créer une offre{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="assets/css/stylelogin.css"/>
+    <main class="connexion-container">
+    <section class="connexion-card">
+        <header class="connexion-header">
+            <h1>Créer une offre</h1>
+        </header>
+
+        <form class="connexion-form" method="POST" action="index.php?action=creer_offre">
+            <input type="hidden" name="type" value="OFFRE">
+            
+            <h3>Informations Principales</h3>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="titre_offre">Titre de l'offre *</label>
+                    <input type="text" name="titre_offre" id="titre_offre" placeholder="Ex: Développeur Web Junior" maxlength="50" required>
+                </div>
+
+                <div class="form-line">
+                    <label for="domaine_requis_offre">Domaine requis *</label>
+                    <input type="text" name="domaine_requis_offre" id="domaine_requis_offre" placeholder="Ex: Informatique, Marketing..." maxlength="100">
+                </div>
+            </div>
+
+            <div class="form-line">
+                <label for="description_offre">Description de l'offre *</label>
+                <textarea name="description_offre" id="description_offre" placeholder="Décrivez les missions, le profil recherché..." maxlength="500" rows="4"></textarea>
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+
+            <h3>Détails du stage / emploi</h3>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="lieu_offre">Lieu *</label>
+                    <input type="text" name="lieu_offre" id="lieu_offre" placeholder="Ex: Paris, Télétravail..." maxlength="100">
+                </div>
+
+                <div class="form-line">
+                    <label for="duree_formation_offre">Durée *</label>
+                    <input type="text" name="duree_formation_offre" id="duree_formation_offre" placeholder="Ex: 6 mois" maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="remuneration_offre">Rémunération (€/mois) *</label>
+                    <input type="number" step="0.01" name="remuneration_offre" id="remuneration_offre" placeholder="Ex: 800.00">
+                </div>
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+
+            <h3>Entreprise & Compétences</h3>
+
+            <div class="form-row">
+                <div class="form-line">
+                    <label for="nom_entreprise">Entreprise *</label>
+                    <select name="nom_entreprise" id="nom_entreprise" required>
+                        <option value="">-- Sélectionnez une entreprise --</option>
+                        
+                        {% for ent in entreprises %}
+                            <option value="{{ ent.nom_entreprise }}">{{ ent.nom_entreprise }}</option>
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+
+                <div class="form-line">
+                    <label for="nom_competence">Competences *</label>
+                    <select name="nom_competence" id="nom_competence" required>
+                        <option value="">-- Sélectionnez une competence --</option>
+                        
+                        {% for cp in competences %}
+                            <option value="{{ cp.nom_competence }}">{{ cp.nom_competence }}</option>
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full" style="margin-top: 20px;">
+                Enregistrer l'offre
+            </button>
+
+        </form>
+
+        <div class="connexion-links" style="margin-top: 20px;">
+            <a href="index.php?page=afficher_entreprise_offre">← Retour à la gestion des offres</a>
+        </div>
+    </section>
+    </main>
+
+{% endblock %}

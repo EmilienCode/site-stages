@@ -119,6 +119,8 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     cursor: grab; /* Indique à l'utilisateur qu'il peut interagir */
+    -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 71%);
+    mask-image: radial-gradient(circle, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 71%);
 }
 .planete:active {
     cursor: grabbing;
