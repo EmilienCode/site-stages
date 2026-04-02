@@ -25,10 +25,25 @@ if (container) {
     let w = container.clientWidth;
     let h = container.clientHeight || 500;
 
+    // --- FONCTIONS UTILITAIRES ---
+    function latLongToVector3(lat, lon, radius) {
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lon + 180) * (Math.PI / 180);
+        const x = -(radius * Math.sin(phi) * Math.cos(theta));
+        const z = (radius * Math.sin(phi) * Math.sin(theta));
+        const y = (radius * Math.cos(phi));
+        return new THREE.Vector3(x, y, z);
+    }
+
     // --- SETUP SCENE ---
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(25, w / h, 0.1, 1000);
-    camera.position.z = 5;
+    
+    // Position initiale au-dessus de la France (Lat: 46.2, Lon: 2.2), à une distance de 5
+    const startPos = latLongToVector3(46.2, 2.2, 5);
+    // On applique la même inclinaison que la Terre (-23.4°) à la position de départ de la caméra
+    startPos.applyAxisAngle(new THREE.Vector3(0, 0, 1), -23.4 * Math.PI / 180);
+    camera.position.copy(startPos);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(w, h);
@@ -162,15 +177,6 @@ if (container) {
     }
 
     // --- LABELS ---
-    function latLongToVector3(lat, lon, radius) {
-        const phi = (90 - lat) * (Math.PI / 180);
-        const theta = (lon + 180) * (Math.PI / 180);
-        const x = -(radius * Math.sin(phi) * Math.cos(theta));
-        const z = (radius * Math.sin(phi) * Math.sin(theta));
-        const y = (radius * Math.cos(phi));
-        return new THREE.Vector3(x, y, z);
-    }
-
     const labelsList = [];
 
     function createLabel(text, lat, lon, type, rawName = '') {
