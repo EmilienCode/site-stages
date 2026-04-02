@@ -19,7 +19,7 @@ const highResNightMapUrl = "./texture/8k_earth_nightmap.webp";
 if (container) {
     let targetCameraPos = new THREE.Vector3();
     let isZooming = false;
-    const ZOOM_DISTANCE = 1.4;
+    const ZOOM_DISTANCE = 1.5;
     let cityToSearch = null;
 
     let w = container.clientWidth;
@@ -204,6 +204,8 @@ if (container) {
 
         div.addEventListener('click', (e) => {
             e.stopPropagation();
+            if (isZooming) return; // BOUCLIER : Ignore les clics si on est déjà en train de zoomer
+
             applyHighResTextures();
             
             const labelWorldPos = new THREE.Vector3();
@@ -217,6 +219,7 @@ if (container) {
             
             cityToSearch = (type === 'ville') ? rawName : null;
             isZooming = true;
+            controls.enabled = false; // DESACTIVE LA ROTATION MANUELLE
         });
     }
 
@@ -232,15 +235,19 @@ if (container) {
     let pointerDownPos = new THREE.Vector2();
 
     renderer.domElement.addEventListener('pointerdown', (e) => {
+        if (isZooming) return; // BOUCLIER
         pointerDownPos.set(e.clientX, e.clientY);
     });
 
     renderer.domElement.addEventListener('pointerup', (e) => {
+        if (isZooming) return; // BOUCLIER
+
         const distance = pointerDownPos.distanceTo(new THREE.Vector2(e.clientX, e.clientY));
         if (distance < 5) {
             const currentDirection = camera.position.clone().normalize();
             targetCameraPos.copy(currentDirection.multiplyScalar(5));
             isZooming = true;
+            controls.enabled = false; // DESACTIVE LA ROTATION MANUELLE PENDANT LE DEZOOM
             cityToSearch = null;
         }
     });
@@ -276,12 +283,19 @@ if (container) {
         requestAnimationFrame(animate);
 
         if (isZooming) {
-            controls.enabled = false; // ON BLOQUE LA ROTATION MANUELLE
-
             camera.position.lerp(targetCameraPos, 0.15); 
             if (camera.position.distanceTo(targetCameraPos) < 0.05) {
                 isZooming = false;
-                controls.enabled = true; // ON RÉACTIVE LA ROTATION
+                
+                // --- MODIFICATION ICI ---
+                // On vérifie la distance de la caméra (par rapport au centre). 
+                // Si la cible était éloignée (dézoom > 4.5), on réactive la rotation manuelle.
+                // Sinon (zoom sur un pays/ville), les contrôles restent bloqués.
+                if (targetCameraPos.length() > 4.5) {
+                    controls.enabled = true; 
+                } else {
+                    controls.enabled = false; 
+                }
 
                 if (cityToSearch) {
                     window.location.href = `index.php?page=offres&ville=${encodeURIComponent(cityToSearch)}`;
