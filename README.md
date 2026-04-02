@@ -21,18 +21,18 @@ L'application, développée par l'équipe **Web4All**, permet de centraliser les
 ### 🏢 Gestion des Entreprises & Offres
 
 * CRUD complet des entreprises (Création, Lecture, Mise à jour, Suppression).
-* Évaluation des entreprises par les pilotes/étudiants.
+* Évaluation des entreprises par les pilotes/admins.
 * Publication et gestion des offres de stage (Compétences, Rémunération, Dates).
 
 ### 👨‍🏫 Espace Administration (Pilotes)
 
-* Gestion des comptes (Étudiants, Pilotes).
+* Gestion des comptes (Admins, Pilotes).
 * Modération des offres et des entreprises.
 * Accès aux statistiques globales (Offres par durée, top wish-list, etc.).
 
 ### 📱 Transverse & Technique
 
-* **Responsive Design** (Approche Mobile First).
+* **Responsive Design** (Approche Desktop First (plus facile ici pour notre projet)).
 * **PWA** (Progressive Web App) : Installable sur mobile.
 * **Sécurité** : Protection CSRF, XSS, Hachage des mots de passe.
 * **SEO** : Url rewriting, Sitemap, Optimisation des balises meta.
@@ -41,9 +41,9 @@ L'application, développée par l'équipe **Web4All**, permet de centraliser les
 
 Le projet respecte les contraintes strictes suivantes :
 
-* **Backend :** PHP 8+ (Orienté Objet), Architecture MVC personnalisée, Moteur de template maison.
+* **Backend :** PHP 8+ (Orienté Objet), Architecture MVC personnalisée, Moteur de template twig.
 * **Frontend :** HTML5, CSS3 (Sass/SCSS possible), JavaScript (Vanilla / jQuery).
-* **Base de données :** MySQL / MariaDB.
+* **Base de données :** MySQL / PHPmyadmin.
 * **Serveur :** Apache (Configuration VHost requise).
 * **Tests :** PHPUnit.
 
@@ -85,6 +85,21 @@ Le projet nécessite un VHost pour séparer les assets statiques et le routage. 
 <VirtualHost *:80>
     ServerName projet-stage.local
     DocumentRoot "C:/chemin/vers/repo/public"
+
+    <Directory "C:/chemin/vers/repo/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName projet-stage.local
+    DocumentRoot "C:/chemin/vers/repo/public"
+
+    SSLEngine on
+    SSLCertificateFile "chemin/vers/certificat.crt"
+    SSLCertificateKeyFile "chemin/vers/cle.key"
+
     <Directory "C:/chemin/vers/repo/public">
         AllowOverride All
         Require all granted
@@ -97,6 +112,56 @@ Le projet nécessite un VHost pour séparer les assets statiques et le routage. 
 *(N'oubliez pas d'ajouter `127.0.0.1 projet-stage.local` dans votre fichier hosts).*
 4. **Lancer le projet**
 Accédez à `http://projet-stage.local` dans votre navigateur.
+
+## 🔑 Comptes de démonstration
+
+Pour tester l’application, vous pouvez utiliser les comptes suivants :
+
+### 👨‍🎓 Étudiant
+- **Email :** etudiant@etudiant.fr  
+- **Mot de passe :** Etudiant45*
+
+### 👨‍🏫 Pilote
+- **Email :** pilote@pilote.fr  
+- **Mot de passe :** Pilote45*
+
+### 👨‍💼 Administrateur
+- **Email :** admin@admin.fr  
+- **Mot de passe :** Admin45*
+
+### 🏆 Compte Soutenance
+- **Email :** meilleuresoutenance@alain.fr  
+- **Mot de passe :** Soutenance45*
+
+
+
+## 🌍 Accès depuis d'autres machines (réseau local)
+
+Pour permettre à d'autres utilisateurs d'accéder au site depuis leur propre PC :
+
+### 1. Configuration du fichier hosts (sur chaque machine cliente)
+
+Ajouter : IP_DU_SERVEUR projet-stage.local
+
+### 2. Configuration du PC serveur
+
+Le PC hébergeant le projet doit autoriser les connexions sur les ports :
+
+- **80** (HTTP)
+- **443** (HTTPS)
+- **3306** (MySQL - si accès BDD nécessaire)
+
+### 3. Redirection de ports (Windows)
+
+Exécuter en administrateur :
+
+netsh interface portproxy add v4tov4 listenport=80 listenaddress= adresse_cliente connectport=80 connectaddress= adresse_serveur
+netsh interface portproxy add v4tov4 listenport=443 listenaddress= adresse_cliente connectport=443 connectaddress= adresse_serveur
+netsh interface portproxy add v4tov4 listenport=3306 listenaddress= adresse_cliente connectport=3306 connectaddress= adresse_serveur
+
+# Autoriser un sous-réseau avec le PARE-FEU (exemple : CESI)
+netsh advfirewall firewall add rule name="Autoriser reseau CESI" dir=in action=allow remoteip=10.145.128.0/24
+
 
 ## 📂 Structure du Projet (MVC)
 
@@ -122,4 +187,4 @@ Accédez à `http://projet-stage.local` dans votre navigateur.
 ## 📝 Licence & Droits
 
 Projet réalisé dans un cadre pédagogique pour CESI École d'Ingénieurs.
-© 2026 Web4All.
+© 2026 CESITonStage.
