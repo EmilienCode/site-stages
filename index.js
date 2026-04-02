@@ -12,14 +12,14 @@ let highResNightTexture = null;
 let isHighResApplied = false;
 let currentThemeIsDark = localStorage.getItem('theme') === 'dark'; // CACHE du thème
 
-const highResMapUrl = "./texture/8081_earthmap4k.webp";
-const highResNightMapUrl = "./texture/8081_earthlights4k.webp";
+const highResMapUrl = "./texture/8k_earth_daymap.webp";
+const highResNightMapUrl = "./texture/8k_earth_nightmap.webp";
 
 // ON NE LANCE LA 3D QUE SI LE CONTENEUR EXISTE
 if (container) {
     let targetCameraPos = new THREE.Vector3();
     let isZooming = false;
-    const ZOOM_DISTANCE = 2.0;
+    const ZOOM_DISTANCE = 1.4;
     let cityToSearch = null;
 
     let w = container.clientWidth;
@@ -276,9 +276,13 @@ if (container) {
         requestAnimationFrame(animate);
 
         if (isZooming) {
+            controls.enabled = false; // ON BLOQUE LA ROTATION MANUELLE
+
             camera.position.lerp(targetCameraPos, 0.15); 
             if (camera.position.distanceTo(targetCameraPos) < 0.05) {
                 isZooming = false;
+                controls.enabled = true; // ON RÉACTIVE LA ROTATION
+
                 if (cityToSearch) {
                     window.location.href = `index.php?page=offres&ville=${encodeURIComponent(cityToSearch)}`;
                 }
