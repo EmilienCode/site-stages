@@ -19,7 +19,7 @@ const highResNightMapUrl = "./texture/8k_earth_nightmap.webp";
 if (container) {
     let targetCameraPos = new THREE.Vector3();
     let isZooming = false;
-    const ZOOM_DISTANCE = 1.5;
+    const ZOOM_DISTANCE = 2.0;
     let cityToSearch = null;
 
     let w = container.clientWidth;
@@ -128,14 +128,12 @@ if (container) {
         bitmapLoader.load(highResMapUrl, (imageBitmap) => {
             highResDayTexture = new THREE.Texture(imageBitmap);
             highResDayTexture.colorSpace = THREE.LinearSRGBColorSpace;
-            highResDayTexture.needsUpdate = true;
             onTextureReady();
         });
 
         bitmapLoader.load(highResNightMapUrl, (imageBitmap) => {
             highResNightTexture = new THREE.Texture(imageBitmap);
             highResNightTexture.colorSpace = THREE.LinearSRGBColorSpace;
-            highResNightTexture.needsUpdate = true;
             onTextureReady();
         });
     }
@@ -210,12 +208,12 @@ if (container) {
             
             const labelWorldPos = new THREE.Vector3();
             label.getWorldPosition(labelWorldPos);
-            const earthCenter = new THREE.Vector3();
-            earthGroup.getWorldPosition(earthCenter);
-            const direction = new THREE.Vector3().subVectors(labelWorldPos, earthCenter).normalize();
+            
+            // SIMPLIFICATION: La Terre est en 0,0,0. La direction depuis le centre est juste la position normalisée !
+            const direction = labelWorldPos.clone().normalize();
             
             const zoomDist = (type === 'pays') ? ZOOM_DISTANCE : 1.5; 
-            targetCameraPos.copy(earthCenter).add(direction.multiplyScalar(zoomDist));
+            targetCameraPos.copy(direction.multiplyScalar(zoomDist));
             
             cityToSearch = (type === 'ville') ? rawName : null;
             isZooming = true;
@@ -254,8 +252,6 @@ if (container) {
 
     // --- OPTIMISATION CRITIQUE : Pré-allocation des vecteurs hors de la boucle ---
     // Cela empêche le Garbage Collector de geler l'écran en détruisant des milliers d'objets par seconde.
-    const _cameraPos = new THREE.Vector3();
-    const _earthPos = new THREE.Vector3();
     const _labelPos = new THREE.Vector3();
     const _normal = new THREE.Vector3();
     const _viewVector = new THREE.Vector3();
@@ -305,11 +301,9 @@ if (container) {
 
         controls.update();
 
-        // Réutilisation des vecteurs globaux
-        camera.getWorldPosition(_cameraPos);
-        earthGroup.getWorldPosition(_earthPos);
-
-        const distanceCamera = camera.position.distanceTo(_earthPos);
+        // SIMPLIFICATION: La caméra est déjà dans l'espace monde. La Terre est au centre absolu (0,0,0).
+        // Plus besoin de _cameraPos et _earthPos, on utilise camera.position.length() !
+        const distanceCamera = camera.position.length();
         const isZoomedIn = distanceCamera < 3.8;
     
         // Géré via le cache currentThemeIsDark au lieu d'un localStorage sync très lent
@@ -323,8 +317,12 @@ if (container) {
 
         labelsList.forEach(item => {
             item.labelObject.getWorldPosition(_labelPos);
-            _normal.subVectors(_labelPos, _earthPos).normalize();
-            _viewVector.subVectors(_cameraPos, _labelPos).normalize();
+            
+            // SIMPLIFICATION: La normale depuis le centre absolu (0,0,0) est juste le vecteur position
+            _normal.copy(_labelPos).normalize();
+            
+            // Vecteur de vue entre la caméra et le label
+            _viewVector.subVectors(camera.position, _labelPos).normalize();
             const dotProduct = _normal.dot(_viewVector);
 
             let shouldBeVisible = false;
