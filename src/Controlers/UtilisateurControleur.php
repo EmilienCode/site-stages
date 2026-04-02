@@ -13,9 +13,7 @@ class UtilisateurControleur {
         $this->twig = $twig;
     }
 
-    /**
-     * Vérification flexible des accès par rôle
-     */
+    // Vérification flexible des accès par rôle
     protected function checkAccess($allowedRoles) {
         if (!is_array($allowedRoles)) {
             $allowedRoles = [$allowedRoles];
@@ -26,9 +24,7 @@ class UtilisateurControleur {
         }
     }
 
-    /**
-     * Affiche la liste des utilisateurs selon les droits
-     */
+    // Affiche la liste des utilisateurs selon les droits
     public function afficherUtilisateurs() {
         if (!isset($_SESSION['id_role'])) {
             header('Location: index.php?page=connexion');
@@ -55,9 +51,7 @@ class UtilisateurControleur {
         ]);
     }
 
-    /**
-     * Affiche le formulaire de création (nécessaire pour envoyer la liste des pilotes à l'admin)
-     */
+    // Affiche le formulaire de création (nécessaire pour envoyer la liste des pilotes à l'admin)
     public function afficherFormCreation() {
         $this->checkAccess([2, 3]);
         
@@ -71,7 +65,7 @@ class UtilisateurControleur {
             'pilotes' => $pilotes
         ]);
     }
-
+    // Supprime un utilisateur
     public function supprimerUtilisateur() {
         $this->checkAccess([2, 3]);
         $id = $_GET['id'] ?? null;
@@ -81,7 +75,7 @@ class UtilisateurControleur {
         header('Location: index.php?page=afficher_utilisateur&success=delete');
         exit();
     }
-
+    // modifie un utilisateur
     public function modifierUtilisateur() {
         if (!isset($_SESSION['user_id'])) {
             header('Location: index.php?page=connexion');
@@ -100,19 +94,18 @@ class UtilisateurControleur {
                 'sexe' => $_POST['sexe'] ?? 0,
                 'date_naissance' => $_POST['date_naissance'] ?? ''
             ];
-
             if ($this->userModel->updateUser($id, $data)) {
                 header('Location: index.php?page=afficher_utilisateur&success=update');
                 exit();
             }
         }
-
+        // Récupération des infos actuelles pour pré-remplir le formulaire
         $userToEdit = $this->userModel->getUserById($id);
         if (!$userToEdit) {
             header('Location: index.php?page=afficher_utilisateur');
             exit();
         }
-
+        // Sécurité : Un pilote ne peut modifier que les étudiants, un admin peut tout modifier
         if ($_SESSION['id_role'] == 2 && $userToEdit['id_role'] != 1) {
             die("Accès refusé : Vous n'avez pas l'autorisation de modifier ce compte.");
         }
@@ -122,19 +115,19 @@ class UtilisateurControleur {
             'roles' => $this->userModel->getRoles()
         ]);
     }
-
+    // Traite le formulaire d'inscription d'un nouvel utilisateur
     public function registerUtilisateur() {
         if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST['type']) || $_POST['type'] !== "COMPTE") {
             header("Location: index.php?page=creercompte");
             exit;
         }
 
-        // 1. Nettoyage et Validation
+        // Nettoyage et Validation
         $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
         $date_input = trim($_POST['date_naissance']);
         $date_obj = DateTime::createFromFormat('d/m/Y', $date_input);
         $errors = DateTime::getLastErrors();
-
+        // Validation de base + vérification des domaines jetables
         if (!$email || !$date_obj || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
             header("Location: index.php?page=creercompte&error=invalid_data");
             exit;
@@ -158,7 +151,7 @@ class UtilisateurControleur {
             $id_pilote_referent = !empty($_POST['id_pilote']) ? (int)$_POST['id_pilote'] : null;
         }
 
-        // 2. Préparation des données
+        // Préparation des données
         $userData = [
             'nom'            => strtoupper(trim($_POST["nom"])),
             'prenom'         => ucfirst(strtolower(trim($_POST["prenom"]))),
@@ -170,7 +163,7 @@ class UtilisateurControleur {
             'date_naissance' => $date_obj->format('Y-m-d'),
             'id_pilote'      => $id_pilote_referent // Passage de l'ID du pilote
         ];
-
+        // Tentative d'inscription et gestion des erreurs (ex: email déjà pris)
         try {
             $this->userModel->inscrireEtudiant($userData);
             header("Location: index.php?page=afficher_utilisateur&success=created");
@@ -183,7 +176,7 @@ class UtilisateurControleur {
             die("Erreur SQL : " . $e->getMessage());
         }
     }
-
+    // Affiche la wishlist de l'utilisateur connecté
     public function afficherWishlist() {
         if (!isset($_SESSION['user_id'])) {
             header('Location: index.php?page=connexion');
@@ -192,13 +185,15 @@ class UtilisateurControleur {
         $offresWishlist = $this->userModel->getAllOffreWishlist($_SESSION['user_id']);
         echo $this->twig->render('wishlist.twig', ['offres' => $offresWishlist]);
     }
-
-    public function supprimerWishlist() { 
+    // Ajoute une offre à la wishlist de l'utilisateur connecté
+    public function supprimerWishlist() {
+        // Si la session a sauté, on dégage vers le login (ou accueil)
         if (!isset($_SESSION['user_id'])) {
             header('Location: index.php?page=connexion');
             exit();
         }
         $id_offre = $_GET['id'] ?? null;
+        // Si un ID d'offre est fourni, on le supprime de la wishlist de l'utilisateur
         if ($id_offre) {
             $this->userModel->deleteOffreWishlist($id_offre, $_SESSION['user_id']);
         }

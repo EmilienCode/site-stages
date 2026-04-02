@@ -1,7 +1,7 @@
 <?php
 $id_offre = $_GET['id'] ?? null;
 $id_utilisateur = $_SESSION['user_id'] ?? null;
-
+// Vérification de la présence des paramètres nécessaires
 if ($id_offre && $id_utilisateur) {
     try {
         $check = $pdo->prepare("SELECT * FROM MET_EN_FAVORI WHERE id_utilisateur = ? AND id_offre = ?");

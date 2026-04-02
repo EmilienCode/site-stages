@@ -1,9 +1,7 @@
 <?php
-// traitementwishlist.php
-
 $id_utilisateur = $_SESSION['user_id'] ?? null;
 $offres_favoris = [];
-
+// Si l'utilisateur est connecté, on récupère ses offres en favoris
 if ($id_utilisateur) {
     try {
         $sql = "SELECT o.* FROM OFFRE o 

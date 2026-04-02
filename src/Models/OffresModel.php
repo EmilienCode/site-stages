@@ -78,23 +78,22 @@ class OffresModel {
         }
     }
 
-    // MISE À JOUR : Ajout du paramètre $competence_id
+    //  Compte le nombre total d'offres selon les mêmes filtres (pour la pagination)
     public function countOffres($metier = '', $ville = '', $competence_id = '') {
         try {
             $sql = "SELECT COUNT(*) FROM OFFRE WHERE 1=1";
             $params = [];
-
+            // Ajout de conditions dynamiques selon les filtres
             if (!empty($metier)) {
                 $sql .= " AND (titre_offre LIKE :metier OR description_offre LIKE :metier)";
                 $params[':metier'] = '%' . $metier . '%';
             }
 
             if (!empty($ville)) {
-                $sql .= " AND ville LIKE :ville"; // <-- Pareil, vérifie la colonne "ville"
+                $sql .= " AND ville LIKE :ville";
                 $params[':ville'] = '%' . $ville . '%';
             }
 
-            // Nouveau filtre par compétence
             if (!empty($competence_id)) {
                 $sql .= " AND id_competence = :competence_id";
                 $params[':competence_id'] = $competence_id;
@@ -113,14 +112,14 @@ class OffresModel {
             return 0; 
         }
     }
-
+    // Récupère les détails d'une offre par son ID
     public function getOffreById($id) {
         $sql = "SELECT * FROM OFFRE WHERE id_offre = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
+    // Récupère les offres d'une entreprise par son nom
     public function getAllEntrepriseMinInfos() {
         $query = "
             SELECT 
@@ -132,6 +131,7 @@ class OffresModel {
         ";
         return $this->pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
+    // Récupère les offres d'une entreprise par son nom
     public function afficherOffreByNomEntrepriseSQL($nom_entreprise){
         $sql = "
             SELECT 
@@ -152,6 +152,7 @@ class OffresModel {
         $stmt->execute([$nom_entreprise]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    // Affiche les détails d'une entreprise
     public function deleteOffre($id){
         $query = "
         DELETE FROM OFFRE WHERE id_offre = :id
@@ -159,7 +160,7 @@ class OffresModel {
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute(['id' => $id]);
     }
-
+    // Affiche les détails d'une entreprise
     public function updateOffre($id, $data) {
         try {
             // Une seule table à modifier : pas besoin de transaction ici
