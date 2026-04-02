@@ -1,38 +1,101 @@
-h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: inherit;
-}
-.confidentialite{
-    font-family: var(--font-sans);
-    font-weight: var(--font-weight-moyen);
-    max-width: 70rem;
-    margin-inline: auto;
+/* Conteneur global */
+main {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
 }
 
-.conditiongene{
-    color: rgb(16, 24, 40);
-    font-weight: var(--font-weight-titre);
-    line-height: 1.25;
+/* Titre principal */
+.conditiongene {
     font-size: var(--size-text-titre);
-    margin-bottom: calc(var(--spacing) * 6);
-    font-family: var(--font-sans);
-    cursor: default;
-    max-width: 70rem;
-    margin-inline: auto;
-    margin-top: 7rem;
-}
-
-.article{
-    font-family: var(--font-sans);
     font-weight: var(--font-weight-titre);
-    max-width: 70rem;
-    margin-inline: auto;
+    color: var(--color-dark-gray);
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-@media (max-width: 768px) {
+/* Sections (articles) */
+.article {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-nom);
+    color: var(--secondary-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
 
-    .barrePopulaire {
-        justify-content: center;
-        flex-wrap: wrap;
+/* Petite barre décorative */
+.article::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+}
+
+/* Texte */
+.confidentialite {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-light-gray);
+    background: var(--color-background-offre);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-blue);
+    margin-bottom: 1.5rem;
+}
+
+/* Mise en valeur des numéros d'articles */
+.confidentialite strong {
+    color: var(--primary-color);
+}
+
+/* Email lien */
+.confidentialite a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-moyen);
+}
+
+.confidentialite a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive tablette */
+@media (max-width: 768px) {
+    main {
+        margin: 2rem 1rem;
+        padding: 1rem;
+    }
+
+    .conditiongene {
+        font-size: 2rem;
+    }
+
+    .article {
+        font-size: 1.3rem;
+    }
+
+    .confidentialite {
+        font-size: 0.95rem;
+        padding: 1.2rem;
+    }
+}
+
+/* Responsive mobile */
+@media (max-width: 480px) {
+    .conditiongene {
+        font-size: 1.6rem;
+    }
+
+    .article {
+        font-size: 1.1rem;
+    }
+
+    .confidentialite {
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 }

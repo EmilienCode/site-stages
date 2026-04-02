@@ -1,26 +1,127 @@
-h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: inherit;
-}
-.mentionslegales{
+/* Conteneur principal */
+.mentions-container {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
     font-family: var(--font-sans);
-    font-weight: var(--font-weight-moyen);
-    max-width: 70rem;
-    margin-inline: auto;
 }
 
-.infoediteur{
-    color: rgb(16, 24, 40);
-    font-weight: var(--font-weight-titre);
-    line-height: 1.25;
+/* Titre principal */
+.infoediteur {
     font-size: var(--size-text-titre);
-    margin-bottom: calc(var(--spacing) * 6);
-    font-family: var(--font-sans);
-    cursor: default;
-    max-width: 70rem;
-    margin-inline: auto;
-    margin-top: 7rem;
+    font-weight: var(--font-weight-titre);
+    color: var(--color-dark-gray);
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
+/* Grille des blocs */
+.mentions-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* Bloc (card) */
+.bloc {
+    background: var(--color-background-offre);
+    padding: 1.8rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-blue);
+    border: 1px solid var(--color-border-light);
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+/* Effet hover */
+.bloc:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(235, 116, 37, 0.12);
+}
+
+/* Titres des blocs */
+.bloc h3 {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-nom);
+    color: var(--secondary-color);
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+/* Barre stylée */
+.bloc h3::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+}
+
+/* Texte */
+.bloc p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-light-gray);
+    margin-bottom: 0.8rem;
+}
+
+/* Liens */
+.bloc a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-moyen);
+}
+
+.bloc a:hover {
+    text-decoration: underline;
+}
+
+/* Emojis un peu plus visibles */
+.bloc p span,
+.bloc p {
+    display: block;
+}
+
+/* Responsive tablette */
 @media (max-width: 768px) {
+    .mentions-container {
+        margin: 2rem 1rem;
+        padding: 1rem;
+        gap: 1.2rem;
+    }
+
+    .infoediteur {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .bloc {
+        padding: 1.5rem;
+    }
+
+    .bloc h3 {
+        font-size: 1.2rem;
+    }
+
+    .bloc p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Responsive mobile */
+@media (max-width: 480px) {
+    .infoediteur {
+        font-size: 1.6rem;
+    }
+
+    .bloc {
+        padding: 1.2rem;
+    }
+
+    .bloc p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
 }
