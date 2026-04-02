@@ -26,7 +26,7 @@ $userRole = $_SESSION['id_role'] ?? null;
 
 $page = $_GET['page'] ?? 'accueil';
 $action = $_GET['action'] ?? null;
-
+// --- GESTION DES ACTIONS (POST) ---
 if ($action) {
     switch ($action) {
         case 'inscription_entreprise':
@@ -42,7 +42,7 @@ if ($action) {
             exit;
     }
 }
-
+// --- GESTION DES PAGES (GET) ---
 switch ($page) {
     case 'accueil':
         echo $twig->render('index.twig');
@@ -61,7 +61,7 @@ switch ($page) {
         $controleur = new EntrepriseControleur($entrepriseModel, $twig);
         $controleur->pagination();
         break;
-    
+    // Affiche les détails d'une entreprise et incrémente le nombre de vues
     case 'offres':
         $offresModel = new OffresModel($pdo);
         $controleur = new OffresControleur($offresModel, $twig);
@@ -76,7 +76,7 @@ switch ($page) {
 
         $controleur->pagination();
         break;
-
+    // Affiche les détails d'une offre et incrémente le nombre de vues
     case 'postuler':
         $id_offre = $_GET['id'] ?? null;
         $sqlVue = "UPDATE OFFRE SET nombredevues = nombredevues + 1 WHERE id_offre = ?";
@@ -86,13 +86,13 @@ switch ($page) {
         $controleur = new OffresControleur($offresModel, $twig);
         $controleur->afficherOffre();
         break;
-
+    // Traite la candidature d'un utilisateur à une offre
     case 'candidature':
         $model = new CandidatureModel($pdo);
         $controleur = new CandidatureControleur($model, $twig);
         $controleur->postuler();
         break;
-    
+
     case 'afficher_utilisateur':
     case 'modifier_utilisateur':
     case 'supprimer_utilisateur':
@@ -120,8 +120,10 @@ switch ($page) {
     case 'modifier_offre':
     case 'supprimer_offre':
     case 'afficher_offre':
+        // On instancie le modèle et le contrôleur des offres
         $offresModel = new OffresModel($pdo);
         $controleur = new OffresControleur($offresModel, $twig);
+        // On appelle la méthode correspondante à la page
         if ($page === 'afficher_entreprise_offre') $controleur->afficherEntrepriseOffre();
         if ($page === 'modifier_offre') $controleur->modifierOffre();
         if ($page === 'supprimer_offre') $controleur->supprimerOffre();
@@ -131,17 +133,17 @@ switch ($page) {
     case 'connexion':
         echo $twig->render('connexion.twig');
         break;
-    
+    // Affiche le formulaire de création de compte et traite l'inscription
     case 'creercompte':
         $userModel = new UtilisateurModel($pdo);
         $controleur = new UtilisateurControleur($userModel, $twig);
         $controleur->afficherFormCreation(); // Cette méthode gère le render avec les pilotes
         break;
-    
+
     case 'creerentreprise':
         echo $twig->render('creerentreprise.twig');
         break;
-    
+    // Affiche le formulaire de création d'offre et traite la création d'une nouvelle offre
     case 'creeroffre':
         $offresModel = new OffresModel($pdo);
         $controleur = new OffresControleur($offresModel, $twig);
@@ -151,7 +153,7 @@ switch ($page) {
     case 'contact':
         echo $twig->render('contact.twig');
         break;
-
+    // Affiche la page de remerciement après une candidature et affiche les détails de la candidature
     case 'merci-candidature':
         $id = $_GET['id'] ?? null;
         if (!$id) { die("Candidature introuvable"); }
