@@ -19,7 +19,7 @@ const highResNightMapUrl = "./texture/8k_earth_nightmap.webp";
 if (container) {
     let targetCameraPos = new THREE.Vector3();
     let isZooming = false;
-    const ZOOM_DISTANCE = 2.0;
+    const ZOOM_DISTANCE = 1.5;
     let cityToSearch = null;
 
     let w = container.clientWidth;
