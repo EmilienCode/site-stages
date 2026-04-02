@@ -1,7 +1,7 @@
 <?php
 $id_utilisateur = $_SESSION['user_id'] ?? null;
 $mes_candidatures = [];
-
+// Si l'utilisateur est connecté, on récupère ses candidatures
 if ($id_utilisateur) {
     try {
         $sql = "SELECT c.*, o.titre_offre, o.nom_entreprise, o.lieu_offre 

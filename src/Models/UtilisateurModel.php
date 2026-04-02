@@ -11,9 +11,7 @@ class UtilisateurModel {
         $this->pdo = $pdo;
     }
 
-    /**
-     * Récupère tous les utilisateurs avec recherche par nom/prénom
-     */
+    // Récupère tous les utilisateurs avec recherche par nom/prénom
     public function getAll($search = '') {
         $query = "
             SELECT u.id_utilisateur, u.nom, u.prenom, u.email, r.nom_role 
@@ -34,18 +32,14 @@ class UtilisateurModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère uniquement les utilisateurs ayant le rôle Pilote (ID 2)
-     */
+    // Récupère uniquement les utilisateurs ayant le rôle Pilote (ID 2)
     public function getAllPilotes() {
         $query = "SELECT id_utilisateur, nom, prenom FROM UTILISATEUR WHERE id_role = 2 ORDER BY nom ASC";
         $stmt = $this->pdo->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère les offres en favoris d'un utilisateur
-     */
+    // écupère les offres en favoris d'un utilisateur
     public function getAllOffreWishlist($id_utilisateur) {
         $query = "SELECT o.id_offre, o.titre_offre, o.description_offre, o.remuneration_offre, 
                          o.domaine_requis_offre, o.date_offre, o.lieu_offre, o.duree_formation_offre,
@@ -59,7 +53,7 @@ class UtilisateurModel {
         $stmt->execute(['id_utilisateur' => $id_utilisateur]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    // Supprime une offre des favoris d'un utilisateur
     public function deleteOffreWishlist($id_offre, $id_utilisateur) {
         $query = "DELETE FROM MET_EN_FAVORI 
                   WHERE id_offre = :id_offre AND id_utilisateur = :id_utilisateur";
@@ -69,13 +63,13 @@ class UtilisateurModel {
             'id_utilisateur' => $id_utilisateur
         ]);
     }
-
+    // Supprime un utilisateur
     public function deleteUser($id) {
         $query = "DELETE FROM UTILISATEUR WHERE id_utilisateur = :id";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute(['id' => $id]);
     }
-
+    // Récupère les détails d'un utilisateur par son ID (avec jointure sur COORDONNEES)
     public function getUserById($id) {
         $query = "
             SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.id_role, u.id_pilote_referent,
@@ -88,11 +82,11 @@ class UtilisateurModel {
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+    // Récupère la liste de tous les rôles
     public function getRoles() {
         return $this->pdo->query("SELECT id_role, nom_role FROM ROLES")->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    // Récupère les utilisateurs selon les rôles spécifiés (avec recherche par nom/prénom)
     public function getUsersByRoles(array $roles, $search = '') {
         $rolesList = implode(',', array_map('intval', $roles)); 
         
@@ -104,7 +98,7 @@ class UtilisateurModel {
         ";
         
         $params = [];
-        if (!empty($search)) {
+        if (!empty($search)) { // Ajout de la condition de recherche
             $query .= " AND (u.nom LIKE :search OR u.prenom LIKE :search)";
             $params['search'] = '%' . $search . '%';
         }
@@ -115,7 +109,7 @@ class UtilisateurModel {
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    // Affiche la liste des utilisateurs avec possibilité de recherche
     public function updateUser($id, $data) {
         try {
             $this->pdo->beginTransaction();
@@ -159,14 +153,12 @@ class UtilisateurModel {
         }
     }
 
-    /**
-     * INSCRIPTION ETUDIANT (Version Corrigée avec Pilote Référent)
-     */
+    // INSCRIPTION ETUDIANT (Version Corrigée avec Pilote Référent)
     public function inscrireEtudiant($data) {
         try {
             $this->pdo->beginTransaction();
 
-            // 1. Insertion UTILISATEUR (5 paramètres : nom, prenom, email, mdp, id_pilote)
+            // Insertion UTILISATEUR (5 paramètres : nom, prenom, email, mdp, id_pilote)
             // On force l'id_role à 1 directement dans le SQL
             $sql1 = "INSERT INTO UTILISATEUR (nom, prenom, email, mot_de_passe, id_role, id_pilote_referent) 
                      VALUES (?, ?, ?, ?, 1, ?)";
@@ -177,12 +169,12 @@ class UtilisateurModel {
                 $data['prenom'], 
                 $data['email'], 
                 $data['password'],
-                $data['id_pilote'] // <--- L'ID du pilote (peut être null)
+                $data['id_pilote']
             ]);
 
             $id_utilisateur = $this->pdo->lastInsertId();
 
-            // 2. Insertion COORDONNEES (5 paramètres)
+            // Insertion COORDONNEES (5 paramètres)
             $sql2 = "INSERT INTO COORDONNEES 
                     (ville_coordonnees, telephone_coordonnees, sexe_coordonnees, date_naissance_coordonnees, id_utilisateur)
                     VALUES (?, ?, ?, ?, ?)";

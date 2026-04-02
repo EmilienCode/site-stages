@@ -9,7 +9,7 @@ class OffresControleur extends UtilisateurControleur{
         $this->offresModel = $offresModel;
         $this->twig = $twig;
     }
-
+    // Affiche la liste des offres avec pagination, filtres et tri
     public function pagination() {
         $p = isset($_GET['p']) ? (int)$_GET['p'] : 1;
         if ($p < 1) $p = 1;
@@ -20,10 +20,10 @@ class OffresControleur extends UtilisateurControleur{
         $metier = $_GET['metier'] ?? '';
         $ville = $_GET['ville'] ?? '';
         $tri = $_GET['tri'] ?? 'recents';
-        // NOUVEAU : On récupère la compétence sélectionnée
+        // On récupère la compétence sélectionnée
         $competence_id = $_GET['competence'] ?? ''; 
 
-        // NOUVEAU : On récupère la liste complète des compétences pour le menu
+        // On récupère la liste complète des compétences pour le menu
         $competences_list = $this->offresModel->getAllCompetences();
 
         // On passe $competence_id aux méthodes du modèle
@@ -42,6 +42,7 @@ class OffresControleur extends UtilisateurControleur{
             'competence_selected' => $competence_id     // Pour garder la sélection active
         ]);
     }
+    // Affiche les offres
     public function afficherOffre() {
         if (!isset($_GET['id'])) {
             die("Offre non trouvée");
@@ -56,9 +57,9 @@ class OffresControleur extends UtilisateurControleur{
             'offre' => $offre, 'user' => $user
         ]);
     }
-
+    // Affiche les offres d'une entreprise
     public function afficherEntrepriseOffre(){
-        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        // Si la session a sauté, on dégage vers le login (ou accueil)
         if (!isset($_SESSION['id_role'])) {
             header('Location: index.php?page=connexion'); // Ou ta page de login
             exit();
@@ -74,9 +75,9 @@ class OffresControleur extends UtilisateurControleur{
             'entreprise' => $entreprise
         ]);
     }
-
+    // Affiche les offres d'une entreprise par nom
     public function afficherOffreByNomEntreprise(){
-        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        // Si la session a sauté, on dégage vers le login (ou accueil)
         if (!isset($_SESSION['id_role'])) {
             header('Location: index.php?page=connexion'); // Ou ta page de login
             exit();
@@ -94,9 +95,9 @@ class OffresControleur extends UtilisateurControleur{
             'nom_entreprise' => $nom_entreprise
         ]);
     }
-
+    // Affiche les offres d'une entreprise par ID
     public function afficherOffreById(){
-        // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
+        // Si la session a sauté, on dégage vers le login (ou accueil)
         if (!isset($_SESSION['id_role'])) {
             header('Location: index.php?page=connexion'); // Ou ta page de login
             exit();
@@ -115,44 +116,43 @@ class OffresControleur extends UtilisateurControleur{
         ]);
     
     }
-
+    // Supprime une offre
     public function supprimerOffre() {
-        // 1. Vérification des droits
+        // Vérification des droits
         $this->checkAccess([2,3]);
 
         $id = $_GET['id'] ?? null;
 
         if ($id) {
-            // 2. On récupère les infos de l'offre AVANT de la détruire
+            // On récupère les infos de l'offre AVANT de la détruire
             $offre = $this->offresModel->getOffreById($id);
 
             if ($offre) {
                 // On sauvegarde le nom de l'entreprise pour la redirection
                 $nom_entreprise = $offre['nom_entreprise'];
 
-                // 3. On supprime l'offre
+                // On supprime l'offre
                 $this->offresModel->deleteOffre($id);
 
-                // 4. On redirige vers la liste des offres de CETTE entreprise
+                // n redirige vers la liste des offres de CETTE entreprise
                 // urlencode() sécurise le nom dans l'URL (remplace les espaces par %20 etc.)
                 header('Location: index.php?page=afficher_offre&nom=' . urlencode($nom_entreprise) . '&success=delete');
                 exit(); 
             }
         }
 
-        // 5. Sécurité : Si l'ID est invalide ou l'offre introuvable, on renvoie à la page globale
+        // Si l'ID est invalide ou l'offre introuvable, on renvoie à la page globale
         header('Location: index.php?page=afficher_entreprise_offre&error=notfound');
         exit();
     }
 
     public function afficherFormulaireCreation() {
-        // 1. On récupère la liste des entreprises
+        // On récupère la liste des entreprises
         $entreprises = $this->offresModel->getAllNomsEntreprises();
-        
-        // 2. (Bonus) Tu peux faire pareil pour les compétences !
+
         $competences = $this->offresModel->getAllCompetences(); 
 
-        // 3. On envoie tout à la vue Twig
+        // On envoie tout à la vue Twig
         echo $this->twig->render('creeroffre.twig', [
             'entreprises' => $entreprises,
             'competences' => $competences
@@ -160,7 +160,7 @@ class OffresControleur extends UtilisateurControleur{
     }
 
     public function modifierOffre() {
-        // Sécurité : Vérification du rôle (Admin=3 ou Pilote=2)
+        // Vérification du rôle (Admin=3 ou Pilote=2)
         if (!isset($_SESSION['id_role']) || ($_SESSION['id_role'] != 3 && $_SESSION['id_role'] != 2)) {
             header('Location: index.php?page=connexion');
             exit();
@@ -168,9 +168,8 @@ class OffresControleur extends UtilisateurControleur{
 
         // On récupère le id depuis l'URL (ex: index.php?page=modifier_entreprise&id=3061389...)
         $id = $_GET['id'] ?? null;
-
+        // Si pas d'ID, on redirige vers la liste globale
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
             $remuneration = $_POST['remuneration_offre'] ?? '';
             if ($remuneration === '') $remuneration = null;
 
@@ -203,10 +202,9 @@ class OffresControleur extends UtilisateurControleur{
 
         // Récupération des infos actuelles pour pré-remplir le formulaire
         $offreToEdit = $this->offresModel->getOffreById($id);
-        // 1. On récupère la liste des entreprises
+        // On récupère la liste des entreprises
         $entreprises = $this->offresModel->getAllNomsEntreprises();
-        
-        // 2. (Bonus) Tu peux faire pareil pour les compétences !
+
         $competences = $this->offresModel->getAllCompetences(); 
         //var_dump($offreToEdit);
         //die();

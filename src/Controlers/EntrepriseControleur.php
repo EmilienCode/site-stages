@@ -10,7 +10,7 @@ class EntrepriseControleur extends UtilisateurControleur {
         $this->entrepriseModel = $entrepriseModel;
         $this->twig = $twig;
     }
-
+    // Affiche la liste des entreprises avec pagination et filtres
     public function pagination() {
         // Paramètres de base
         $p = isset($_GET['p']) ? (int)$_GET['p'] : 1;
@@ -40,7 +40,7 @@ class EntrepriseControleur extends UtilisateurControleur {
             'secteurs_list'    => $secteurs_list
         ]);
     }
-        
+    // Affiche la liste des entreprises (sans pagination ni filtres)
     public function afficherEntreprises() {
         // 1. Sécurité : Si la session a sauté, on dégage vers le login (ou accueil)
         if (!isset($_SESSION['id_role'])) {
@@ -53,12 +53,12 @@ class EntrepriseControleur extends UtilisateurControleur {
             $entreprise = $this->entrepriseModel->getAllEntreprise();
             //var_dump($entreprise); die(); //permet d'afficher le resultat de la requete (debut)
         }
-
+        // Rendu de la vue avec Twig
         echo $this->twig->render('gestion_entreprise.twig', [
             'entreprise' => $entreprise
         ]);
     }
-
+    // Affiche les détails d'une entreprise
     public function supprimerEntreprise(){
         
         $this->checkAccess([2,3]);
@@ -71,7 +71,7 @@ class EntrepriseControleur extends UtilisateurControleur {
         header('Location: index.php?page=afficher_entreprise&success=delete');
         exit();
     }
-
+    // Affiche les détails d'une entreprise
     public function modifierEntreprise() {
         // Sécurité : Vérification du rôle (Admin=3 ou Pilote=2)
         if (!isset($_SESSION['id_role']) || ($_SESSION['id_role'] != 3 && $_SESSION['id_role'] != 2)) {
@@ -117,14 +117,14 @@ class EntrepriseControleur extends UtilisateurControleur {
     }
 
     public function registerEntreprise() {
-        // 1. Sécurité : Vérifier si l'utilisateur est connecté et autorisé (Pilote/Admin)
+        // Vérifie si l'utilisateur est connecté et autorisé (Pilote/Admin)
         if (!isset($_SESSION['user_id']) || !in_array($_SESSION['id_role'], [2, 3])) {
             header('Location: index.php?page=connexion');
             exit;
         }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            // 2. Nettoyage et Validation des données obligatoires
+            // Nettoyage et Validation des données obligatoires
             $siret = trim($_POST["siret_entreprise"] ?? "");
             $email = filter_var(trim($_POST["email_entreprise"] ?? ""), FILTER_VALIDATE_EMAIL);
             $nom   = trim($_POST["nom_entreprise"] ?? "");
@@ -135,7 +135,7 @@ class EntrepriseControleur extends UtilisateurControleur {
                 exit;
             }
 
-            // 3. Préparation du tableau de données (mappage avec ta BDD)
+            // Préparation du tableau de données (mappage avec ta BDD)
             $entrepriseData = [
                 'siret_entreprise'       => $siret,
                 'email_entreprise'       => $email,
@@ -155,7 +155,7 @@ class EntrepriseControleur extends UtilisateurControleur {
             ];
 
             try {
-                // 4. Appel au modèle EntrepriseModel
+                // Appel au modèle EntrepriseModel
                 $success = $this->entrepriseModel->inscrireEntreprise($entrepriseData);
 
                 if ($success) {

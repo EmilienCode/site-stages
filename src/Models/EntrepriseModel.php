@@ -10,12 +10,12 @@ class EntrepriseModel {
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
-
+    // Récupère la liste des entreprises avec pagination et filtres
     public function getEntreprises($limit, $offset, $nom = '', $taille = '', $secteur = '') {
         try {
             $sql = "SELECT * FROM ENTREPRISE WHERE 1=1 AND est_active_entreprise = 1";
             $params = [];
-
+            // Ajout de conditions dynamiques selon les filtres
             if (!empty($nom)) {
                 $sql .= " AND nom_entreprise LIKE :nom";
                 $params[':nom'] = '%' . $nom . '%';
@@ -45,12 +45,12 @@ class EntrepriseModel {
             return [];
         }
     }
-
+    // Compte le nombre total d'entreprises selon les mêmes filtres (pour la pagination)
     public function countEntreprises($nom = '', $taille = '', $secteur = '') {
         try {
             $sql = "SELECT COUNT(*) FROM ENTREPRISE WHERE 1=1 AND est_active_entreprise = 1";
             $params = [];
-
+            // Ajout de conditions dynamiques selon les filtres
             if (!empty($nom)) {
                 $sql .= " AND nom_entreprise LIKE :nom";
                 $params[':nom'] = '%' . $nom . '%';
@@ -72,7 +72,7 @@ class EntrepriseModel {
             return 0;
         }
     }
-
+    // Récupère la liste de tous les secteurs d'activité distincts pour le menu déroulant
     public function getAllSecteurs() {
         try {
             $sql = "SELECT DISTINCT secteur_entreprise FROM ENTREPRISE WHERE secteur_entreprise IS NOT NULL AND secteur_entreprise != '' ORDER BY secteur_entreprise ASC";
@@ -83,16 +83,17 @@ class EntrepriseModel {
             return [];
         }
     }
+    // Récupère les détails d'une entreprise par son SIRET
     public function getEntrepriseBySiret($siret) {
         try {
-            // 1. On prépare la requête avec l'étoile (*) pour tout récupérer
+            // On prépare la requête avec l'étoile (*) pour tout récupérer
             $query = "SELECT * FROM ENTREPRISE WHERE siret_entreprise = :siret";
             $stmt = $this->pdo->prepare($query);
 
-            // 2. On lie le paramètre et on exécute
+            // On lie le paramètre et on exécute
             $stmt->execute(['siret' => $siret]);
 
-            // 3. On utilise fetch() pour avoir un tableau simple (une seule ligne)
+            // On utilise fetch() pour avoir un tableau simple (une seule ligne)
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
         } catch (Exception $e) {
@@ -100,7 +101,7 @@ class EntrepriseModel {
             return false;
         }
     }
-
+    // Récupère la liste de toutes les entreprises (sans pagination ni filtres)
     public function getAllEntreprise() {
         $sql = "
             SELECT 
@@ -127,7 +128,7 @@ class EntrepriseModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
-
+    // Supprime une entreprise
     public function deleteEntreprise($id) {
         $query = "
         DELETE FROM ENTREPRISE WHERE siret_entreprise = :id
@@ -135,7 +136,7 @@ class EntrepriseModel {
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute(['id' => $id]);
     }
-
+    // Affiche les détails d'une entreprise
     public function updateEntreprise($siret, $data) {
         try {
             // Une seule table à modifier : pas besoin de transaction ici
@@ -185,7 +186,7 @@ class EntrepriseModel {
             return false;
         }
     }
-
+    // Affiche les détails d'une entreprise
     public function inscrireEntreprise($data) {
         try {
             $query = "
