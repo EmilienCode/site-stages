@@ -4,12 +4,9 @@ Gestion Utilisateur
 {% endblock %}
 {% block content %}
 
-    <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/styleadmin.css"/>
 
     {% if session.user_id is defined and session.user_id is not null and session.id_role == 2 or session.id_role == 3 %}
-
-    <div style="padding-top: calc(var(--spacing) * 16);">
         <main class="admin-container">
             <div class="admin-header">
                 <h1>Gestion des Utilisateurs</h1>
@@ -52,11 +49,11 @@ Gestion Utilisateur
                 <tbody>
                     {% for user in users %}
                         <tr>
-                            <td>{{ user.id_utilisateur }}</td>
-                            <td>{{ user.nom }}</td>
-                            <td>{{ user.prenom }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.nom_role|default('Aucun') }}</td>
+                            <td data-label="ID">{{ user.id_utilisateur }}</td>
+                            <td data-label="Nom">{{ user.nom }}</td>
+                            <td data-label="Prénom">{{ user.prenom }}</td>
+                            <td data-label="Email">{{ user.email }}</td>
+                            <td data-label="Rôle">{{ user.nom_role|default('Aucun') }}</td>
                             <td>
                                 <a href="index.php?page=modifier_utilisateur&id={{ user.id_utilisateur }}" class="btn-action btn-edit">Modifier</a>
                                 <a href="index.php?page=supprimer_utilisateur&id={{ user.id_utilisateur }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>

@@ -4,7 +4,6 @@ Gestion Offres
 {% endblock %}
 {% block content %}
 
-    <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/styleadmin.css"/>
 
     {% if session.user_id is defined and session.user_id is not null and session.id_role == 2 or session.id_role == 3 %}
@@ -33,16 +32,17 @@ Gestion Offres
             <tbody>
                 {% for offre in offres %}
                     <tr>
-                        <td>{{ offre.id_offre }}</td>
-                        <td>{{ offre.titre_offre }}</td>
-                        <td>{{ offre.description_offre }}</td>
-                        <td>{{ offre.remuneration_offre }}</td>
-                        <td>{{ offre.date_offre }}</td>
-                        <td>{{ offre.lieu_offre }}</td>
-                        <td>{{ offre.duree_formation_offre }}</td>
-                        <td>{{ offre.domaine_requis_offre }}</td>
-                        <td>{{ offre.nombredevues }}</td>
-                        <td>{{ offre.nombredepostulants }}</td>
+                        <td data-label="ID">{{ offre.id_offre }}</td>
+                        <td data-label="Titre">{{ offre.titre_offre }}</td>
+                        <td data-label="Description">{{ offre.description_offre }}</td>
+                        <td data-label="Rémunération">{{ offre.remuneration_offre }}</td>
+                        <td data-label="Date">{{ offre.date_offre }}</td>
+                        <td data-label="Lieu">{{ offre.lieu_offre }}</td>
+                        <td data-label="Durée">{{ offre.duree_formation_offre }}</td>
+                        <td data-label="Domaine">{{ offre.domaine_requis_offre }}</td>
+                        <td data-label="Nom entreprise">{{ offre.nom_entreprise }}</td>
+                        <td data-label="Nombres de vues">{{ offre.nombredevues }}</td>
+                        <td data-label="Nombres de postulants">{{ offre.nombredepostulants }}</td>
                         <td>
                             <a href="index.php?page=modifier_offre&id={{ offre.id_offre }}" class="btn-action btn-edit">Modifier</a>
                             <a href="index.php?page=supprimer_offre&id={{ offre.id_offre }}" class="btn-action btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?');">Supprimer</a>

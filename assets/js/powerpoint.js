@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1 à 4
+    // 1 à 3 : Hero, Sommaire, Contexte Horizontal
     gsap.to(".hero-title", { y: -20, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 });
     gsap.to(".hero-subtitle", { y: -10, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 });
 
@@ -11,7 +11,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const panels = gsap.utils.toArray(".panel");
     gsap.to(panels, { xPercent: -100 * (panels.length - 1), ease: "none", scrollTrigger: { trigger: ".horizontal-scene", pin: true, scrub: 1, end: () => "+=" + horizontalContainer.offsetWidth } });
 
-    gsap.to(".diagram-card", { scrollTrigger: { trigger: ".diagrams-scene", start: "top 50%" }, y: -30, opacity: 1, stagger: 0.2, duration: 0.8, ease: "back.out(1.5)" });
+
+    // --- 4 : NOUVELLE ANIMATION DES DIAGRAMMES (VERTICAL) ---
+    const diagramItems = gsap.utils.toArray(".diagram-item");
+    
+    diagramItems.forEach((item) => {
+        gsap.fromTo(item, 
+            { y: 100, opacity: 0 }, // Part d'en bas, invisible
+            { 
+                y: 0, 
+                opacity: 1, 
+                duration: 1, 
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%", // L'animation démarre quand l'image arrive dans l'écran
+                    toggleActions: "play none none reverse" // Disparaît si on remonte pour rejouer l'animation
+                }
+            }
+        );
+    });
+
 
     // --- 5 : EPIC SCENE INNOVATION (ÉVENTAIL + FLY-BY EXTRÊME) ---
     const tlEpic1 = gsap.timeline({ scrollTrigger: { trigger: ".epic-scene-1", start: "top top", end: "+=3000", pin: true, scrub: 1 } });
@@ -33,7 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
            .to(".layer-mid", { z: 3000, scale: 5, opacity: 0, duration: 1.5, ease: "power3.in" }, 1.5)
            .to(".epic-desc", { opacity: 0, scale: 2, duration: 1, ease: "power3.in" }, 1.5);
 
-    // --- 6 à 8 ---
+
+    // --- 6 à 8 : MVC, PORTAIL ET FIN ---
     const tlMvc = gsap.timeline({ scrollTrigger: { trigger: ".mvc-mcd-scene", start: "top top", end: "+=2000", pin: true, scrub: 1 } });
     tlMvc.fromTo(".mvc-panel", { opacity: 0, scale: 0.8, y: 100 }, { opacity: 1, scale: 1, y: 0, duration: 1 })
          .to(".mvc-panel", { opacity: 1, duration: 0.5 })

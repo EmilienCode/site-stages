@@ -1,0 +1,191 @@
+:root {
+    /* Utilisation des variables de ta page Login */
+    --font-weight-titre: 800;
+    --font-weight-nom: 700;
+    --font-weight-moyen: 500;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    
+    --radius: 0.625rem;
+    --background: #ffffff;
+    --color-gray: #ffd5d0;
+    --color-dark-gray: #0f172a;
+    --color-light-gray: #4e3030;
+
+    --primary-color: #fa8072;
+    --secondary-color: #914941;
+    --tertiary-color: #fac4a7; 
+
+    --color-border-light: rgb(229, 231, 235);
+    --color-input-bg: rgb(249, 251, 255);
+    --focus-ring-blue: 0 0 0 4px rgba(235, 106, 37, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-sans);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--color-dark-gray);
+}
+
+/* Conteneur principal style "Card" */
+.admin-container {
+    max-width: 900px;
+    margin: 40px auto;
+    margin-top: 100px;
+    background: var(--background);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--color-gray);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-gray);
+    padding-bottom: 25px;
+    margin-bottom: 35px;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: var(--font-weight-titre);
+    color: var(--color-dark-gray);
+}
+
+.btn-retour {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: var(--font-weight-moyen);
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-retour:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Alertes */
+.alert.error {
+    background-color: var(--background);
+    color: #b91c1c;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 5px solid var(--primary-color);
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+/* Fieldsets stylisés en "Cases" */
+.admin-form fieldset {
+    border: 1px solid var(--color-border-light);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    background-color: rgba(250, 128, 114, 0.02);
+}
+
+.admin-form legend {
+    font-weight: var(--font-weight-nom);
+    padding: 0 15px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+/* Grille pour PC */
+@media (min-width: 600px) {
+    fieldset {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 30px;
+    }
+}
+
+/* Individu "Case" de donnée avec contour */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 12px;
+    background-color: var(--background);
+    transition: all 0.3s ease;
+}
+
+.form-group:hover {
+    border-color: var(--tertiary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: var(--font-weight-moyen);
+    font-size: 0.85rem;
+    color: var(--color-light-gray);
+}
+
+/* Inputs, Selects */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    padding: 12px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    width: 100%;
+    background: var(--color-input-bg);
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--focus-ring-blue);
+    background: var(--background);
+}
+
+/* Actions */
+.form-actions {
+    text-align: right;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, var(--primary-color), var(--tertiary-color));
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    font-size: 1rem;
+    font-weight: var(--font-weight-nom);
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(250, 128, 114, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(250, 128, 114, 0.4);
+    opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    .admin-container{
+        margin-top: 190px;
+    }
+}
+

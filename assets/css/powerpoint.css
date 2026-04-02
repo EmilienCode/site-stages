@@ -65,8 +65,33 @@ html, body { margin: 0 !important; padding: 0 !important; background-color: #050
 .tech-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; opacity: 0; }
 .tech-title { font-size: 3rem; margin-bottom: 1rem; color: #fff; }
 .tech-desc { font-size: 1.2rem; color: #aaa; margin-bottom: 2rem; text-align: center; max-width: 800px; }
-.tech-img-large { width: 80vw; max-width: 1200px; height: 50vh; background: #111; border: 1px dashed #555; border-radius: 20px; display: flex; justify-content: center; align-items: center; color: #666; font-size: 2rem; font-weight: bold; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-.mcd-glow { border-color: #3742fa; box-shadow: 0 0 50px rgba(55, 66, 250, 0.2); }
+/* --- LA BOÎTE IMMENSE POUR MVC / MCD --- */
+.tech-img-large { 
+    width: 95vw; /* Prend presque toute la largeur de l'écran */
+    max-width: 1600px; /* Limite repoussée (avant c'était 1200) */
+    height: 75vh; /* Prend les 3 quarts de la hauteur de l'écran */
+    background: #111; 
+    border: 1px dashed #555; 
+    border-radius: 20px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8); 
+    padding: 20px; /* Laisse un petit bord interne élégant */
+}
+
+/* --- POUR QUE L'IMAGE REMPLISSE PARFAITEMENT LA BOÎTE --- */
+.tech-img-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ajuste l'image au max sans la déformer ni la couper */
+    border-radius: 10px;
+}
+
+.mcd-glow { 
+    border-color: #3742fa; 
+    box-shadow: 0 0 50px rgba(55, 66, 250, 0.2); 
+}.mcd-glow { border-color: #3742fa; box-shadow: 0 0 50px rgba(55, 66, 250, 0.2); }
 
 .experience-wow-scene { background: #000; }
 .bg-massive-text { position: absolute; font-size: 25vw; font-weight: 900; color: rgba(255, 255, 255, 0.05); white-space: nowrap; z-index: 1; }
@@ -83,7 +108,65 @@ html, body { margin: 0 !important; padding: 0 !important; background-color: #050
 .final-btn { opacity: 0; margin-top: 4rem; position: relative; z-index: 20; box-shadow: 0 0 30px rgba(250, 128, 114, 0.3); border: none; }
 .btn-retour { display: inline-block; padding: 1rem 3rem; background: #fff; color: #fa8072; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.2rem; transition: transform 0.3s; cursor: pointer; }
 .btn-retour:hover { transform: scale(1.05); }
+.panel-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Empêche l'image de se déformer */
+}
 
+/* --- NOUVEAU FORMAT : DIAGRAMMES L'UN APRÈS L'AUTRE --- */
+.diagrams-scene-vertical {
+    background: #080808;
+    padding: 10vh 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.diagrams-header { text-align: center; margin-bottom: 5rem; }
+.diagrams-header h2 { font-size: 3.5rem; color: #fa8072; margin-bottom: 1rem; }
+.diagrams-header p { font-size: 1.5rem; color: #aaa; }
+
+.diagram-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem; /* Laisse un grand espace de respiration entre chaque diagramme */
+    width: 100%;
+    max-width: 1000px; /* Bloque la largeur max pour éviter que ce soit TROP grand */
+}
+
+.diagram-item {
+    width: 100%;
+    opacity: 0; /* Caché par défaut pour l'animation GSAP */
+}
+
+.diagram-item h3 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 1rem;
+}
+
+.diag-img-container {
+    width: 100%;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+}
+
+/* L'image s'adapte parfaitement à ses propres proportions */
+.diag-img-container img {
+    max-width: 100%;
+    height: auto; 
+    border-radius: 8px;
+}
 @media (max-width: 900px) {
     .panel-content { flex-direction: column; text-align: center; padding: 0 2rem; }
     .reveal-text { font-size: 2rem; }

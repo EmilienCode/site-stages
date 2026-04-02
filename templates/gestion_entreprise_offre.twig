@@ -4,7 +4,6 @@ Gestion Offres/Entreprise
 {% endblock %}
 {% block content %}
 
-    <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/styleadmin.css"/>
 
     {% if session.user_id is defined and session.user_id is not null and (session.id_role == 2 or session.id_role == 3) %}
@@ -26,10 +25,10 @@ Gestion Offres/Entreprise
             <tbody>
                 {% for ent in entreprise %}
                     <tr>
-                        <td>{{ ent.nom_entreprise }}</td>
-                        <td>{{ ent.email_entreprise }}</td>
-                        <td>{{ ent.secteur_entreprise }}</td>
-                        <td>
+                        <td data-label="Nom entreprise">{{ ent.nom_entreprise }}</td>
+                        <td data-label="Email">{{ ent.email_entreprise }}</td>
+                        <td data-label="Secteur">{{ ent.secteur_entreprise }}</td>
+                        <td data-label="Note">
                         {% if ent.note_evaluation is not null %}
                             {{ent.note_evaluation}} / 5
                         {%else%}
