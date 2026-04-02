@@ -18,18 +18,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./includes/image/logo.png">
 
-    <style>
-        /* Sécurité au cas où le CSS externe ne charge pas l'affichage par défaut */
-        .container-cookie {
-            display: none; /* Caché par défaut, le JS l'affichera */
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-        }
-    </style>
-
     <script>
         // Thème sombre immédiat pour éviter le flash blanc
         if (localStorage.getItem('theme') === 'dark') {
