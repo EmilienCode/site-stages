@@ -1,13 +1,12 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
     <title>CESITonStage - {% block title %} {% endblock %}</title>
-    <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
-    rel="stylesheet"
-    type="text/css" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    
     <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/header.css"/>
     <link rel="stylesheet" href="assets/css/footer.css"/>
@@ -15,53 +14,66 @@
     <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">
     <link rel="stylesheet" href="assets/css/stylePopupCookies.css">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./includes/image/logo.png">
+
+    <style>
+        /* Sécurité au cas où le CSS externe ne charge pas l'affichage par défaut */
+        .container-cookie {
+            display: none; /* Caché par défaut, le JS l'affichera */
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+    </style>
+
     <script>
+        // Thème sombre immédiat pour éviter le flash blanc
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('theme-dark');
         }
-    </script>
-    <script src="assets/js/headerScroll.js"></script>
-    <script>
+
         document.addEventListener("DOMContentLoaded", () => {
             const popup = document.querySelector(".container-cookie");
             const acceptBtn = document.querySelector(".accept-btn");
             const rejectBtn = document.querySelector(".reject-btn");
 
-            // 1. On vérifie si l'utilisateur a DÉJÀ fait un choix avant
-            if (localStorage.getItem("cookieChoice")) {
-                popup.style.display = "none"; // On cache la popup direct
-                return; // On arrête le script ici
+            // Vérification du choix stocké
+            const cookieChoice = localStorage.getItem("cookieChoice");
+
+            if (cookieChoice) {
+                // Si un choix existe, on s'assure que la popup reste cachée
+                popup.style.display = "none";
+            } else {
+                // Si AUCUN choix, on affiche la popup (en flex ou block selon ton design)
+                popup.style.display = "flex";
             }
 
-            // 2. Fonction pour fermer et mémoriser le choix
+            // Fonction pour fermer et mémoriser le choix
             const closePopup = (choice) => {
                 popup.style.display = "none";
-                localStorage.setItem("cookieChoice", choice); // Sauvegarde 'accepted' ou 'rejected'
-                
-                if (choice === "accepted") {
-                    console.log("Les cookies ont été acceptés.");
-                    // C'est ici que tu mettras ton code Google Analytics plus tard
-                } else {
-                    console.log("Les cookies ont été refusés.");
-                }
+                localStorage.setItem("cookieChoice", choice);
+                console.log(`Choix utilisateur : ${choice}`);
             };
 
-            // 3. On écoute les clics sur les boutons
-            if(acceptBtn && rejectBtn) {
+            // Écouteurs d'événements
+            if (acceptBtn && rejectBtn) {
                 acceptBtn.addEventListener("click", () => closePopup("accepted"));
                 rejectBtn.addEventListener("click", () => closePopup("rejected"));
             }
         });
     </script>
+    <script src="assets/js/headerScroll.js" defer></script>
 </head>
 <body>
     {% include "header.twig" %}
+
     <main>
         {% block content %}
         {% endblock %}
-
     </main>
 
     {% include "footer.twig" %}
@@ -78,11 +90,11 @@
                     more information, please see our <a href="#" class="privacy-policy">privacy policy</a>.
                 </p>
                 <div class="button">
-                    <button href="#" class="btn reject-btn">
+                    <button type="button" class="btn reject-btn">
                         <i class="ri-close-fill"></i>
                         Reject
                     </button>
-                    <button href="#" class="btn accept-btn">
+                    <button type="button" class="btn accept-btn">
                         <i class="ri-check-line"></i>
                         Accept
                     </button>
