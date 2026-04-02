@@ -7,12 +7,14 @@
     href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
     rel="stylesheet"
     type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="assets/css/root.css"/>
     <link rel="stylesheet" href="assets/css/header.css"/>
     <link rel="stylesheet" href="assets/css/footer.css"/>
     <link rel="stylesheet" href="assets/css/styleAnimationLogoNavBarre.css"/>
     <link rel="stylesheet" href="assets/css/styleToogleThemeMode.css"/>
     <link rel="stylesheet" href="assets/css/styleDarkMode.css">
+    <link rel="stylesheet" href="assets/css/stylePopupCookies.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./includes/image/logo.png">
     <script>
@@ -21,6 +23,38 @@
         }
     </script>
     <script src="assets/js/headerScroll.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const popup = document.querySelector(".container-cookie");
+            const acceptBtn = document.querySelector(".accept-btn");
+            const rejectBtn = document.querySelector(".reject-btn");
+
+            // 1. On vérifie si l'utilisateur a DÉJÀ fait un choix avant
+            if (localStorage.getItem("cookieChoice")) {
+                popup.style.display = "none"; // On cache la popup direct
+                return; // On arrête le script ici
+            }
+
+            // 2. Fonction pour fermer et mémoriser le choix
+            const closePopup = (choice) => {
+                popup.style.display = "none";
+                localStorage.setItem("cookieChoice", choice); // Sauvegarde 'accepted' ou 'rejected'
+                
+                if (choice === "accepted") {
+                    console.log("Les cookies ont été acceptés.");
+                    // C'est ici que tu mettras ton code Google Analytics plus tard
+                } else {
+                    console.log("Les cookies ont été refusés.");
+                }
+            };
+
+            // 3. On écoute les clics sur les boutons
+            if(acceptBtn && rejectBtn) {
+                acceptBtn.addEventListener("click", () => closePopup("accepted"));
+                rejectBtn.addEventListener("click", () => closePopup("rejected"));
+            }
+        });
+    </script>
 </head>
 <body>
     {% include "header.twig" %}
@@ -33,5 +67,28 @@
     {% include "footer.twig" %}
 
     <script type="module" src="assets/js/darkToogle.js"></script>
+
+    <section class="container-cookie">
+        <div class="popup">
+            <img src="assets/img/7900_4_2_02.png" alt="cookies" class="cookie-picture"/>
+            <div class="text-container">
+                <p class="text">
+                    This site uses cookies to enhance your experience. 
+                    By continuing, you agree to our use of cookies. For 
+                    more information, please see our <a href="#" class="privacy-policy">privacy policy</a>.
+                </p>
+                <div class="button">
+                    <button href="#" class="btn reject-btn">
+                        <i class="ri-close-fill"></i>
+                        Reject
+                    </button>
+                    <button href="#" class="btn accept-btn">
+                        <i class="ri-check-line"></i>
+                        Accept
+                    </button>
+                </div>
+            </div>            
+        </div>
+    </section>
 </body>
 </html>
