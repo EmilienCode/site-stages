@@ -1,6 +1,6 @@
 // On récupère la checkbox et le body
 const toggleCheckbox = document.getElementById('btn-theme-toogle');
-const body = document.body;
+const body = document.documentElement;
 
 // 1. Au chargement : on vérifie le thème sauvegardé
 const themeSauvegarde = localStorage.getItem('theme');

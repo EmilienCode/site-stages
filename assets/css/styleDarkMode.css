@@ -1,4 +1,4 @@
-body.theme-dark {
+.theme-dark {
     --background: #111d37; 
     --color-background-offre: #0f0656;
 
@@ -28,32 +28,32 @@ body.theme-dark {
 }
 
 /* INPUTS */
-body.theme-dark input,
-body.theme-dark textarea,
-body.theme-dark select {
+.theme-dark input,
+.theme-dark textarea,
+.theme-dark select {
     background-color: var(--background);
     color: var(--color-dark-gray);
     border: 1px solid var(--color-gray);
 }
-body.theme-dark input::placeholder,
-body.theme-dark textarea::placeholder {
+.theme-dark input::placeholder,
+.theme-dark textarea::placeholder {
     color: var(--color-back-icone);
 }
-body.theme-dark input:focus,
-body.theme-dark textarea:focus,
-body.theme-dark select:focus {
+.theme-dark input:focus,
+.theme-dark textarea:focus,
+.theme-dark select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(250, 128, 114, 0.3);
 }
 
 /* RADIO GROUP */
-body.theme-dark .radio-group {
+.theme-dark .radio-group {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-body.theme-dark .radio-item {
+.theme-dark .radio-item {
     background-color: var(--background);
     border: 1px solid var(--color-gray);
     border-radius: 12px;
@@ -64,27 +64,27 @@ body.theme-dark .radio-item {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-body.theme-dark .radio-item:hover {
+.theme-dark .radio-item:hover {
     background-color: var(--color-background-offre);
     border-color: var(--primary-color);
 }
-body.theme-dark .radio-item input[type="radio"] {
+.theme-dark .radio-item input[type="radio"] {
     accent-color: var(--primary-color);
     cursor: pointer;
 }
-body.theme-dark .radio-item label {
+.theme-dark .radio-item label {
     color: var(--color-dark-gray);
     cursor: pointer;
 }
 
 /* BOUTON ANNULER */
-body.theme-dark .btn-secondary {
+.theme-dark .btn-secondary {
     background-color: var(--background);
     color: var(--color-dark-gray);
     border: 1px solid var(--color-gray);
     transition: all 0.2s ease;
 }
-body.theme-dark .btn-secondary:hover {
+.theme-dark .btn-secondary:hover {
     background-color: var(--color-background-offre);
     border-color: var(--primary-color);
     color: var(--primary-color);
