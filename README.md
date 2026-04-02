@@ -107,7 +107,6 @@ Accédez à `http://projet-stage.local` dans votre navigateur.
 ├── /controllers     # Logique de contrôle
 ├── /models          # Accès aux données (DAO)
 ├── /views           # Fichiers de template (HTML/PHP)
-├── /core            # Routeur, Classe de base Controller/Model
 ├── /tests           # Tests unitaires PHPUnit
 └── /public          # Point d'entrée (index.php)
 
