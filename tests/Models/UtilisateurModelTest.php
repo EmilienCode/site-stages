@@ -7,7 +7,7 @@ use PDO;
 use PDOStatement;
 
 class UtilisateurModelTest extends TestCase {
-    
+    // Test pour vérifier que la méthode deleteUser retourne true quand la suppression réussit
     public function testDeleteUserRetourneVraiQuandLaSuppressionReussit() {
         
         $fausseRequete = $this->createMock(PDOStatement::class);
@@ -29,7 +29,7 @@ class UtilisateurModelTest extends TestCase {
 
         $this->assertTrue($resultat);
     }
-
+    // Test pour vérifier que la méthode getRoles retourne un tableau de rôles
     public function testGetRolesRetourneUnTableauDeRoles(){
 
         $fausseRequete = $this->createMock(PDOStatement::class);
